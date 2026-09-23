@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
-        name="description"
-        content="Calculator Universe by MASTERMIND"
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
     >
 
     <meta
@@ -14,9 +15,20 @@
         content="#020307"
     >
 
+    <meta
+        name="description"
+        content="Calculator Universe by MASTERMIND"
+    >
+
     <title>Calculator Universe — MASTERMIND</title>
 
+
     <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
         * {
             margin: 0;
             padding: 0;
@@ -28,9 +40,15 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
             background: #020307;
-            color: #fff;
+
+            color: #ffffff;
+
             overflow-x: hidden;
         }
 
@@ -39,66 +57,109 @@
             font: inherit;
         }
 
-        /* =========================
+
+        /* =====================================================
            BACKGROUND
-        ========================= */
+        ===================================================== */
 
         .background {
             position: fixed;
+
             inset: 0;
+
             overflow: hidden;
+
             z-index: -10;
+
             background: #020307;
         }
 
         .glow {
             position: absolute;
-            width: 550px;
-            height: 550px;
+
+            width: 560px;
+            height: 560px;
+
             border-radius: 50%;
+
             filter: blur(120px);
-            opacity: .15;
+
+            opacity: 0.16;
         }
 
         .glow-red {
             background: #ff174f;
+
             top: -250px;
-            left: -200px;
-            animation: floatGlow 8s ease-in-out infinite;
+            left: -220px;
+
+            animation:
+                floatingGlow 8s
+                ease-in-out
+                infinite;
         }
 
         .glow-blue {
             background: #168cff;
-            right: -200px;
+
+            right: -240px;
             bottom: -300px;
-            animation: floatGlow 10s ease-in-out infinite reverse;
+
+            animation:
+                floatingGlow 10s
+                ease-in-out
+                infinite
+                reverse;
         }
 
-        @keyframes floatGlow {
-            0%,100% {
-                transform: translate(0,0);
+        @keyframes floatingGlow {
+
+            0%,
+            100% {
+                transform:
+                    translate(0, 0);
             }
 
             50% {
-                transform: translate(70px,45px);
+                transform:
+                    translate(
+                        70px,
+                        50px
+                    );
             }
         }
 
         .grid {
             position: absolute;
+
             inset: 0;
-            opacity: .12;
+
+            opacity: 0.12;
+
             background-image:
                 linear-gradient(
-                    rgba(22,140,255,.25) 1px,
+                    rgba(
+                        22,
+                        140,
+                        255,
+                        0.25
+                    ) 1px,
                     transparent 1px
                 ),
                 linear-gradient(
                     90deg,
-                    rgba(255,23,79,.20) 1px,
+                    rgba(
+                        255,
+                        23,
+                        79,
+                        0.20
+                    ) 1px,
                     transparent 1px
                 );
-            background-size: 55px 55px;
+
+            background-size:
+                55px 55px;
+
             transform:
                 perspective(500px)
                 rotateX(60deg)
@@ -107,174 +168,262 @@
 
         #particles {
             position: absolute;
+
             inset: 0;
         }
 
         .particle {
             position: absolute;
+
             width: 3px;
             height: 3px;
+
             border-radius: 50%;
-            background: #fff;
-            opacity: .6;
-            animation: particleMove 8s linear infinite;
+
+            background: #ffffff;
+
+            opacity: 0.65;
+
+            animation:
+                particleMove 8s
+                linear
+                infinite;
         }
 
         @keyframes particleMove {
+
             0% {
-                transform: translateY(30px);
+                transform:
+                    translateY(30px);
             }
 
             50% {
-                transform: translateY(-60px);
+                transform:
+                    translateY(-60px);
             }
 
             100% {
-                transform: translateY(30px);
+                transform:
+                    translateY(30px);
             }
         }
 
-        /* =========================
+
+        /* =====================================================
            NAVBAR
-        ========================= */
+        ===================================================== */
 
         .navbar {
             position: fixed;
+
             top: 0;
             left: 0;
             right: 0;
-            height: 70px;
+
+            height: 72px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
-            padding: 0 6%;
+            padding:
+                0 6%;
 
-            background: rgba(2,3,7,.78);
-            backdrop-filter: blur(16px);
+            background:
+                rgba(
+                    2,
+                    3,
+                    7,
+                    0.78
+                );
 
-            border-bottom: 1px solid rgba(255,255,255,.07);
+            backdrop-filter:
+                blur(16px);
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.07
+                );
 
             z-index: 100;
         }
 
         .logo {
             font-size: 20px;
+
             font-weight: 900;
+
             letter-spacing: 3px;
 
             background:
                 linear-gradient(
                     90deg,
                     #ff174f,
-                    #fff,
+                    #ffffff,
                     #168cff
                 );
 
             -webkit-background-clip: text;
+
             color: transparent;
         }
 
         .nav-links {
             display: flex;
+
             gap: 28px;
         }
 
         .nav-links a {
-            color: #999;
+            color: #999999;
+
             text-decoration: none;
+
             font-size: 14px;
-            transition: .25s;
+
+            transition: 0.25s;
         }
 
         .nav-links a:hover {
-            color: #fff;
+            color: #ffffff;
         }
 
         .nav-button {
-            border: 1px solid rgba(22,140,255,.4);
-            background: rgba(22,140,255,.08);
-            color: #fff;
-            padding: 10px 15px;
+            border:
+                1px solid
+                rgba(
+                    22,
+                    140,
+                    255,
+                    0.4
+                );
+
+            background:
+                rgba(
+                    22,
+                    140,
+                    255,
+                    0.08
+                );
+
+            color: #ffffff;
+
+            padding:
+                10px 15px;
+
             border-radius: 9px;
+
             cursor: pointer;
+
+            transition: 0.25s;
         }
 
         .nav-button:hover {
-            background: rgba(22,140,255,.18);
+            background:
+                rgba(
+                    22,
+                    140,
+                    255,
+                    0.18
+                );
         }
 
-        /* =========================
+
+        /* =====================================================
            HERO
-        ========================= */
+        ===================================================== */
 
         .hero {
             min-height: 100vh;
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             justify-content: center;
 
             text-align: center;
 
-            padding: 110px 20px 70px;
+            padding:
+                110px 20px 70px;
         }
 
         .status {
             display: flex;
+
             align-items: center;
+
             gap: 9px;
 
-            color: #999;
+            color: #999999;
+
             font-size: 12px;
+
             letter-spacing: 3px;
 
-            margin-bottom: 28px;
+            margin-bottom: 30px;
         }
 
         .status-dot {
             width: 8px;
             height: 8px;
+
             border-radius: 50%;
+
             background: #ff174f;
 
             box-shadow:
                 0 0 8px #ff174f,
                 0 0 20px #ff174f;
 
-            animation: pulse 1.5s infinite;
+            animation:
+                statusPulse
+                1.5s
+                infinite;
         }
 
-        @keyframes pulse {
+        @keyframes statusPulse {
+
             50% {
-                opacity: .35;
-                transform: scale(.65);
+                opacity: 0.35;
+
+                transform:
+                    scale(0.65);
             }
         }
 
         .orb {
             position: relative;
+
             width: 180px;
             height: 180px;
+
             margin-bottom: 28px;
         }
 
         .orb-core {
             position: absolute;
-            top: 40px;
-            left: 40px;
 
             width: 100px;
             height: 100px;
+
+            top: 40px;
+            left: 40px;
 
             border-radius: 50%;
 
             background:
                 radial-gradient(
                     circle at 35% 30%,
-                    #fff,
+                    #ffffff,
                     #168cff 25%,
                     #07182d 60%,
                     #020307 100%
@@ -282,65 +431,101 @@
 
             box-shadow:
                 0 0 30px #168cff,
-                0 0 80px rgba(22,140,255,.45);
+                0 0 80px
+                rgba(
+                    22,
+                    140,
+                    255,
+                    0.45
+                );
         }
 
         .orb-ring {
             position: absolute;
+
             inset: 10px;
 
-            border: 2px solid transparent;
-            border-top-color: #ff174f;
-            border-right-color: #168cff;
             border-radius: 50%;
 
-            animation: spin 4s linear infinite;
+            border:
+                2px solid transparent;
+
+            border-top-color: #ff174f;
+
+            border-right-color: #168cff;
+
+            animation:
+                spin 4s
+                linear
+                infinite;
         }
 
-        .orb-ring.two {
+        .orb-ring-two {
             inset: -3px;
 
             border-top-color: #168cff;
+
             border-right-color: #ff174f;
 
             animation-duration: 6s;
-            animation-direction: reverse;
+
+            animation-direction:
+                reverse;
         }
 
         @keyframes spin {
+
             to {
-                transform: rotate(360deg);
+                transform:
+                    rotate(360deg);
             }
         }
 
         .welcome {
+            color: #888888;
+
             font-size: 13px;
+
             letter-spacing: 5px;
-            color: #888;
+
             margin-bottom: 10px;
         }
 
         .hero h1 {
-            font-size: clamp(48px,8vw,92px);
-            line-height: .95;
+            font-size:
+                clamp(
+                    48px,
+                    8vw,
+                    92px
+                );
+
+            line-height: 0.95;
+
             font-weight: 900;
+
             letter-spacing: -4px;
 
             background:
                 linear-gradient(
                     90deg,
-                    #fff,
+                    #ffffff,
                     #ff174f,
                     #168cff,
-                    #fff
+                    #ffffff
                 );
 
-            background-size: 300%;
+            background-size:
+                300%;
 
             -webkit-background-clip: text;
+
             color: transparent;
 
-            animation: gradientMove 7s linear infinite;
+            animation:
+                gradientMove
+                7s
+                linear
+                infinite;
         }
 
         .hero h1 span {
@@ -348,25 +533,32 @@
         }
 
         @keyframes gradientMove {
+
             to {
-                background-position: 300%;
+                background-position:
+                    300%;
             }
         }
 
         .hero-text {
             max-width: 650px;
-            margin: 28px auto;
 
-            color: #888;
+            margin:
+                28px auto;
+
+            color: #888888;
+
             line-height: 1.7;
         }
 
         .hero-button {
             display: inline-block;
 
-            padding: 15px 25px;
+            padding:
+                15px 25px;
 
-            color: #fff;
+            color: #ffffff;
+
             text-decoration: none;
 
             border-radius: 11px;
@@ -379,53 +571,86 @@
                 );
 
             box-shadow:
-                0 0 25px rgba(255,23,79,.16),
-                0 0 25px rgba(22,140,255,.16);
+                0 0 25px
+                rgba(
+                    255,
+                    23,
+                    79,
+                    0.16
+                ),
+                0 0 25px
+                rgba(
+                    22,
+                    140,
+                    255,
+                    0.16
+                );
+
+            transition:
+                0.25s;
         }
 
         .hero-button:hover {
-            transform: translateY(-2px);
+            transform:
+                translateY(-3px);
         }
 
-        /* =========================
-           SECTIONS
-        ========================= */
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
 
         .section {
-            padding: 100px 6%;
+            padding:
+                100px 6%;
         }
 
         .section-title {
             text-align: center;
+
             margin-bottom: 50px;
         }
 
         .section-title small {
             color: #ff174f;
+
             letter-spacing: 4px;
         }
 
         .section-title h2 {
             margin-top: 10px;
-            font-size: clamp(30px,5vw,48px);
+
+            font-size:
+                clamp(
+                    30px,
+                    5vw,
+                    48px
+                );
         }
 
         .section-title p {
             margin-top: 12px;
-            color: #777;
+
+            color: #777777;
         }
 
-        /* =========================
-           CARDS
-        ========================= */
+
+        /* =====================================================
+           CARD GRID
+        ===================================================== */
 
         .cards {
             max-width: 1200px;
+
             margin: auto;
 
             display: grid;
+
             grid-template-columns:
-                repeat(3,1fr);
+                repeat(
+                    3,
+                    1fr
+                );
 
             gap: 20px;
         }
@@ -439,90 +664,176 @@
 
             text-align: left;
 
-            border: 1px solid rgba(255,255,255,.08);
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
             border-radius: 18px;
 
-            background: rgba(255,255,255,.035);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.035
+                );
 
-            color: #fff;
+            color: #ffffff;
 
             cursor: pointer;
 
             transition:
-                transform .3s,
-                border-color .3s,
-                box-shadow .3s;
+                transform 0.3s,
+                border-color 0.3s,
+                box-shadow 0.3s;
+
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            right: -70px;
+            top: -70px;
+
+            border-radius: 50%;
+
+            background: #168cff;
+
+            filter:
+                blur(65px);
+
+            opacity: 0.10;
         }
 
         .card:hover {
-            transform: translateY(-7px);
+            transform:
+                translateY(-7px);
 
             border-color:
-                rgba(22,140,255,.4);
+                rgba(
+                    22,
+                    140,
+                    255,
+                    0.40
+                );
 
             box-shadow:
-                0 15px 45px rgba(0,0,0,.35),
-                0 0 30px rgba(22,140,255,.10);
+                0 15px 45px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.35
+                ),
+                0 0 30px
+                rgba(
+                    22,
+                    140,
+                    255,
+                    0.10
+                );
         }
 
         .card-icon {
             font-size: 38px;
+
             margin-bottom: 18px;
         }
 
         .card-number {
             position: absolute;
+
             top: 22px;
             right: 25px;
-            color: #555;
+
+            color: #555555;
+
             font-size: 12px;
         }
 
         .card h3 {
             margin-bottom: 10px;
+
             font-size: 21px;
         }
 
         .card p {
-            color: #888;
+            color: #888888;
+
             line-height: 1.6;
+
             margin-bottom: 18px;
         }
 
         .card span {
             color: #168cff;
+
             font-size: 12px;
+
             letter-spacing: 2px;
         }
 
-        /* =========================
+
+        /* =====================================================
            ABOUT
-        ========================= */
+        ===================================================== */
 
         .about-box {
             max-width: 850px;
+
             margin: auto;
 
             padding: 45px;
 
             text-align: center;
 
-            background: rgba(255,255,255,.035);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.035
+                );
 
             border:
-                1px solid rgba(255,255,255,.08);
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
 
             border-radius: 22px;
         }
 
         .about-box small {
             color: #ff174f;
+
             letter-spacing: 4px;
         }
 
         .about-box h2 {
-            margin: 12px 0 18px;
-            font-size: clamp(30px,5vw,48px);
+            margin:
+                12px 0 18px;
+
+            font-size:
+                clamp(
+                    30px,
+                    5vw,
+                    48px
+                );
         }
 
         .about-box h2 span {
@@ -530,27 +841,33 @@
         }
 
         .about-box p {
-            color: #888;
+            color: #888888;
+
             line-height: 1.8;
+
             margin-bottom: 15px;
         }
 
         .developer-link {
             color: #168cff;
+
             text-decoration: none;
         }
 
         .developer-link:hover {
-            text-decoration: underline;
+            text-decoration:
+                underline;
         }
 
         .telegram-button {
             margin-top: 10px;
 
             border: 0;
+
             border-radius: 10px;
 
-            padding: 13px 18px;
+            padding:
+                13px 18px;
 
             background:
                 linear-gradient(
@@ -559,49 +876,72 @@
                     #168cff
                 );
 
-            color: #fff;
+            color: #ffffff;
+
             cursor: pointer;
         }
 
-        /* =========================
+
+        /* =====================================================
            FOOTER
-        ========================= */
+        ===================================================== */
 
         footer {
-            padding: 35px 20px;
+            padding:
+                35px 20px;
+
             text-align: center;
 
             border-top:
-                1px solid rgba(255,255,255,.06);
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
 
-            color: #555;
+            color: #555555;
+
             font-size: 12px;
+
             letter-spacing: 2px;
         }
 
         footer p {
             margin-top: 8px;
-            color: #333;
+
+            color: #333333;
         }
 
-        /* =========================
+
+        /* =====================================================
            MODAL
-        ========================= */
+        ===================================================== */
 
         .modal {
             position: fixed;
+
             inset: 0;
 
             display: none;
 
             align-items: center;
+
             justify-content: center;
 
             padding: 18px;
 
-            background: rgba(0,0,0,.82);
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.82
+                );
 
-            backdrop-filter: blur(10px);
+            backdrop-filter:
+                blur(10px);
 
             z-index: 999;
         }
@@ -614,9 +954,11 @@
             position: relative;
 
             width: 100%;
-            max-width: 520px;
+
+            max-width: 540px;
 
             max-height: 90vh;
+
             overflow-y: auto;
 
             padding: 30px;
@@ -624,64 +966,97 @@
             background: #080a10;
 
             border:
-                1px solid rgba(22,140,255,.25);
+                1px solid
+                rgba(
+                    22,
+                    140,
+                    255,
+                    0.25
+                );
 
             border-radius: 20px;
 
             box-shadow:
-                0 0 60px rgba(0,0,0,.7);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 12px;
-            right: 14px;
-
-            width: 36px;
-            height: 36px;
-
-            border: 0;
-            border-radius: 50%;
-
-            background: rgba(255,255,255,.08);
-
-            color: white;
-
-            font-size: 24px;
-
-            cursor: pointer;
+                0 0 60px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.70
+                );
         }
 
         .modal-box h2 {
             margin-bottom: 22px;
         }
 
-        /* =========================
+        .modal-close {
+            position: absolute;
+
+            top: 12px;
+
+            right: 14px;
+
+            width: 36px;
+
+            height: 36px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            color: #ffffff;
+
+            font-size: 24px;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
            FORM
-        ========================= */
+        ===================================================== */
 
         .form {
             display: flex;
+
             flex-direction: column;
+
             gap: 13px;
         }
 
         .form label {
-            color: #aaa;
+            color: #aaaaaa;
+
             font-size: 13px;
         }
 
         .input {
             width: 100%;
 
-            padding: 13px;
+            padding:
+                13px;
 
             background: #03050a;
 
-            color: #fff;
+            color: #ffffff;
 
             border:
-                1px solid rgba(255,255,255,.10);
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.10
+                );
 
             border-radius: 10px;
 
@@ -689,13 +1064,24 @@
         }
 
         .input:focus {
-            border-color: #168cff;
+            border-color:
+                #168cff;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(
+                    22,
+                    140,
+                    255,
+                    0.07
+                );
         }
 
         .calc-button {
             border: 0;
 
-            padding: 13px;
+            padding:
+                13px;
 
             border-radius: 10px;
 
@@ -706,11 +1092,124 @@
                     #168cff
                 );
 
-            color: #fff;
+            color: #ffffff;
 
             cursor: pointer;
+
             font-weight: bold;
+
+            transition:
+                0.25s;
         }
+
+        .calc-button:hover {
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =====================================================
+           DATE INPUT
+        ===================================================== */
+
+        .date-control {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .date-text {
+            flex: 1;
+        }
+
+        .calendar-button {
+            position: relative;
+
+            width: 50px;
+
+            height: 48px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            border-radius: 10px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            color: #ffffff;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            overflow: hidden;
+
+            transition:
+                0.25s;
+        }
+
+        .calendar-button:hover {
+            border-color:
+                #168cff;
+
+            background:
+                rgba(
+                    22,
+                    140,
+                    255,
+                    0.12
+                );
+        }
+
+        .calendar-button input {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            opacity: 0;
+
+            cursor: pointer;
+        }
+
+        .date-hint {
+            color: #5f5f5f;
+
+            font-size: 11px;
+
+            margin-top: -6px;
+
+            line-height: 1.4;
+        }
+
+
+        /* =====================================================
+           RESULT
+        ===================================================== */
 
         .result {
             margin-top: 15px;
@@ -719,10 +1218,22 @@
         .result-box {
             padding: 18px;
 
-            background: rgba(255,255,255,.04);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
 
             border:
-                1px solid rgba(255,255,255,.08);
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
 
             border-radius: 14px;
 
@@ -731,103 +1242,172 @@
 
         .result-box h3 {
             color: #168cff;
+
             margin-bottom: 10px;
         }
 
         .result-box hr {
             border: 0;
+
             border-top:
-                1px solid rgba(255,255,255,.08);
-            margin: 12px 0;
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            margin:
+                12px 0;
         }
+
+
+        /* =====================================================
+           COUNTDOWN
+        ===================================================== */
 
         .countdown-grid {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
             gap: 10px;
+
             margin-top: 12px;
         }
 
         .countdown-item {
             padding: 14px;
+
             text-align: center;
-            background: rgba(255,255,255,.05);
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.05
+                );
+
             border-radius: 10px;
         }
 
         .countdown-item strong {
             display: block;
+
             font-size: 28px;
         }
 
         .countdown-item span {
-            color: #777;
+            color: #777777;
+
             font-size: 12px;
         }
 
-        /* =========================
+
+        /* =====================================================
            RESPONSIVE
-        ========================= */
+        ===================================================== */
 
         @media (max-width: 900px) {
 
             .cards {
                 grid-template-columns:
-                    repeat(2,1fr);
+                    repeat(
+                        2,
+                        1fr
+                    );
             }
 
             .nav-links {
                 display: none;
             }
+
         }
+
 
         @media (max-width: 620px) {
 
             .navbar {
-                padding: 0 4%;
+                padding:
+                    0 4%;
             }
 
             .nav-button {
-                padding: 8px 10px;
+                padding:
+                    8px 10px;
+
                 font-size: 12px;
             }
 
             .hero h1 {
                 font-size: 48px;
+
                 letter-spacing: -3px;
             }
 
             .orb {
-                transform: scale(.84);
+                transform:
+                    scale(0.84);
+
                 margin-bottom: 3px;
             }
 
             .section {
-                padding: 80px 5%;
+                padding:
+                    80px 5%;
             }
 
             .cards {
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
             }
 
             .about-box {
-                padding: 28px 20px;
+                padding:
+                    28px 20px;
             }
+
+            .modal-box {
+                padding:
+                    25px 20px;
+            }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
+    <!-- =====================================================
+         BACKGROUND
+    ===================================================== -->
+
     <div class="background">
+
         <div class="glow glow-red"></div>
+
         <div class="glow glow-blue"></div>
+
         <div class="grid"></div>
+
         <div id="particles"></div>
+
     </div>
 
 
-    <!-- NAVBAR -->
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
 
     <header class="navbar">
 
@@ -835,11 +1415,23 @@
             MASTERMIND
         </div>
 
+
         <nav class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#calculators">Calculators</a>
-            <a href="#about">About</a>
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#calculators">
+                Calculators
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
         </nav>
+
 
         <button
             class="nav-button"
@@ -851,7 +1443,9 @@
     </header>
 
 
-    <!-- HERO -->
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
 
     <section
         class="hero"
@@ -859,32 +1453,53 @@
     >
 
         <div class="status">
-            <span class="status-dot"></span>
+
+            <span
+                class="status-dot"
+            ></span>
+
             SYSTEM ONLINE
+
         </div>
+
 
         <div class="orb">
 
             <div class="orb-ring"></div>
-            <div class="orb-ring two"></div>
+
+            <div
+                class="orb-ring orb-ring-two"
+            ></div>
+
             <div class="orb-core"></div>
 
         </div>
+
 
         <div class="welcome">
             WELCOME TO
         </div>
 
+
         <h1>
+
             CALCULATOR
-            <span>UNIVERSE</span>
+
+            <span>
+                UNIVERSE
+            </span>
+
         </h1>
 
+
         <p class="hero-text">
+
             Powerful calculators for your age,
             birthdays, dates, countdowns and
             life statistics.
+
         </p>
+
 
         <a
             class="hero-button"
@@ -896,7 +1511,9 @@
     </section>
 
 
-    <!-- CALCULATORS -->
+    <!-- =====================================================
+         CALCULATORS
+    ===================================================== -->
 
     <section
         class="section"
@@ -905,7 +1522,9 @@
 
         <div class="section-title">
 
-            <small>TOOLS</small>
+            <small>
+                TOOLS
+            </small>
 
             <h2>
                 Choose Your Calculator
@@ -919,6 +1538,7 @@
 
 
         <div class="cards">
+
 
             <button
                 class="card"
@@ -1098,7 +1718,9 @@
     </section>
 
 
-    <!-- ABOUT -->
+    <!-- =====================================================
+         ABOUT
+    ===================================================== -->
 
     <section
         class="section"
@@ -1107,20 +1729,32 @@
 
         <div class="about-box">
 
-            <small>ABOUT</small>
+            <small>
+                ABOUT
+            </small>
+
 
             <h2>
+
                 Built by
-                <span>MASTERMIND</span>
+
+                <span>
+                    MASTERMIND
+                </span>
+
             </h2>
+
 
             <p>
                 Calculator Universe is a collection
                 of modern date and age calculation tools.
             </p>
 
+
             <p>
+
                 👨‍💻 Developer:
+
                 <a
                     class="developer-link"
                     href="https://t.me/Do_x_Die"
@@ -1129,7 +1763,9 @@
                 >
                     @Do_x_Die
                 </a>
+
             </p>
+
 
             <button
                 class="telegram-button"
@@ -1143,7 +1779,9 @@
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
 
     <footer>
 
@@ -1156,7 +1794,9 @@
     </footer>
 
 
-    <!-- MODAL -->
+    <!-- =====================================================
+         MODAL
+    ===================================================== -->
 
     <div
         class="modal"
@@ -1172,25 +1812,33 @@
                 ×
             </button>
 
+
             <h2 id="modalTitle">
                 Calculator
             </h2>
 
-            <div id="modalContent"></div>
+
+            <div
+                id="modalContent"
+            ></div>
 
         </div>
 
     </div>
 
 
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
     <script>
 
         "use strict";
 
 
-        /* =========================================
+        /* =====================================================
            TELEGRAM
-        ========================================= */
+        ===================================================== */
 
         const telegramBotUrl =
             "https://t.me/cracker_team_05_bot";
@@ -1208,7 +1856,9 @@
 
 
         document
-            .getElementById("telegramNav")
+            .getElementById(
+                "telegramNav"
+            )
             .addEventListener(
                 "click",
                 openTelegram
@@ -1216,47 +1866,67 @@
 
 
         document
-            .getElementById("telegramAbout")
+            .getElementById(
+                "telegramAbout"
+            )
             .addEventListener(
                 "click",
                 openTelegram
             );
 
 
-        /* =========================================
+        /* =====================================================
            PARTICLES
-        ========================================= */
+        ===================================================== */
 
         const particles =
-            document.getElementById("particles");
+            document.getElementById(
+                "particles"
+            );
+
+
+        const particleCount =
+            window.innerWidth < 650
+                ? 30
+                : 60;
+
 
         for (
             let i = 0;
-            i < (
-                window.innerWidth < 650
-                    ? 30
-                    : 60
-            );
+            i < particleCount;
             i++
         ) {
 
             const particle =
-                document.createElement("span");
+                document.createElement(
+                    "span"
+                );
+
 
             particle.className =
                 "particle";
 
+
             particle.style.left =
-                Math.random() * 100 + "%";
+                Math.random() * 100
+                + "%";
+
 
             particle.style.top =
-                Math.random() * 100 + "%";
+                Math.random() * 100
+                + "%";
+
 
             particle.style.animationDelay =
-                Math.random() * 8 + "s";
+                Math.random() * 8
+                + "s";
+
 
             particle.style.animationDuration =
-                5 + Math.random() * 8 + "s";
+                5 +
+                Math.random() * 8
+                + "s";
+
 
             particles.appendChild(
                 particle
@@ -1265,20 +1935,27 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            MODAL
-        ========================================= */
+        ===================================================== */
 
         const modal =
-            document.getElementById("modal");
+            document.getElementById(
+                "modal"
+            );
+
 
         const modalTitle =
-            document.getElementById("modalTitle");
+            document.getElementById(
+                "modalTitle"
+            );
+
 
         const modalContent =
             document.getElementById(
                 "modalContent"
             );
+
 
         const closeModalButton =
             document.getElementById(
@@ -1294,8 +1971,10 @@
             modalTitle.textContent =
                 title;
 
+
             modalContent.innerHTML =
                 content;
+
 
             modal.classList.add(
                 "show"
@@ -1326,7 +2005,9 @@
                 if (
                     event.target === modal
                 ) {
+
                     closeModal();
+
                 }
 
             }
@@ -1340,27 +2021,336 @@
                 if (
                     event.key === "Escape"
                 ) {
+
                     closeModal();
+
                 }
 
             }
         );
 
 
-        /* =========================================
-           HELPERS
-        ========================================= */
+        /* =====================================================
+           DATE INPUT
+        ===================================================== */
 
-        function parseDate(value) {
+        function formatDateInput(
+            value
+        ) {
 
-            return new Date(
-                value + "T00:00:00"
+            let digits =
+                value.replace(
+                    /\D/g,
+                    ""
+                );
+
+
+            if (
+                digits.length > 8
+            ) {
+
+                digits =
+                    digits.slice(
+                        0,
+                        8
+                    );
+
+            }
+
+
+            if (
+                digits.length >= 5
+            ) {
+
+                return (
+                    digits.slice(0, 2)
+                    + "/"
+                    + digits.slice(2, 4)
+                    + "/"
+                    + digits.slice(4)
+                );
+
+            }
+
+
+            if (
+                digits.length >= 3
+            ) {
+
+                return (
+                    digits.slice(0, 2)
+                    + "/"
+                    + digits.slice(2)
+                );
+
+            }
+
+
+            return digits;
+
+        }
+
+
+        function pickerToUSDate(
+            value
+        ) {
+
+            if (!value) {
+
+                return "";
+
+            }
+
+
+            const parts =
+                value.split("-");
+
+
+            if (
+                parts.length !== 3
+            ) {
+
+                return "";
+
+            }
+
+
+            return (
+                parts[1]
+                + "/"
+                + parts[2]
+                + "/"
+                + parts[0]
             );
 
         }
 
 
-        function formatDate(date) {
+        function parseUSDate(
+            value
+        ) {
+
+            const parts =
+                value.split("/");
+
+
+            if (
+                parts.length !== 3
+            ) {
+
+                return null;
+
+            }
+
+
+            if (
+                parts[0].length !== 2 ||
+                parts[1].length !== 2 ||
+                parts[2].length !== 4
+            ) {
+
+                return null;
+
+            }
+
+
+            const month =
+                Number(parts[0]);
+
+
+            const day =
+                Number(parts[1]);
+
+
+            const year =
+                Number(parts[2]);
+
+
+            if (
+                !month ||
+                !day ||
+                !year
+            ) {
+
+                return null;
+
+            }
+
+
+            if (
+                month < 1 ||
+                month > 12 ||
+                day < 1 ||
+                day > 31
+            ) {
+
+                return null;
+
+            }
+
+
+            const date =
+                new Date(
+                    year,
+                    month - 1,
+                    day
+                );
+
+
+            if (
+                date.getFullYear() !== year ||
+                date.getMonth() !== month - 1 ||
+                date.getDate() !== day
+            ) {
+
+                return null;
+
+            }
+
+
+            return date;
+
+        }
+
+
+        function createDateControl(
+            textId,
+            pickerId,
+            label
+        ) {
+
+            return `
+
+                <label>
+                    ${label}
+                </label>
+
+                <div class="date-control">
+
+                    <input
+                        id="${textId}"
+                        type="text"
+                        class="input date-text"
+                        placeholder="MM/DD/YYYY"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        maxlength="10"
+                    >
+
+                    <label
+                        class="calendar-button"
+                        title="Choose date"
+                    >
+
+                        📅
+
+                        <input
+                            id="${pickerId}"
+                            type="date"
+                        >
+
+                    </label>
+
+                </div>
+
+                <div class="date-hint">
+
+                    Type MM/DD/YYYY
+                    or use the calendar
+
+                </div>
+
+            `;
+
+        }
+
+
+        function activateDateControl(
+            textId,
+            pickerId
+        ) {
+
+            const textInput =
+                document.getElementById(
+                    textId
+                );
+
+
+            const picker =
+                document.getElementById(
+                    pickerId
+                );
+
+
+            if (
+                !textInput ||
+                !picker
+            ) {
+
+                return;
+
+            }
+
+
+            textInput.addEventListener(
+                "input",
+                function() {
+
+                    textInput.value =
+                        formatDateInput(
+                            textInput.value
+                        );
+
+                }
+            );
+
+
+            picker.addEventListener(
+                "change",
+                function() {
+
+                    textInput.value =
+                        pickerToUSDate(
+                            picker.value
+                        );
+
+                }
+            );
+
+        }
+
+
+        function getSelectedDate(
+            textId
+        ) {
+
+            const input =
+                document.getElementById(
+                    textId
+                );
+
+
+            if (!input) {
+
+                return null;
+
+            }
+
+
+            return parseUSDate(
+                input.value
+            );
+
+        }
+
+
+        /* =====================================================
+           DATE HELPERS
+        ===================================================== */
+
+        function formatDate(
+            date
+        ) {
 
             return date.toLocaleDateString(
                 "en-US",
@@ -1374,44 +2364,59 @@
         }
 
 
-        function getAge(birthDate) {
+        function getAge(
+            birthday
+        ) {
 
             const today =
                 new Date();
 
+
             let years =
                 today.getFullYear()
-                - birthDate.getFullYear();
+                -
+                birthday.getFullYear();
+
 
             let months =
                 today.getMonth()
-                - birthDate.getMonth();
+                -
+                birthday.getMonth();
+
 
             let days =
                 today.getDate()
-                - birthDate.getDate();
+                -
+                birthday.getDate();
 
 
-            if (days < 0) {
+            if (
+                days < 0
+            ) {
 
                 months--;
 
-                const lastMonth =
+
+                const previousMonth =
                     new Date(
                         today.getFullYear(),
                         today.getMonth(),
                         0
                     );
 
+
                 days +=
-                    lastMonth.getDate();
+                    previousMonth.getDate();
 
             }
 
 
-            if (months < 0) {
+            if (
+                months < 0
+            ) {
 
                 years--;
+
                 months += 12;
 
             }
@@ -1426,9 +2431,9 @@
         }
 
 
-        /* =========================================
-           BIRTHDAY
-        ========================================= */
+        /* =====================================================
+           BIRTHDAY CALCULATOR
+        ===================================================== */
 
         function birthdayCalculator() {
 
@@ -1436,17 +2441,14 @@
                 "🎂 Birthday Calculator",
 
                 `
+
                 <div class="form">
 
-                    <label>
-                        Enter your birthday
-                    </label>
-
-                    <input
-                        type="date"
-                        id="birthDate"
-                        class="input"
-                    >
+                    ${createDateControl(
+                        "birthDate",
+                        "birthDatePicker",
+                        "Enter your birthday"
+                    )}
 
                     <button
                         class="calc-button"
@@ -1461,7 +2463,14 @@
                     ></div>
 
                 </div>
+
                 `
+            );
+
+
+            activateDateControl(
+                "birthDate",
+                "birthDatePicker"
             );
 
 
@@ -1473,40 +2482,46 @@
                     "click",
                     function() {
 
-                        const value =
-                            document.getElementById(
-                                "birthDate"
-                            ).value;
-
                         const result =
                             document.getElementById(
                                 "birthResult"
                             );
 
 
-                        if (!value) {
+                        const birthday =
+                            getSelectedDate(
+                                "birthDate"
+                            );
 
-                            result.innerHTML =
-                                "⚠️ Please select your birthday.";
+
+                        if (!birthday) {
+
+                            result.innerHTML = `
+                                <div class="result-box">
+                                    ⚠️ Please enter a valid
+                                    date in MM/DD/YYYY format.
+                                </div>
+                            `;
 
                             return;
 
                         }
 
 
-                        const birthday =
-                            parseDate(value);
-
-                        const now =
+                        const today =
                             new Date();
 
 
                         if (
-                            birthday > now
+                            birthday > today
                         ) {
 
-                            result.innerHTML =
-                                "⚠️ Birthday cannot be in the future.";
+                            result.innerHTML = `
+                                <div class="result-box">
+                                    ⚠️ Birthday cannot
+                                    be in the future.
+                                </div>
+                            `;
 
                             return;
 
@@ -1522,9 +2537,10 @@
                         const totalDays =
                             Math.floor(
                                 (
-                                    now -
+                                    today -
                                     birthday
-                                ) /
+                                )
+                                /
                                 (
                                     1000 *
                                     60 *
@@ -1563,6 +2579,12 @@
                                     ${totalDays.toLocaleString()}
                                 </p>
 
+                                <p>
+                                    🕒 Total Hours:
+                                    ${(totalDays * 24)
+                                        .toLocaleString()}
+                                </p>
+
                             </div>
 
                         `;
@@ -1573,9 +2595,9 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            DATE DIFFERENCE
-        ========================================= */
+        ===================================================== */
 
         function differenceCalculator() {
 
@@ -1583,27 +2605,20 @@
                 "📆 Date Difference",
 
                 `
+
                 <div class="form">
 
-                    <label>
-                        First Date
-                    </label>
+                    ${createDateControl(
+                        "date1",
+                        "date1Picker",
+                        "First Date"
+                    )}
 
-                    <input
-                        type="date"
-                        id="date1"
-                        class="input"
-                    >
-
-                    <label>
-                        Second Date
-                    </label>
-
-                    <input
-                        type="date"
-                        id="date2"
-                        class="input"
-                    >
+                    ${createDateControl(
+                        "date2",
+                        "date2Picker",
+                        "Second Date"
+                    )}
 
                     <button
                         class="calc-button"
@@ -1618,7 +2633,20 @@
                     ></div>
 
                 </div>
+
                 `
+            );
+
+
+            activateDateControl(
+                "date1",
+                "date1Picker"
+            );
+
+
+            activateDateControl(
+                "date2",
+                "date2Picker"
             );
 
 
@@ -1630,51 +2658,52 @@
                     "click",
                     function() {
 
-                        const first =
-                            document.getElementById(
-                                "date1"
-                            ).value;
-
-                        const second =
-                            document.getElementById(
-                                "date2"
-                            ).value;
-
                         const result =
                             document.getElementById(
                                 "differenceResult"
                             );
 
 
+                        const date1 =
+                            getSelectedDate(
+                                "date1"
+                            );
+
+
+                        const date2 =
+                            getSelectedDate(
+                                "date2"
+                            );
+
+
                         if (
-                            !first ||
-                            !second
+                            !date1 ||
+                            !date2
                         ) {
 
-                            result.innerHTML =
-                                "⚠️ Please select both dates.";
+                            result.innerHTML = `
+                                <div class="result-box">
+                                    ⚠️ Please enter both dates
+                                    in MM/DD/YYYY format.
+                                </div>
+                            `;
 
                             return;
 
                         }
 
 
-                        const d1 =
-                            parseDate(first);
-
-                        const d2 =
-                            parseDate(second);
-
-
                         const difference =
                             Math.abs(
-                                d2 - d1
+                                date2 -
+                                date1
                             );
 
 
-                        const days =
+                        const totalDays =
                             Math.floor(
-                                difference /
+                                difference
+                                /
                                 (
                                     1000 *
                                     60 *
@@ -1686,11 +2715,24 @@
 
                         const weeks =
                             Math.floor(
-                                days / 7
+                                totalDays / 7
                             );
 
+
                         const remainingDays =
-                            days % 7;
+                            totalDays % 7;
+
+
+                        const totalHours =
+                            totalDays * 24;
+
+
+                        const totalMinutes =
+                            totalHours * 60;
+
+
+                        const totalSeconds =
+                            totalMinutes * 60;
 
 
                         result.innerHTML = `
@@ -1702,18 +2744,20 @@
                                 </h3>
 
                                 <p>
-                                    ${formatDate(d1)}
+                                    📅
+                                    ${formatDate(date1)}
                                 </p>
 
                                 <p>
-                                    ${formatDate(d2)}
+                                    📅
+                                    ${formatDate(date2)}
                                 </p>
 
                                 <hr>
 
                                 <p>
                                     <strong>
-                                        ${days.toLocaleString()}
+                                        ${totalDays.toLocaleString()}
                                         Days
                                     </strong>
                                 </p>
@@ -1728,16 +2772,20 @@
 
                                 <p>
                                     🕒
-                                    ${(days * 24)
-                                        .toLocaleString()}
+                                    ${totalHours.toLocaleString()}
                                     Hours
                                 </p>
 
                                 <p>
                                     ⏱️
-                                    ${(days * 24 * 60)
-                                        .toLocaleString()}
+                                    ${totalMinutes.toLocaleString()}
                                     Minutes
+                                </p>
+
+                                <p>
+                                    ⚡
+                                    ${totalSeconds.toLocaleString()}
+                                    Seconds
                                 </p>
 
                             </div>
@@ -1750,11 +2798,12 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            COUNTDOWN
-        ========================================= */
+        ===================================================== */
 
-        let countdownInterval = null;
+        let countdownInterval =
+            null;
 
 
         function countdownCalculator() {
@@ -1763,6 +2812,7 @@
                 "⏳ Countdown",
 
                 `
+
                 <div class="form">
 
                     <label>
@@ -1788,6 +2838,7 @@
                     ></div>
 
                 </div>
+
                 `
             );
 
@@ -1805,6 +2856,7 @@
                                 "countdownDate"
                             ).value;
 
+
                         const result =
                             document.getElementById(
                                 "countdownResult"
@@ -1813,8 +2865,12 @@
 
                         if (!value) {
 
-                            result.innerHTML =
-                                "⚠️ Please select a target date.";
+                            result.innerHTML = `
+                                <div class="result-box">
+                                    ⚠️ Please select
+                                    a target date.
+                                </div>
+                            `;
 
                             return;
 
@@ -1822,7 +2878,9 @@
 
 
                         const target =
-                            new Date(value);
+                            new Date(
+                                value
+                            );
 
 
                         if (
@@ -1836,22 +2894,24 @@
                         }
 
 
-                        function update() {
+                        function updateCountdown() {
 
                             const now =
                                 new Date();
 
-                            const diff =
+
+                            const difference =
                                 target - now;
 
 
                             if (
-                                diff <= 0
+                                difference <= 0
                             ) {
 
                                 clearInterval(
                                     countdownInterval
                                 );
+
 
                                 result.innerHTML = `
 
@@ -1869,6 +2929,7 @@
 
                                 `;
 
+
                                 return;
 
                             }
@@ -1876,7 +2937,7 @@
 
                             const days =
                                 Math.floor(
-                                    diff /
+                                    difference /
                                     (
                                         1000 *
                                         60 *
@@ -1888,30 +2949,33 @@
 
                             const hours =
                                 Math.floor(
-                                    diff /
+                                    difference /
                                     (
                                         1000 *
                                         60 *
                                         60
                                     )
-                                ) % 24;
+                                )
+                                % 24;
 
 
                             const minutes =
                                 Math.floor(
-                                    diff /
+                                    difference /
                                     (
                                         1000 *
                                         60
                                     )
-                                ) % 60;
+                                )
+                                % 60;
 
 
                             const seconds =
                                 Math.floor(
-                                    diff /
+                                    difference /
                                     1000
-                                ) % 60;
+                                )
+                                % 60;
 
 
                             result.innerHTML = `
@@ -1922,42 +2986,67 @@
                                         ⏰ Remaining
                                     </h3>
 
-                                    <div class="countdown-grid">
+                                    <div
+                                        class="countdown-grid"
+                                    >
 
-                                        <div class="countdown-item">
+                                        <div
+                                            class="countdown-item"
+                                        >
+
                                             <strong>
                                                 ${days}
                                             </strong>
+
                                             <span>
                                                 Days
                                             </span>
+
                                         </div>
 
-                                        <div class="countdown-item">
+
+                                        <div
+                                            class="countdown-item"
+                                        >
+
                                             <strong>
                                                 ${hours}
                                             </strong>
+
                                             <span>
                                                 Hours
                                             </span>
+
                                         </div>
 
-                                        <div class="countdown-item">
+
+                                        <div
+                                            class="countdown-item"
+                                        >
+
                                             <strong>
                                                 ${minutes}
                                             </strong>
+
                                             <span>
                                                 Minutes
                                             </span>
+
                                         </div>
 
-                                        <div class="countdown-item">
+
+                                        <div
+                                            class="countdown-item"
+                                        >
+
                                             <strong>
                                                 ${seconds}
                                             </strong>
+
                                             <span>
                                                 Seconds
                                             </span>
+
                                         </div>
 
                                     </div>
@@ -1969,11 +3058,12 @@
                         }
 
 
-                        update();
+                        updateCountdown();
+
 
                         countdownInterval =
                             setInterval(
-                                update,
+                                updateCountdown,
                                 1000
                             );
 
@@ -1983,9 +3073,9 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            LIFE STATISTICS
-        ========================================= */
+        ===================================================== */
 
         function statisticsCalculator() {
 
@@ -1993,17 +3083,14 @@
                 "📊 Life Statistics",
 
                 `
+
                 <div class="form">
 
-                    <label>
-                        Your Birthday
-                    </label>
-
-                    <input
-                        type="date"
-                        id="statsBirthday"
-                        class="input"
-                    >
+                    ${createDateControl(
+                        "statsBirthday",
+                        "statsBirthdayPicker",
+                        "Your Birthday"
+                    )}
 
                     <button
                         class="calc-button"
@@ -2018,7 +3105,14 @@
                     ></div>
 
                 </div>
+
                 `
+            );
+
+
+            activateDateControl(
+                "statsBirthday",
+                "statsBirthdayPicker"
             );
 
 
@@ -2030,29 +3124,31 @@
                     "click",
                     function() {
 
-                        const value =
-                            document.getElementById(
-                                "statsBirthday"
-                            ).value;
-
                         const result =
                             document.getElementById(
                                 "statsResult"
                             );
 
 
-                        if (!value) {
+                        const birthday =
+                            getSelectedDate(
+                                "statsBirthday"
+                            );
 
-                            result.innerHTML =
-                                "⚠️ Please select your birthday.";
+
+                        if (!birthday) {
+
+                            result.innerHTML = `
+                                <div class="result-box">
+                                    ⚠️ Please enter a valid
+                                    date in MM/DD/YYYY format.
+                                </div>
+                            `;
 
                             return;
 
                         }
 
-
-                        const birthday =
-                            parseDate(value);
 
                         const now =
                             new Date();
@@ -2062,8 +3158,12 @@
                             birthday > now
                         ) {
 
-                            result.innerHTML =
-                                "⚠️ Invalid birthday.";
+                            result.innerHTML = `
+                                <div class="result-box">
+                                    ⚠️ Birthday cannot
+                                    be in the future.
+                                </div>
+                            `;
 
                             return;
 
@@ -2075,7 +3175,8 @@
                                 (
                                     now -
                                     birthday
-                                ) /
+                                )
+                                /
                                 (
                                     1000 *
                                     60 *
@@ -2088,8 +3189,10 @@
                         const hours =
                             days * 24;
 
+
                         const minutes =
                             hours * 60;
+
 
                         const seconds =
                             minutes * 60;
@@ -2140,9 +3243,9 @@
         }
 
 
-        /* =========================================
-           MILESTONES
-        ========================================= */
+        /* =====================================================
+           AGE MILESTONES
+        ===================================================== */
 
         function milestonesCalculator() {
 
@@ -2150,17 +3253,14 @@
                 "🎯 Age Milestones",
 
                 `
+
                 <div class="form">
 
-                    <label>
-                        Your Birthday
-                    </label>
-
-                    <input
-                        type="date"
-                        id="milestoneBirthday"
-                        class="input"
-                    >
+                    ${createDateControl(
+                        "milestoneBirthday",
+                        "milestoneBirthdayPicker",
+                        "Your Birthday"
+                    )}
 
                     <button
                         class="calc-button"
@@ -2175,7 +3275,14 @@
                     ></div>
 
                 </div>
+
                 `
+            );
+
+
+            activateDateControl(
+                "milestoneBirthday",
+                "milestoneBirthdayPicker"
             );
 
 
@@ -2187,29 +3294,31 @@
                     "click",
                     function() {
 
-                        const value =
-                            document.getElementById(
-                                "milestoneBirthday"
-                            ).value;
-
                         const result =
                             document.getElementById(
                                 "milestoneResult"
                             );
 
 
-                        if (!value) {
+                        const birthday =
+                            getSelectedDate(
+                                "milestoneBirthday"
+                            );
 
-                            result.innerHTML =
-                                "⚠️ Please select your birthday.";
+
+                        if (!birthday) {
+
+                            result.innerHTML = `
+                                <div class="result-box">
+                                    ⚠️ Please enter a valid
+                                    date in MM/DD/YYYY format.
+                                </div>
+                            `;
 
                             return;
 
                         }
 
-
-                        const birthday =
-                            parseDate(value);
 
                         const now =
                             new Date();
@@ -2219,8 +3328,12 @@
                             birthday > now
                         ) {
 
-                            result.innerHTML =
-                                "⚠️ Invalid birthday.";
+                            result.innerHTML = `
+                                <div class="result-box">
+                                    ⚠️ Birthday cannot
+                                    be in the future.
+                                </div>
+                            `;
 
                             return;
 
@@ -2246,10 +3359,13 @@
 
 
                         let html = `
+
                             <div class="result-box">
+
                                 <h3>
                                     🎯 Milestones
                                 </h3>
+
                         `;
 
 
@@ -2261,8 +3377,10 @@
                                         birthday
                                     );
 
+
                                 date.setFullYear(
-                                    birthday.getFullYear()
+                                    birthday
+                                        .getFullYear()
                                     + age
                                 );
 
@@ -2272,21 +3390,29 @@
                                 ) {
 
                                     html += `
+
                                         <p>
                                             ✅ Age
                                             ${age} —
-                                            ${formatDate(date)}
+                                            ${formatDate(
+                                                date
+                                            )}
                                         </p>
+
                                     `;
 
                                 } else {
 
                                     html += `
+
                                         <p>
                                             🔜 Age
                                             ${age} —
-                                            ${formatDate(date)}
+                                            ${formatDate(
+                                                date
+                                            )}
                                         </p>
+
                                     `;
 
                                 }
@@ -2309,12 +3435,14 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            CARD EVENTS
-        ========================================= */
+        ===================================================== */
 
         document
-            .querySelectorAll(".card")
+            .querySelectorAll(
+                ".card"
+            )
             .forEach(
                 function(card) {
 
@@ -2327,39 +3455,57 @@
 
 
                             if (
-                                tool === "birthday"
+                                tool ===
+                                "birthday"
                             ) {
+
                                 birthdayCalculator();
+
                             }
 
                             else if (
-                                tool === "difference"
+                                tool ===
+                                "difference"
                             ) {
+
                                 differenceCalculator();
+
                             }
 
                             else if (
-                                tool === "countdown"
+                                tool ===
+                                "countdown"
                             ) {
+
                                 countdownCalculator();
+
                             }
 
                             else if (
-                                tool === "statistics"
+                                tool ===
+                                "statistics"
                             ) {
+
                                 statisticsCalculator();
+
                             }
 
                             else if (
-                                tool === "milestones"
+                                tool ===
+                                "milestones"
                             ) {
+
                                 milestonesCalculator();
+
                             }
 
                             else if (
-                                tool === "telegram"
+                                tool ===
+                                "telegram"
                             ) {
+
                                 openTelegram();
+
                             }
 
                         }
@@ -2369,9 +3515,9 @@
             );
 
 
-        /* =========================================
-           MOUSE EFFECT
-        ========================================= */
+        /* =====================================================
+           MOUSE PARALLAX
+        ===================================================== */
 
         if (
             window.innerWidth > 900
@@ -2386,6 +3532,7 @@
                             ".orb"
                         );
 
+
                     if (!orb) {
                         return;
                     }
@@ -2394,21 +3541,26 @@
                     const x =
                         (
                             event.clientX /
-                            window.innerWidth -
-                            .5
-                        ) * 8;
+                            window.innerWidth
+                            - 0.5
+                        )
+                        * 8;
 
 
                     const y =
                         (
                             event.clientY /
-                            window.innerHeight -
-                            .5
-                        ) * 8;
+                            window.innerHeight
+                            - 0.5
+                        )
+                        * 8;
 
 
                     orb.style.transform =
-                        `translate(${x}px,${y}px)`;
+                        `translate(
+                            ${x}px,
+                            ${y}px
+                        )`;
 
                 }
             );
@@ -2416,11 +3568,28 @@
         }
 
 
+        /* =====================================================
+           CONSOLE
+        ===================================================== */
+
         console.log(
-            "Calculator Universe loaded successfully."
+            "Calculator Universe loaded."
+        );
+
+        console.log(
+            "Date input: MM/DD/YYYY"
+        );
+
+        console.log(
+            "Developer: @Do_x_Die"
+        );
+
+        console.log(
+            "Telegram Bot: @cracker_team_05_bot"
         );
 
     </script>
 
 </body>
+
 </html>
