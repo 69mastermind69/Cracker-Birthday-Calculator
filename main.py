@@ -1,4 +1,3 @@
-
 import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from threading import Thread
@@ -9,6 +8,7 @@ from telegram import (
     MenuButtonWebApp,
     WebAppInfo,
 )
+
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -17,12 +17,24 @@ from telegram.ext import (
     filters,
 )
 
-# IMPORTANT:
-# Your birthday.py uses birthday_message_handler,
-# NOT birthday_handler.
+# ============================================================
+# BIRTHDAY CALCULATOR
+# ============================================================
+
 from birthday import (
     birthday_message_handler,
     birthday_start,
+)
+
+# ============================================================
+# DATE DIFFERENCE CALCULATOR
+# ============================================================
+
+from date_calculator import (
+    DATE_CALCULATOR_BUTTON,
+    date_calculator_start,
+    date_calculator_handler,
+    is_date_calculator_active,
 )
 
 
@@ -49,7 +61,6 @@ PORT = int(
     )
 )
 
-# Your Render URL
 RENDER_URL = (
     "https://cracker-birthday-calculator.onrender.com"
 )
@@ -66,16 +77,22 @@ if not TOKEN:
 # ============================================================
 
 START_BUTTON = "🏠 Start"
+
 BIRTHDAY_BUTTON = "🎂 Birthday Calculator"
+
 DEVELOPER_BUTTON = "👨‍💻 Developer"
 
+
+# ============================================================
+# MAIN KEYBOARD
+# ============================================================
 
 MAIN_KEYBOARD = [
     [START_BUTTON],
     [BIRTHDAY_BUTTON],
+    [DATE_CALCULATOR_BUTTON],
     [DEVELOPER_BUTTON],
 ]
-
 
 MAIN_MARKUP = ReplyKeyboardMarkup(
     MAIN_KEYBOARD,
@@ -85,13 +102,6 @@ MAIN_MARKUP = ReplyKeyboardMarkup(
 
 # ============================================================
 # TELEGRAM TOP MENU
-# ============================================================
-#
-# Telegram-এর ☰ Menu-এর ভিতরে:
-#
-# 🌐 Open / Wake Bot
-#
-# এই button-এ click করলে Render URL খুলবে।
 # ============================================================
 
 async def setup_bot_menu(
@@ -134,7 +144,9 @@ class HealthHandler(
         html = """
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -175,6 +187,7 @@ class HealthHandler(
         }
 
     </style>
+
 </head>
 
 <body>
@@ -190,6 +203,11 @@ class HealthHandler(
         </p>
 
         <p>
+            📆 Date Difference Calculator
+            is also available.
+        </p>
+
+        <p>
             You can return to Telegram
             and use the bot.
         </p>
@@ -197,6 +215,7 @@ class HealthHandler(
     </div>
 
 </body>
+
 </html>
 """
 
@@ -271,18 +290,19 @@ async def start_command(
     text = (
         f"🎉 Hello {first_name}!\n\n"
 
-        "🎂 Welcome to Birthday "
+        "🤖 Welcome to Birthday "
         "Calculator Bot!\n\n"
 
-        "Calculate your:\n"
-        "📅 Age\n"
-        "🎂 Next Birthday\n"
-        "⏳ Birthday Countdown\n"
-        "♈ Zodiac\n"
-        "🔢 Life Path Number\n"
-        "📊 Life Statistics\n"
-        "🎯 Age Milestones\n"
-        "🖼️ Birthday Card\n\n"
+        "Available features:\n\n"
+
+        "🎂 Birthday Calculator\n"
+        "Calculate your age, birthday, zodiac, "
+        "life statistics and more.\n\n"
+
+        "📆 Date Difference Calculator\n"
+        "Compare any two dates and get days, "
+        "weeks, hours, minutes, seconds, "
+        "calendar difference and countdown.\n\n"
 
         "👇 Choose an option below."
     )
@@ -303,25 +323,38 @@ async def help_command(
 ):
 
     text = (
-        "📖 Birthday Calculator Bot\n"
+        "📖 CALCULATOR BOT HELP\n"
         "━━━━━━━━━━━━━━━━━━━━\n\n"
 
         "🏠 /start\n"
         "Open the main menu.\n\n"
 
         "🎂 Birthday Calculator\n"
-        "Calculate your birthday information.\n\n"
+        "Calculate age, next birthday, "
+        "countdown, zodiac, life path, "
+        "life statistics and milestones.\n\n"
+
+        "📆 Date Difference Calculator\n"
+        "Enter two dates and get:\n"
+        "• Weekday of both dates\n"
+        "• Total days\n"
+        "• Weeks + days\n"
+        "• Years + months + days\n"
+        "• Total hours\n"
+        "• Total minutes\n"
+        "• Total seconds\n"
+        "• Countdown from today\n"
+        "• Leap year information\n"
+        "• Leap days\n"
+        "• Day of year\n"
+        "• Weekend information\n"
+        "• Much more\n\n"
 
         "❌ /cancel\n"
         "Cancel the current calculation.\n\n"
 
         "📖 /help\n"
-        "Show this help message.\n\n"
-
-        "☰ Telegram Menu\n"
-        "Use the Telegram ☰ Menu at the "
-        "top of the chat to open the Render "
-        "service."
+        "Show this help message."
     )
 
     await update.message.reply_text(
@@ -379,7 +412,8 @@ async def developer_command(
         )
 
     text += (
-        "\n🎂 Birthday Calculator Bot"
+        "\n🎂 Birthday Calculator Bot\n"
+        "📆 Date Difference Calculator"
     )
 
     await update.message.reply_text(
@@ -405,9 +439,10 @@ async def text_router(
 
     text = update.message.text.strip()
 
-    # --------------------------------------------------------
-    # START
-    # --------------------------------------------------------
+
+    # ========================================================
+    # START BUTTON
+    # ========================================================
 
     if text == START_BUTTON:
 
@@ -418,9 +453,10 @@ async def text_router(
 
         return
 
-    # --------------------------------------------------------
-    # BIRTHDAY CALCULATOR
-    # --------------------------------------------------------
+
+    # ========================================================
+    # BIRTHDAY BUTTON
+    # ========================================================
 
     if text == BIRTHDAY_BUTTON:
 
@@ -431,9 +467,24 @@ async def text_router(
 
         return
 
-    # --------------------------------------------------------
-    # DEVELOPER
-    # --------------------------------------------------------
+
+    # ========================================================
+    # DATE DIFFERENCE BUTTON
+    # ========================================================
+
+    if text == DATE_CALCULATOR_BUTTON:
+
+        await date_calculator_start(
+            update,
+            context
+        )
+
+        return
+
+
+    # ========================================================
+    # DEVELOPER BUTTON
+    # ========================================================
 
     if text == DEVELOPER_BUTTON:
 
@@ -444,16 +495,26 @@ async def text_router(
 
         return
 
-    # --------------------------------------------------------
-    # BIRTHDAY CALCULATOR HANDLER
-    # --------------------------------------------------------
-    #
-    # IMPORTANT:
-    # This matches the actual function
-    # inside your birthday.py:
-    #
-    # birthday_message_handler
-    # --------------------------------------------------------
+
+    # ========================================================
+    # DATE CALCULATOR ACTIVE
+    # ========================================================
+
+    if is_date_calculator_active(
+        context
+    ):
+
+        await date_calculator_handler(
+            update,
+            context
+        )
+
+        return
+
+
+    # ========================================================
+    # BIRTHDAY CALCULATOR
+    # ========================================================
 
     await birthday_message_handler(
         update,
@@ -487,7 +548,7 @@ def main():
     )
 
     # --------------------------------------------------------
-    # START RENDER HTTP SERVER
+    # Render health server
     # --------------------------------------------------------
 
     health_thread = Thread(
@@ -497,8 +558,9 @@ def main():
 
     health_thread.start()
 
+
     # --------------------------------------------------------
-    # BUILD TELEGRAM APPLICATION
+    # Telegram Application
     # --------------------------------------------------------
 
     application = (
@@ -508,8 +570,9 @@ def main():
         .build()
     )
 
+
     # --------------------------------------------------------
-    # COMMANDS
+    # Commands
     # --------------------------------------------------------
 
     application.add_handler(
@@ -533,8 +596,9 @@ def main():
         )
     )
 
+
     # --------------------------------------------------------
-    # TEXT MESSAGES
+    # Text messages
     # --------------------------------------------------------
 
     application.add_handler(
@@ -545,16 +609,26 @@ def main():
         )
     )
 
+
     # --------------------------------------------------------
-    # ERROR HANDLER
+    # Error handler
     # --------------------------------------------------------
 
     application.add_error_handler(
         error_handler
     )
 
+
+    # --------------------------------------------------------
+    # Start
+    # --------------------------------------------------------
+
     print(
         "🤖 Birthday Calculator Bot is running!"
+    )
+
+    print(
+        "📆 Date Difference Calculator enabled!"
     )
 
     print(
@@ -566,8 +640,9 @@ def main():
         f"🌐 Render URL: {RENDER_URL}"
     )
 
+
     # --------------------------------------------------------
-    # START POLLING
+    # Polling
     # --------------------------------------------------------
 
     application.run_polling(
