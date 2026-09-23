@@ -25,10 +25,6 @@
 
     <style>
 
-        /* =====================================================
-           GLOBAL
-        ===================================================== */
-
         * {
             margin: 0;
             padding: 0;
@@ -46,7 +42,6 @@
                 sans-serif;
 
             background: #020307;
-
             color: #ffffff;
 
             overflow-x: hidden;
@@ -57,62 +52,65 @@
             font: inherit;
         }
 
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
 
-        /* =====================================================
+
+        /* ================================
            BACKGROUND
-        ===================================================== */
+        ================================= */
 
         .background {
             position: fixed;
-
             inset: 0;
+
+            background: #020307;
 
             overflow: hidden;
 
             z-index: -10;
-
-            background: #020307;
         }
 
         .glow {
             position: absolute;
 
-            width: 560px;
-            height: 560px;
+            width: 550px;
+            height: 550px;
 
             border-radius: 50%;
 
-            filter: blur(120px);
+            filter: blur(130px);
 
-            opacity: 0.16;
+            opacity: .15;
         }
 
         .glow-red {
-            background: #ff174f;
-
-            top: -250px;
+            top: -260px;
             left: -220px;
 
+            background: #ff174f;
+
             animation:
-                floatingGlow 8s
+                glowMove 8s
                 ease-in-out
                 infinite;
         }
 
         .glow-blue {
-            background: #168cff;
-
-            right: -240px;
+            right: -220px;
             bottom: -300px;
 
+            background: #168cff;
+
             animation:
-                floatingGlow 10s
+                glowMove 10s
                 ease-in-out
                 infinite
                 reverse;
         }
 
-        @keyframes floatingGlow {
+        @keyframes glowMove {
 
             0%,
             100% {
@@ -127,14 +125,14 @@
                         50px
                     );
             }
+
         }
 
         .grid {
             position: absolute;
-
             inset: 0;
 
-            opacity: 0.12;
+            opacity: .12;
 
             background-image:
                 linear-gradient(
@@ -142,7 +140,7 @@
                         22,
                         140,
                         255,
-                        0.25
+                        .25
                     ) 1px,
                     transparent 1px
                 ),
@@ -152,7 +150,7 @@
                         255,
                         23,
                         79,
-                        0.20
+                        .20
                     ) 1px,
                     transparent 1px
                 );
@@ -168,7 +166,6 @@
 
         #particles {
             position: absolute;
-
             inset: 0;
         }
 
@@ -182,15 +179,16 @@
 
             background: #ffffff;
 
-            opacity: 0.65;
+            opacity: .55;
 
             animation:
-                particleMove 8s
+                particleFloat
+                8s
                 linear
                 infinite;
         }
 
-        @keyframes particleMove {
+        @keyframes particleFloat {
 
             0% {
                 transform:
@@ -206,12 +204,13 @@
                 transform:
                     translateY(30px);
             }
+
         }
 
 
-        /* =====================================================
+        /* ================================
            NAVBAR
-        ===================================================== */
+        ================================= */
 
         .navbar {
             position: fixed;
@@ -223,9 +222,7 @@
             height: 72px;
 
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
 
             padding:
@@ -236,11 +233,11 @@
                     2,
                     3,
                     7,
-                    0.78
+                    .78
                 );
 
             backdrop-filter:
-                blur(16px);
+                blur(18px);
 
             border-bottom:
                 1px solid
@@ -248,7 +245,7 @@
                     255,
                     255,
                     255,
-                    0.07
+                    .07
                 );
 
             z-index: 100;
@@ -270,7 +267,6 @@
                 );
 
             -webkit-background-clip: text;
-
             color: transparent;
         }
 
@@ -287,7 +283,8 @@
 
             font-size: 14px;
 
-            transition: 0.25s;
+            transition:
+                .25s;
         }
 
         .nav-links a:hover {
@@ -301,7 +298,7 @@
                     22,
                     140,
                     255,
-                    0.4
+                    .40
                 );
 
             background:
@@ -309,7 +306,7 @@
                     22,
                     140,
                     255,
-                    0.08
+                    .08
                 );
 
             color: #ffffff;
@@ -317,37 +314,23 @@
             padding:
                 10px 15px;
 
-            border-radius: 9px;
+            border-radius: 10px;
 
             cursor: pointer;
-
-            transition: 0.25s;
-        }
-
-        .nav-button:hover {
-            background:
-                rgba(
-                    22,
-                    140,
-                    255,
-                    0.18
-                );
         }
 
 
-        /* =====================================================
+        /* ================================
            HERO
-        ===================================================== */
+        ================================= */
 
         .hero {
             min-height: 100vh;
 
             display: flex;
-
             flex-direction: column;
 
             align-items: center;
-
             justify-content: center;
 
             text-align: center;
@@ -358,10 +341,9 @@
 
         .status {
             display: flex;
-
             align-items: center;
 
-            gap: 9px;
+            gap: 8px;
 
             color: #999999;
 
@@ -385,19 +367,18 @@
                 0 0 20px #ff174f;
 
             animation:
-                statusPulse
-                1.5s
-                infinite;
+                pulse 1.5s infinite;
         }
 
-        @keyframes statusPulse {
+        @keyframes pulse {
 
             50% {
-                opacity: 0.35;
+                opacity: .30;
 
                 transform:
-                    scale(0.65);
+                    scale(.65);
             }
+
         }
 
         .orb {
@@ -406,17 +387,17 @@
             width: 180px;
             height: 180px;
 
-            margin-bottom: 28px;
+            margin-bottom: 25px;
         }
 
         .orb-core {
             position: absolute;
 
-            width: 100px;
-            height: 100px;
-
             top: 40px;
             left: 40px;
+
+            width: 100px;
+            height: 100px;
 
             border-radius: 50%;
 
@@ -426,7 +407,7 @@
                     #ffffff,
                     #168cff 25%,
                     #07182d 60%,
-                    #020307 100%
+                    #020307
                 );
 
             box-shadow:
@@ -436,7 +417,7 @@
                     22,
                     140,
                     255,
-                    0.45
+                    .45
                 );
         }
 
@@ -450,24 +431,30 @@
             border:
                 2px solid transparent;
 
-            border-top-color: #ff174f;
+            border-top-color:
+                #ff174f;
 
-            border-right-color: #168cff;
+            border-right-color:
+                #168cff;
 
             animation:
-                spin 4s
+                spin
+                4s
                 linear
                 infinite;
         }
 
-        .orb-ring-two {
+        .orb-ring.two {
             inset: -3px;
 
-            border-top-color: #168cff;
+            border-top-color:
+                #168cff;
 
-            border-right-color: #ff174f;
+            border-right-color:
+                #ff174f;
 
-            animation-duration: 6s;
+            animation-duration:
+                6s;
 
             animation-direction:
                 reverse;
@@ -479,14 +466,15 @@
                 transform:
                     rotate(360deg);
             }
+
         }
 
         .welcome {
             color: #888888;
 
-            font-size: 13px;
-
             letter-spacing: 5px;
+
+            font-size: 13px;
 
             margin-bottom: 10px;
         }
@@ -499,7 +487,7 @@
                     92px
                 );
 
-            line-height: 0.95;
+            line-height: .95;
 
             font-weight: 900;
 
@@ -514,8 +502,7 @@
                     #ffffff
                 );
 
-            background-size:
-                300%;
+            background-size: 300%;
 
             -webkit-background-clip: text;
 
@@ -538,6 +525,7 @@
                 background-position:
                     300%;
             }
+
         }
 
         .hero-text {
@@ -557,11 +545,11 @@
             padding:
                 15px 25px;
 
+            border-radius: 11px;
+
             color: #ffffff;
 
             text-decoration: none;
-
-            border-radius: 11px;
 
             background:
                 linear-gradient(
@@ -569,36 +557,12 @@
                     #ff174f,
                     #168cff
                 );
-
-            box-shadow:
-                0 0 25px
-                rgba(
-                    255,
-                    23,
-                    79,
-                    0.16
-                ),
-                0 0 25px
-                rgba(
-                    22,
-                    140,
-                    255,
-                    0.16
-                );
-
-            transition:
-                0.25s;
-        }
-
-        .hero-button:hover {
-            transform:
-                translateY(-3px);
         }
 
 
-        /* =====================================================
+        /* ================================
            SECTION
-        ===================================================== */
+        ================================= */
 
         .section {
             padding:
@@ -635,9 +599,9 @@
         }
 
 
-        /* =====================================================
-           CARD GRID
-        ===================================================== */
+        /* ================================
+           MAIN CARDS
+        ================================= */
 
         .cards {
             max-width: 1200px;
@@ -658,7 +622,7 @@
         .card {
             position: relative;
 
-            min-height: 260px;
+            min-height: 250px;
 
             padding: 28px;
 
@@ -670,7 +634,7 @@
                     255,
                     255,
                     255,
-                    0.08
+                    .08
                 );
 
             border-radius: 18px;
@@ -680,7 +644,7 @@
                     255,
                     255,
                     255,
-                    0.035
+                    .035
                 );
 
             color: #ffffff;
@@ -688,32 +652,7 @@
             cursor: pointer;
 
             transition:
-                transform 0.3s,
-                border-color 0.3s,
-                box-shadow 0.3s;
-
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: "";
-
-            position: absolute;
-
-            width: 150px;
-            height: 150px;
-
-            right: -70px;
-            top: -70px;
-
-            border-radius: 50%;
-
-            background: #168cff;
-
-            filter:
-                blur(65px);
-
-            opacity: 0.10;
+                .3s;
         }
 
         .card:hover {
@@ -725,7 +664,7 @@
                     22,
                     140,
                     255,
-                    0.40
+                    .40
                 );
 
             box-shadow:
@@ -734,38 +673,22 @@
                     0,
                     0,
                     0,
-                    0.35
-                ),
-                0 0 30px
-                rgba(
-                    22,
-                    140,
-                    255,
-                    0.10
+                    .35
                 );
         }
 
         .card-icon {
-            font-size: 38px;
+            font-size: 40px;
 
-            margin-bottom: 18px;
-        }
-
-        .card-number {
-            position: absolute;
-
-            top: 22px;
-            right: 25px;
-
-            color: #555555;
-
-            font-size: 12px;
+            margin-bottom:
+                18px;
         }
 
         .card h3 {
-            margin-bottom: 10px;
-
             font-size: 21px;
+
+            margin-bottom:
+                10px;
         }
 
         .card p {
@@ -773,7 +696,8 @@
 
             line-height: 1.6;
 
-            margin-bottom: 18px;
+            margin-bottom:
+                18px;
         }
 
         .card span {
@@ -785,9 +709,539 @@
         }
 
 
-        /* =====================================================
+        /* ================================
+           WORKSPACE
+        ================================= */
+
+        #workspaceSection {
+            display: none;
+        }
+
+        .workspace {
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+        .workspace-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+        }
+
+        .workspace-header h2 {
+            font-size:
+                clamp(
+                    26px,
+                    5vw,
+                    42px
+                );
+        }
+
+        .workspace-header p {
+            color: #777777;
+
+            margin-top: 6px;
+        }
+
+        .back-button {
+            border:
+                1px solid
+                rgba(
+                    255,
+                    23,
+                    79,
+                    .35
+                );
+
+            background:
+                rgba(
+                    255,
+                    23,
+                    79,
+                    .08
+                );
+
+            color: #ffffff;
+
+            padding:
+                10px 16px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+        }
+
+        .input-panel {
+            padding: 25px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .08
+                );
+
+            border-radius: 18px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .035
+                );
+        }
+
+        .birthday-actions {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+        .action-button {
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .08
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .045
+                );
+
+            color: #ffffff;
+
+            padding: 13px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            transition:
+                .25s;
+        }
+
+        .action-button:hover {
+            border-color:
+                rgba(
+                    22,
+                    140,
+                    255,
+                    .40
+                );
+
+            background:
+                rgba(
+                    22,
+                    140,
+                    255,
+                    .08
+                );
+        }
+
+        .action-button.active {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(
+                        255,
+                        23,
+                        79,
+                        .14
+                    ),
+                    rgba(
+                        22,
+                        140,
+                        255,
+                        .14
+                    )
+                );
+
+            border-color:
+                rgba(
+                    22,
+                    140,
+                    255,
+                    .40
+                );
+        }
+
+
+        /* ================================
+           DATE INPUT
+        ================================= */
+
+        .date-control {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 10px;
+        }
+
+        .date-text {
+            flex: 1;
+        }
+
+        .input {
+            width: 100%;
+
+            padding:
+                14px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .10
+                );
+
+            border-radius: 10px;
+
+            background:
+                #03050a;
+
+            color: #ffffff;
+
+            outline: none;
+        }
+
+        .input:focus {
+            border-color:
+                #168cff;
+        }
+
+        .calendar-button {
+            position: relative;
+
+            width: 52px;
+            height: 49px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .12
+                );
+
+            border-radius: 10px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .06
+                );
+
+            cursor: pointer;
+
+            overflow: hidden;
+
+            font-size: 20px;
+        }
+
+        .calendar-button input {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            opacity: 0;
+
+            cursor: pointer;
+        }
+
+        .hint {
+            margin-top: 7px;
+
+            color: #606060;
+
+            font-size: 11px;
+        }
+
+        .form-label {
+            color: #aaaaaa;
+
+            font-size: 13px;
+        }
+
+        .gradient-button {
+            border: 0;
+
+            margin-top: 15px;
+
+            padding: 14px;
+
+            width: 100%;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff174f,
+                    #168cff
+                );
+
+            color: #ffffff;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        /* ================================
+           REPORT
+        ================================= */
+
+        .report {
+            margin-top: 25px;
+
+            padding: 25px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .08
+                );
+
+            border-radius: 18px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .035
+                );
+
+            line-height: 1.8;
+        }
+
+        .report h3 {
+            color: #168cff;
+
+            margin-bottom:
+                15px;
+        }
+
+        .report-section {
+            padding:
+                16px 0;
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .07
+                );
+        }
+
+        .report-section:last-child {
+            border-bottom: 0;
+        }
+
+        .report-section-title {
+            color: #ff174f;
+
+            font-weight: bold;
+
+            margin-bottom:
+                8px;
+        }
+
+        .report-row {
+            color: #cccccc;
+
+            margin:
+                5px 0;
+        }
+
+        .report-row strong {
+            color: #ffffff;
+        }
+
+        .status-good {
+            color: #65e6a8;
+        }
+
+        .status-future {
+            color: #168cff;
+        }
+
+        .status-past {
+            color: #ff8b9f;
+        }
+
+        .note {
+            color: #777777;
+
+            font-size: 12px;
+
+            margin-top: 12px;
+        }
+
+
+        /* ================================
+           DATE REPORT
+        ================================= */
+
+        .live-box {
+            margin-top: 15px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    1fr
+                );
+
+            gap: 10px;
+        }
+
+        .live-item {
+            padding:
+                14px 8px;
+
+            text-align: center;
+
+            background:
+                rgba(
+                    22,
+                    140,
+                    255,
+                    .07
+                );
+
+            border-radius: 10px;
+        }
+
+        .live-item strong {
+            display: block;
+
+            color: #ffffff;
+
+            font-size: 25px;
+        }
+
+        .live-item span {
+            color: #777777;
+
+            font-size: 11px;
+        }
+
+
+        /* ================================
+           CARD PREVIEW
+        ================================= */
+
+        .birthday-card-wrap {
+            margin-top: 20px;
+
+            text-align: center;
+        }
+
+        #birthdayCanvas {
+            width: 100%;
+
+            max-width: 700px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .10
+                );
+
+            box-shadow:
+                0 20px 60px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    .40
+                );
+        }
+
+        .download-button {
+            margin-top: 15px;
+
+            display: inline-block;
+
+            padding:
+                12px 18px;
+
+            border-radius: 10px;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff174f,
+                    #168cff
+                );
+        }
+
+
+        /* ================================
            ABOUT
-        ===================================================== */
+        ================================= */
 
         .about-box {
             max-width: 850px;
@@ -798,24 +1252,24 @@
 
             text-align: center;
 
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.035
-                );
-
             border:
                 1px solid
                 rgba(
                     255,
                     255,
                     255,
-                    0.08
+                    .08
                 );
 
             border-radius: 22px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .035
+                );
         }
 
         .about-box small {
@@ -845,7 +1299,7 @@
 
             line-height: 1.8;
 
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .developer-link {
@@ -854,37 +1308,10 @@
             text-decoration: none;
         }
 
-        .developer-link:hover {
-            text-decoration:
-                underline;
-        }
 
-        .telegram-button {
-            margin-top: 10px;
-
-            border: 0;
-
-            border-radius: 10px;
-
-            padding:
-                13px 18px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ff174f,
-                    #168cff
-                );
-
-            color: #ffffff;
-
-            cursor: pointer;
-        }
-
-
-        /* =====================================================
+        /* ================================
            FOOTER
-        ===================================================== */
+        ================================= */
 
         footer {
             padding:
@@ -898,7 +1325,7 @@
                     255,
                     255,
                     255,
-                    0.06
+                    .06
                 );
 
             color: #555555;
@@ -915,406 +1342,17 @@
         }
 
 
-        /* =====================================================
-           MODAL
-        ===================================================== */
-
-        .modal {
-            position: fixed;
-
-            inset: 0;
-
-            display: none;
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding: 18px;
-
-            background:
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.82
-                );
-
-            backdrop-filter:
-                blur(10px);
-
-            z-index: 999;
-        }
-
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-box {
-            position: relative;
-
-            width: 100%;
-
-            max-width: 540px;
-
-            max-height: 90vh;
-
-            overflow-y: auto;
-
-            padding: 30px;
-
-            background: #080a10;
-
-            border:
-                1px solid
-                rgba(
-                    22,
-                    140,
-                    255,
-                    0.25
-                );
-
-            border-radius: 20px;
-
-            box-shadow:
-                0 0 60px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.70
-                );
-        }
-
-        .modal-box h2 {
-            margin-bottom: 22px;
-        }
-
-        .modal-close {
-            position: absolute;
-
-            top: 12px;
-
-            right: 14px;
-
-            width: 36px;
-
-            height: 36px;
-
-            border: 0;
-
-            border-radius: 50%;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.08
-                );
-
-            color: #ffffff;
-
-            font-size: 24px;
-
-            cursor: pointer;
-        }
-
-
-        /* =====================================================
-           FORM
-        ===================================================== */
-
-        .form {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 13px;
-        }
-
-        .form label {
-            color: #aaaaaa;
-
-            font-size: 13px;
-        }
-
-        .input {
-            width: 100%;
-
-            padding:
-                13px;
-
-            background: #03050a;
-
-            color: #ffffff;
-
-            border:
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.10
-                );
-
-            border-radius: 10px;
-
-            outline: none;
-        }
-
-        .input:focus {
-            border-color:
-                #168cff;
-
-            box-shadow:
-                0 0 0 2px
-                rgba(
-                    22,
-                    140,
-                    255,
-                    0.07
-                );
-        }
-
-        .calc-button {
-            border: 0;
-
-            padding:
-                13px;
-
-            border-radius: 10px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ff174f,
-                    #168cff
-                );
-
-            color: #ffffff;
-
-            cursor: pointer;
-
-            font-weight: bold;
-
-            transition:
-                0.25s;
-        }
-
-        .calc-button:hover {
-            transform:
-                translateY(-2px);
-        }
-
-
-        /* =====================================================
-           DATE INPUT
-        ===================================================== */
-
-        .date-control {
-            display: flex;
-
-            align-items: center;
-
-            gap: 8px;
-        }
-
-        .date-text {
-            flex: 1;
-        }
-
-        .calendar-button {
-            position: relative;
-
-            width: 50px;
-
-            height: 48px;
-
-            flex-shrink: 0;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border:
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.12
-                );
-
-            border-radius: 10px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.06
-                );
-
-            color: #ffffff;
-
-            font-size: 20px;
-
-            cursor: pointer;
-
-            overflow: hidden;
-
-            transition:
-                0.25s;
-        }
-
-        .calendar-button:hover {
-            border-color:
-                #168cff;
-
-            background:
-                rgba(
-                    22,
-                    140,
-                    255,
-                    0.12
-                );
-        }
-
-        .calendar-button input {
-            position: absolute;
-
-            inset: 0;
-
-            width: 100%;
-            height: 100%;
-
-            opacity: 0;
-
-            cursor: pointer;
-        }
-
-        .date-hint {
-            color: #5f5f5f;
-
-            font-size: 11px;
-
-            margin-top: -6px;
-
-            line-height: 1.4;
-        }
-
-
-        /* =====================================================
-           RESULT
-        ===================================================== */
-
-        .result {
-            margin-top: 15px;
-        }
-
-        .result-box {
-            padding: 18px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.04
-                );
-
-            border:
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.08
-                );
-
-            border-radius: 14px;
-
-            line-height: 1.8;
-        }
-
-        .result-box h3 {
-            color: #168cff;
-
-            margin-bottom: 10px;
-        }
-
-        .result-box hr {
-            border: 0;
-
-            border-top:
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.08
-                );
-
-            margin:
-                12px 0;
-        }
-
-
-        /* =====================================================
-           COUNTDOWN
-        ===================================================== */
-
-        .countdown-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(
-                    2,
-                    1fr
-                );
-
-            gap: 10px;
-
-            margin-top: 12px;
-        }
-
-        .countdown-item {
-            padding: 14px;
-
-            text-align: center;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.05
-                );
-
-            border-radius: 10px;
-        }
-
-        .countdown-item strong {
-            display: block;
-
-            font-size: 28px;
-        }
-
-        .countdown-item span {
-            color: #777777;
-
-            font-size: 12px;
-        }
-
-
-        /* =====================================================
+        /* ================================
            RESPONSIVE
-        ===================================================== */
+        ================================= */
 
-        @media (max-width: 900px) {
+        @media (
+            max-width: 900px
+        ) {
+
+            .nav-links {
+                display: none;
+            }
 
             .cards {
                 grid-template-columns:
@@ -1324,25 +1362,16 @@
                     );
             }
 
-            .nav-links {
-                display: none;
-            }
-
         }
 
 
-        @media (max-width: 620px) {
+        @media (
+            max-width: 650px
+        ) {
 
             .navbar {
                 padding:
                     0 4%;
-            }
-
-            .nav-button {
-                padding:
-                    8px 10px;
-
-                font-size: 12px;
             }
 
             .hero h1 {
@@ -1351,31 +1380,35 @@
                 letter-spacing: -3px;
             }
 
-            .orb {
-                transform:
-                    scale(0.84);
-
-                margin-bottom: 3px;
-            }
-
-            .section {
-                padding:
-                    80px 5%;
-            }
-
             .cards {
                 grid-template-columns:
                     1fr;
             }
 
+            .birthday-actions {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .live-box {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
+            }
+
+            .workspace-header {
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+
             .about-box {
                 padding:
                     28px 20px;
-            }
-
-            .modal-box {
-                padding:
-                    25px 20px;
             }
 
         }
@@ -1387,10 +1420,6 @@
 
 <body>
 
-
-    <!-- =====================================================
-         BACKGROUND
-    ===================================================== -->
 
     <div class="background">
 
@@ -1405,16 +1434,15 @@
     </div>
 
 
-    <!-- =====================================================
+    <!-- =========================================
          NAVBAR
-    ===================================================== -->
+    ========================================== -->
 
     <header class="navbar">
 
         <div class="logo">
             MASTERMIND
         </div>
-
 
         <nav class="nav-links">
 
@@ -1432,10 +1460,9 @@
 
         </nav>
 
-
         <button
             class="nav-button"
-            id="telegramNav"
+            id="telegramButton"
         >
             🤖 Telegram
         </button>
@@ -1443,9 +1470,9 @@
     </header>
 
 
-    <!-- =====================================================
+    <!-- =========================================
          HERO
-    ===================================================== -->
+    ========================================== -->
 
     <section
         class="hero"
@@ -1467,9 +1494,7 @@
 
             <div class="orb-ring"></div>
 
-            <div
-                class="orb-ring orb-ring-two"
-            ></div>
+            <div class="orb-ring two"></div>
 
             <div class="orb-core"></div>
 
@@ -1494,16 +1519,15 @@
 
         <p class="hero-text">
 
-            Powerful calculators for your age,
-            birthdays, dates, countdowns and
-            life statistics.
+            Your complete age, birthday and
+            date analysis system.
 
         </p>
 
 
         <a
-            class="hero-button"
             href="#calculators"
+            class="hero-button"
         >
             EXPLORE CALCULATORS
         </a>
@@ -1511,9 +1535,9 @@
     </section>
 
 
-    <!-- =====================================================
+    <!-- =========================================
          CALCULATORS
-    ===================================================== -->
+    ========================================== -->
 
     <section
         class="section"
@@ -1527,11 +1551,11 @@
             </small>
 
             <h2>
-                Choose Your Calculator
+                Calculator Universe
             </h2>
 
             <p>
-                Select a tool and start calculating.
+                Same core features as the Telegram bot.
             </p>
 
         </div>
@@ -1542,15 +1566,11 @@
 
             <button
                 class="card"
-                data-tool="birthday"
+                id="openBirthday"
             >
 
                 <div class="card-icon">
                     🎂
-                </div>
-
-                <div class="card-number">
-                    01
                 </div>
 
                 <h3>
@@ -1558,8 +1578,9 @@
                 </h3>
 
                 <p>
-                    Calculate your exact age
-                    in years, months and days.
+                    Full report, next birthday,
+                    countdown, zodiac, life stats,
+                    milestones and birthday card.
                 </p>
 
                 <span>
@@ -1571,24 +1592,21 @@
 
             <button
                 class="card"
-                data-tool="difference"
+                id="openDateDifference"
             >
 
                 <div class="card-icon">
                     📆
                 </div>
 
-                <div class="card-number">
-                    02
-                </div>
-
                 <h3>
-                    Date Difference
+                    Date Difference Calculator
                 </h3>
 
                 <p>
-                    Find the exact difference
-                    between two dates.
+                    Detailed comparison between
+                    two dates with live countdown
+                    and extra date information.
                 </p>
 
                 <span>
@@ -1600,102 +1618,11 @@
 
             <button
                 class="card"
-                data-tool="countdown"
-            >
-
-                <div class="card-icon">
-                    ⏳
-                </div>
-
-                <div class="card-number">
-                    03
-                </div>
-
-                <h3>
-                    Countdown
-                </h3>
-
-                <p>
-                    Create a live countdown
-                    to any date and time.
-                </p>
-
-                <span>
-                    OPEN →
-                </span>
-
-            </button>
-
-
-            <button
-                class="card"
-                data-tool="statistics"
-            >
-
-                <div class="card-icon">
-                    📊
-                </div>
-
-                <div class="card-number">
-                    04
-                </div>
-
-                <h3>
-                    Life Statistics
-                </h3>
-
-                <p>
-                    See your days, hours,
-                    minutes and seconds.
-                </p>
-
-                <span>
-                    OPEN →
-                </span>
-
-            </button>
-
-
-            <button
-                class="card"
-                data-tool="milestones"
-            >
-
-                <div class="card-icon">
-                    🎯
-                </div>
-
-                <div class="card-number">
-                    05
-                </div>
-
-                <h3>
-                    Age Milestones
-                </h3>
-
-                <p>
-                    Check important future
-                    age milestones.
-                </p>
-
-                <span>
-                    OPEN →
-                </span>
-
-            </button>
-
-
-            <button
-                class="card"
-                data-tool="telegram"
+                id="openTelegram"
             >
 
                 <div class="card-icon">
                     🤖
-                </div>
-
-                <div class="card-number">
-                    06
                 </div>
 
                 <h3>
@@ -1703,8 +1630,8 @@
                 </h3>
 
                 <p>
-                    Open Calculator Universe
-                    directly in Telegram.
+                    Open the original
+                    Calculator Universe bot.
                 </p>
 
                 <span>
@@ -1713,14 +1640,350 @@
 
             </button>
 
+
         </div>
 
     </section>
 
 
-    <!-- =====================================================
+    <!-- =========================================
+         BIRTHDAY WORKSPACE
+    ========================================== -->
+
+    <section
+        class="section"
+        id="birthdayWorkspace"
+        style="display:none;"
+    >
+
+        <div class="workspace">
+
+
+            <div class="workspace-header">
+
+                <div>
+
+                    <h2>
+                        🎂 Birthday Calculator
+                    </h2>
+
+                    <p>
+                        Enter your birth date to calculate
+                        everything.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="back-button"
+                    id="birthdayBack"
+                >
+                    ⬅️ Back
+                </button>
+
+            </div>
+
+
+            <div class="input-panel">
+
+                <div
+                    class="form-label"
+                >
+                    Birth Date
+                </div>
+
+
+                <div class="date-control">
+
+                    <input
+                        id="birthdayInput"
+                        type="text"
+                        class="input date-text"
+                        placeholder="MM/DD/YYYY"
+                        inputmode="numeric"
+                        maxlength="10"
+                        autocomplete="off"
+                    >
+
+
+                    <label
+                        class="calendar-button"
+                    >
+
+                        📅
+
+                        <input
+                            id="birthdayPicker"
+                            type="date"
+                        >
+
+                    </label>
+
+                </div>
+
+
+                <div class="hint">
+
+                    Type MM/DD/YYYY
+                    or use the calendar.
+                    Bot-compatible date formats
+                    are also accepted.
+
+                </div>
+
+
+                <button
+                    class="gradient-button"
+                    id="calculateBirthday"
+                >
+                    🎂 CALCULATE
+                </button>
+
+
+                <div
+                    class="birthday-actions"
+                    id="birthdayActions"
+                    style="display:none;"
+                >
+
+                    <button
+                        class="action-button active"
+                        data-action="full"
+                    >
+                        📋 Full Report
+                    </button>
+
+                    <button
+                        class="action-button"
+                        data-action="next"
+                    >
+                        🎂 Next Birthday
+                    </button>
+
+                    <button
+                        class="action-button"
+                        data-action="countdown"
+                    >
+                        ⏳ Countdown
+                    </button>
+
+                    <button
+                        class="action-button"
+                        data-action="zodiac"
+                    >
+                        ♈ Zodiac & Astrology
+                    </button>
+
+                    <button
+                        class="action-button"
+                        data-action="stats"
+                    >
+                        📊 Life Statistics
+                    </button>
+
+                    <button
+                        class="action-button"
+                        data-action="milestones"
+                    >
+                        🎯 Age Milestones
+                    </button>
+
+                    <button
+                        class="action-button"
+                        data-action="card"
+                    >
+                        🖼️ Birthday Card
+                    </button>
+
+                    <button
+                        class="action-button"
+                        data-action="again"
+                    >
+                        🔄 Calculate Again
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="birthdayReport"
+                class="report"
+                style="display:none;"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         DATE DIFFERENCE WORKSPACE
+    ========================================== -->
+
+    <section
+        class="section"
+        id="dateWorkspace"
+        style="display:none;"
+    >
+
+        <div class="workspace">
+
+
+            <div class="workspace-header">
+
+                <div>
+
+                    <h2>
+                        📆 Date Difference Calculator
+                    </h2>
+
+                    <p>
+                        Compare two dates with a
+                        detailed report.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="back-button"
+                    id="dateBack"
+                >
+                    ⬅️ Back
+                </button>
+
+            </div>
+
+
+            <div class="input-panel">
+
+
+                <div
+                    class="form-label"
+                >
+                    First Date
+                </div>
+
+
+                <div class="date-control">
+
+                    <input
+                        id="firstDate"
+                        type="text"
+                        class="input"
+                        placeholder="MM/DD/YYYY"
+                        inputmode="numeric"
+                        maxlength="10"
+                        autocomplete="off"
+                    >
+
+                    <label
+                        class="calendar-button"
+                    >
+
+                        📅
+
+                        <input
+                            id="firstPicker"
+                            type="date"
+                        >
+
+                    </label>
+
+                </div>
+
+
+                <div
+                    class="hint"
+                >
+                    Example:
+                    09/23/2026
+                </div>
+
+
+                <br>
+
+
+                <div
+                    class="form-label"
+                >
+                    Second Date
+                </div>
+
+
+                <div class="date-control">
+
+                    <input
+                        id="secondDate"
+                        type="text"
+                        class="input"
+                        placeholder="MM/DD/YYYY"
+                        inputmode="numeric"
+                        maxlength="10"
+                        autocomplete="off"
+                    >
+
+                    <label
+                        class="calendar-button"
+                    >
+
+                        📅
+
+                        <input
+                            id="secondPicker"
+                            type="date"
+                        >
+
+                    </label>
+
+                </div>
+
+
+                <div
+                    class="hint"
+                >
+                    Example:
+                    09/29/2026
+                </div>
+
+
+                <button
+                    class="gradient-button"
+                    id="calculateDifference"
+                >
+                    📆 CALCULATE DIFFERENCE
+                </button>
+
+
+                <button
+                    class="action-button"
+                    id="calculateDateAgain"
+                    style="display:none; margin-top:10px;"
+                >
+                    🔄 Calculate Again
+                </button>
+
+
+            </div>
+
+
+            <div
+                id="dateReport"
+                class="report"
+                style="display:none;"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
          ABOUT
-    ===================================================== -->
+    ========================================== -->
 
     <section
         class="section"
@@ -1746,8 +2009,10 @@
 
 
             <p>
-                Calculator Universe is a collection
-                of modern date and age calculation tools.
+                Calculator Universe
+                brings the Telegram bot's
+                date and birthday features
+                to the web.
             </p>
 
 
@@ -1766,22 +2031,10 @@
 
             </p>
 
-
-            <button
-                class="telegram-button"
-                id="telegramAbout"
-            >
-                🤖 OPEN TELEGRAM BOT
-            </button>
-
         </div>
 
     </section>
 
-
-    <!-- =====================================================
-         FOOTER
-    ===================================================== -->
 
     <footer>
 
@@ -1794,42 +2047,13 @@
     </footer>
 
 
-    <!-- =====================================================
-         MODAL
-    ===================================================== -->
+    <canvas
+        id="hiddenCanvas"
+        width="1200"
+        height="700"
+        style="display:none;"
+    ></canvas>
 
-    <div
-        class="modal"
-        id="modal"
-    >
-
-        <div class="modal-box">
-
-            <button
-                class="modal-close"
-                id="closeModal"
-            >
-                ×
-            </button>
-
-
-            <h2 id="modalTitle">
-                Calculator
-            </h2>
-
-
-            <div
-                id="modalContent"
-            ></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ===================================================== -->
 
     <script>
 
@@ -1840,38 +2064,35 @@
            TELEGRAM
         ===================================================== */
 
-        const telegramBotUrl =
+        const TELEGRAM =
             "https://t.me/cracker_team_05_bot";
 
 
-        function openTelegram() {
-
-            window.open(
-                telegramBotUrl,
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-        }
-
-
         document
-            .getElementById(
-                "telegramNav"
-            )
+            .getElementById("telegramButton")
             .addEventListener(
                 "click",
-                openTelegram
+                () => {
+                    window.open(
+                        TELEGRAM,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+                }
             );
 
 
         document
-            .getElementById(
-                "telegramAbout"
-            )
+            .getElementById("openTelegram")
             .addEventListener(
                 "click",
-                openTelegram
+                () => {
+                    window.open(
+                        TELEGRAM,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+                }
             );
 
 
@@ -1885,7 +2106,7 @@
             );
 
 
-        const particleCount =
+        const count =
             window.innerWidth < 650
                 ? 30
                 : 60;
@@ -1893,148 +2114,37 @@
 
         for (
             let i = 0;
-            i < particleCount;
+            i < count;
             i++
         ) {
 
-            const particle =
+            const dot =
                 document.createElement(
                     "span"
                 );
 
-
-            particle.className =
+            dot.className =
                 "particle";
 
+            dot.style.left =
+                Math.random() * 100 + "%";
 
-            particle.style.left =
-                Math.random() * 100
-                + "%";
+            dot.style.top =
+                Math.random() * 100 + "%";
 
+            dot.style.animationDelay =
+                Math.random() * 8 + "s";
 
-            particle.style.top =
-                Math.random() * 100
-                + "%";
-
-
-            particle.style.animationDelay =
-                Math.random() * 8
-                + "s";
-
-
-            particle.style.animationDuration =
-                5 +
-                Math.random() * 8
-                + "s";
-
-
-            particles.appendChild(
-                particle
-            );
+            particles.appendChild(dot);
 
         }
 
 
         /* =====================================================
-           MODAL
+           DATE PARSING
         ===================================================== */
 
-        const modal =
-            document.getElementById(
-                "modal"
-            );
-
-
-        const modalTitle =
-            document.getElementById(
-                "modalTitle"
-            );
-
-
-        const modalContent =
-            document.getElementById(
-                "modalContent"
-            );
-
-
-        const closeModalButton =
-            document.getElementById(
-                "closeModal"
-            );
-
-
-        function showModal(
-            title,
-            content
-        ) {
-
-            modalTitle.textContent =
-                title;
-
-
-            modalContent.innerHTML =
-                content;
-
-
-            modal.classList.add(
-                "show"
-            );
-
-        }
-
-
-        function closeModal() {
-
-            modal.classList.remove(
-                "show"
-            );
-
-        }
-
-
-        closeModalButton.addEventListener(
-            "click",
-            closeModal
-        );
-
-
-        modal.addEventListener(
-            "click",
-            function(event) {
-
-                if (
-                    event.target === modal
-                ) {
-
-                    closeModal();
-
-                }
-
-            }
-        );
-
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    closeModal();
-
-                }
-
-            }
-        );
-
-
-        /* =====================================================
-           DATE INPUT
-        ===================================================== */
-
-        function formatDateInput(
+        function formatTypedDate(
             value
         ) {
 
@@ -2063,11 +2173,21 @@
             ) {
 
                 return (
-                    digits.slice(0, 2)
+                    digits.slice(
+                        0,
+                        2
+                    )
                     + "/"
-                    + digits.slice(2, 4)
+                    +
+                    digits.slice(
+                        2,
+                        4
+                    )
                     + "/"
-                    + digits.slice(4)
+                    +
+                    digits.slice(
+                        4
+                    )
                 );
 
             }
@@ -2078,9 +2198,15 @@
             ) {
 
                 return (
-                    digits.slice(0, 2)
+                    digits.slice(
+                        0,
+                        2
+                    )
                     + "/"
-                    + digits.slice(2)
+                    +
+                    digits.slice(
+                        2
+                    )
                 );
 
             }
@@ -2091,7 +2217,7 @@
         }
 
 
-        function pickerToUSDate(
+        function pickerToText(
             value
         ) {
 
@@ -2126,227 +2252,157 @@
         }
 
 
-        function parseUSDate(
+        function parseDate(
             value
         ) {
 
-            const parts =
-                value.split("/");
+            const text =
+                value.trim();
+
+
+            /* MM/DD/YYYY */
+
+            let parts =
+                text.split("/");
 
 
             if (
-                parts.length !== 3
+                parts.length === 3
             ) {
 
-                return null;
+                let a =
+                    Number(parts[0]);
 
-            }
+                let b =
+                    Number(parts[1]);
 
-
-            if (
-                parts[0].length !== 2 ||
-                parts[1].length !== 2 ||
-                parts[2].length !== 4
-            ) {
-
-                return null;
-
-            }
+                let y =
+                    Number(parts[2]);
 
 
-            const month =
-                Number(parts[0]);
+                if (
+                    parts[0].length === 2 &&
+                    parts[1].length === 2 &&
+                    parts[2].length === 4
+                ) {
 
-
-            const day =
-                Number(parts[1]);
-
-
-            const year =
-                Number(parts[2]);
-
-
-            if (
-                !month ||
-                !day ||
-                !year
-            ) {
-
-                return null;
-
-            }
-
-
-            if (
-                month < 1 ||
-                month > 12 ||
-                day < 1 ||
-                day > 31
-            ) {
-
-                return null;
-
-            }
-
-
-            const date =
-                new Date(
-                    year,
-                    month - 1,
-                    day
-                );
-
-
-            if (
-                date.getFullYear() !== year ||
-                date.getMonth() !== month - 1 ||
-                date.getDate() !== day
-            ) {
-
-                return null;
-
-            }
-
-
-            return date;
-
-        }
-
-
-        function createDateControl(
-            textId,
-            pickerId,
-            label
-        ) {
-
-            return `
-
-                <label>
-                    ${label}
-                </label>
-
-                <div class="date-control">
-
-                    <input
-                        id="${textId}"
-                        type="text"
-                        class="input date-text"
-                        placeholder="MM/DD/YYYY"
-                        inputmode="numeric"
-                        autocomplete="off"
-                        maxlength="10"
-                    >
-
-                    <label
-                        class="calendar-button"
-                        title="Choose date"
-                    >
-
-                        📅
-
-                        <input
-                            id="${pickerId}"
-                            type="date"
-                        >
-
-                    </label>
-
-                </div>
-
-                <div class="date-hint">
-
-                    Type MM/DD/YYYY
-                    or use the calendar
-
-                </div>
-
-            `;
-
-        }
-
-
-        function activateDateControl(
-            textId,
-            pickerId
-        ) {
-
-            const textInput =
-                document.getElementById(
-                    textId
-                );
-
-
-            const picker =
-                document.getElementById(
-                    pickerId
-                );
-
-
-            if (
-                !textInput ||
-                !picker
-            ) {
-
-                return;
-
-            }
-
-
-            textInput.addEventListener(
-                "input",
-                function() {
-
-                    textInput.value =
-                        formatDateInput(
-                            textInput.value
+                    const date =
+                        new Date(
+                            y,
+                            a - 1,
+                            b
                         );
 
+
+                    if (
+                        date.getFullYear()
+                        === y &&
+                        date.getMonth()
+                        === a - 1 &&
+                        date.getDate()
+                        === b
+                    ) {
+
+                        return date;
+
+                    }
+
                 }
-            );
 
 
-            picker.addEventListener(
-                "change",
-                function() {
+                /* Bot-compatible DD/MM/YYYY */
 
-                    textInput.value =
-                        pickerToUSDate(
-                            picker.value
+                a =
+                    Number(parts[0]);
+
+                b =
+                    Number(parts[1]);
+
+                y =
+                    Number(parts[2]);
+
+
+                if (
+                    parts[0].length <= 2 &&
+                    parts[1].length <= 2 &&
+                    parts[2].length === 4
+                ) {
+
+                    const date =
+                        new Date(
+                            y,
+                            b - 1,
+                            a
                         );
 
+
+                    if (
+                        date.getFullYear()
+                        === y &&
+                        date.getMonth()
+                        === b - 1 &&
+                        date.getDate()
+                        === a
+                    ) {
+
+                        return date;
+
+                    }
+
                 }
-            );
-
-        }
-
-
-        function getSelectedDate(
-            textId
-        ) {
-
-            const input =
-                document.getElementById(
-                    textId
-                );
-
-
-            if (!input) {
-
-                return null;
 
             }
 
 
-            return parseUSDate(
-                input.value
-            );
+            /* YYYY-MM-DD */
+
+            parts =
+                text.split("-");
+
+
+            if (
+                parts.length === 3 &&
+                parts[0].length === 4
+            ) {
+
+                const y =
+                    Number(parts[0]);
+
+                const m =
+                    Number(parts[1]);
+
+                const d =
+                    Number(parts[2]);
+
+
+                const date =
+                    new Date(
+                        y,
+                        m - 1,
+                        d
+                    );
+
+
+                if (
+                    date.getFullYear()
+                    === y &&
+                    date.getMonth()
+                    === m - 1 &&
+                    date.getDate()
+                    === d
+                ) {
+
+                    return date;
+
+                }
+
+            }
+
+
+            return null;
 
         }
 
-
-        /* =====================================================
-           DATE HELPERS
-        ===================================================== */
 
         function formatDate(
             date
@@ -2364,30 +2420,413 @@
         }
 
 
-        function getAge(
-            birthday
+        function formatNumber(
+            number
         ) {
 
-            const today =
-                new Date();
+            return Number(
+                number
+            ).toLocaleString(
+                "en-US"
+            );
+
+        }
+
+
+        function ordinal(
+            number
+        ) {
+
+            const mod100 =
+                number % 100;
+
+
+            if (
+                mod100 >= 10 &&
+                mod100 <= 20
+            ) {
+
+                return (
+                    number + "th"
+                );
+
+            }
+
+
+            return (
+                number
+                +
+                (
+                    {
+                        1: "st",
+                        2: "nd",
+                        3: "rd"
+                    }[
+                        number % 10
+                    ]
+                    ||
+                    "th"
+                )
+            );
+
+        }
+
+
+        function weekday(
+            date
+        ) {
+
+            return date.toLocaleDateString(
+                "en-US",
+                {
+                    weekday: "long"
+                }
+            );
+
+        }
+
+
+        function isLeapYear(
+            year
+        ) {
+
+            return (
+                year % 400 === 0
+                ||
+                (
+                    year % 4 === 0
+                    &&
+                    year % 100 !== 0
+                )
+            );
+
+        }
+
+
+        function daysInMonth(
+            date
+        ) {
+
+            return new Date(
+                date.getFullYear(),
+                date.getMonth() + 1,
+                0
+            ).getDate();
+
+        }
+
+
+        function dayOfYear(
+            date
+        ) {
+
+            const start =
+                new Date(
+                    date.getFullYear(),
+                    0,
+                    0
+                );
+
+
+            return Math.floor(
+                (
+                    date - start
+                )
+                /
+                86400000
+            );
+
+        }
+
+
+        function daysRemainingInYear(
+            date
+        ) {
+
+            return (
+                (
+                    isLeapYear(
+                        date.getFullYear()
+                    )
+                        ? 366
+                        : 365
+                )
+                -
+                dayOfYear(date)
+            );
+
+        }
+
+
+        function countLeapDays(
+            first,
+            second
+        ) {
+
+            let start =
+                first < second
+                    ? first
+                    : second;
+
+
+            let end =
+                first < second
+                    ? second
+                    : first;
+
+
+            let count = 0;
+
+
+            for (
+                let year =
+                    start.getFullYear();
+
+                year <=
+                    end.getFullYear();
+
+                year++
+            ) {
+
+                if (
+                    !isLeapYear(year)
+                ) {
+                    continue;
+                }
+
+
+                const leap =
+                    new Date(
+                        year,
+                        1,
+                        29
+                    );
+
+
+                if (
+                    leap >= start &&
+                    leap <= end
+                ) {
+
+                    count++;
+
+                }
+
+            }
+
+
+            return count;
+
+        }
+
+
+        /* =====================================================
+           SAFE YEAR
+        ===================================================== */
+
+        function safeReplaceYear(
+            date,
+            year
+        ) {
+
+            if (
+                date.getMonth() === 1 &&
+                date.getDate() === 29 &&
+                !isLeapYear(year)
+            ) {
+
+                return new Date(
+                    year,
+                    1,
+                    28
+                );
+
+            }
+
+
+            return new Date(
+                year,
+                date.getMonth(),
+                date.getDate()
+            );
+
+        }
+
+
+        /* =====================================================
+           AGE CALCULATOR
+        ===================================================== */
+
+        function calculateAge(
+            birthDate,
+            currentDate
+        ) {
+
+            if (
+                currentDate < birthDate
+            ) {
+
+                return {
+                    years: 0,
+                    months: 0,
+                    days: 0
+                };
+
+            }
 
 
             let years =
-                today.getFullYear()
+                currentDate.getFullYear()
                 -
-                birthday.getFullYear();
+                birthDate.getFullYear();
+
+
+            const birthdayThisYear =
+                safeReplaceYear(
+                    birthDate,
+                    currentDate.getFullYear()
+                );
+
+
+            if (
+                currentDate <
+                birthdayThisYear
+            ) {
+
+                years--;
+
+            }
+
+
+            let temp =
+                safeReplaceYear(
+                    birthDate,
+                    birthDate.getFullYear()
+                    + years
+                );
+
+
+            let months = 0;
+
+
+            while (true) {
+
+                let month =
+                    temp.getMonth() + 1;
+
+                let year =
+                    temp.getFullYear();
+
+
+                if (
+                    month === 12
+                ) {
+
+                    month = 0;
+                    year++;
+
+                }
+
+
+                const last =
+                    new Date(
+                        year,
+                        month + 1,
+                        0
+                    ).getDate();
+
+
+                const candidate =
+                    new Date(
+                        year,
+                        month,
+                        Math.min(
+                            temp.getDate(),
+                            last
+                        )
+                    );
+
+
+                if (
+                    candidate <=
+                    currentDate
+                ) {
+
+                    months++;
+
+                    temp =
+                        candidate;
+
+                } else {
+
+                    break;
+
+                }
+
+            }
+
+
+            const days =
+                Math.floor(
+                    (
+                        currentDate -
+                        temp
+                    )
+                    /
+                    86400000
+                );
+
+
+            return {
+                years,
+                months,
+                days
+            };
+
+        }
+
+
+        /* =====================================================
+           CALENDAR DIFFERENCE
+        ===================================================== */
+
+        function calendarDifference(
+            start,
+            end
+        ) {
+
+            if (
+                start > end
+            ) {
+
+                const temp =
+                    start;
+
+                start =
+                    end;
+
+                end =
+                    temp;
+
+            }
+
+
+            let years =
+                end.getFullYear()
+                -
+                start.getFullYear();
 
 
             let months =
-                today.getMonth()
+                end.getMonth()
                 -
-                birthday.getMonth();
+                start.getMonth();
 
 
             let days =
-                today.getDate()
+                end.getDate()
                 -
-                birthday.getDate();
+                start.getDate();
 
 
             if (
@@ -2397,16 +2836,35 @@
                 months--;
 
 
-                const previousMonth =
+                let previousMonth =
+                    end.getMonth() - 1;
+
+
+                let previousYear =
+                    end.getFullYear();
+
+
+                if (
+                    previousMonth < 0
+                ) {
+
+                    previousMonth = 11;
+
+                    previousYear--;
+
+                }
+
+
+                const previousDays =
                     new Date(
-                        today.getFullYear(),
-                        today.getMonth(),
+                        previousYear,
+                        previousMonth + 1,
                         0
-                    );
+                    ).getDate();
 
 
                 days +=
-                    previousMonth.getDate();
+                    previousDays;
 
             }
 
@@ -2432,643 +2890,427 @@
 
 
         /* =====================================================
-           BIRTHDAY CALCULATOR
+           NEXT BIRTHDAY
         ===================================================== */
 
-        function birthdayCalculator() {
+        function nextBirthday(
+            birthDate,
+            today
+        ) {
 
-            showModal(
-                "🎂 Birthday Calculator",
-
-                `
-
-                <div class="form">
-
-                    ${createDateControl(
-                        "birthDate",
-                        "birthDatePicker",
-                        "Enter your birthday"
-                    )}
-
-                    <button
-                        class="calc-button"
-                        id="birthCalculate"
-                    >
-                        Calculate Age
-                    </button>
-
-                    <div
-                        class="result"
-                        id="birthResult"
-                    ></div>
-
-                </div>
-
-                `
-            );
-
-
-            activateDateControl(
-                "birthDate",
-                "birthDatePicker"
-            );
-
-
-            document
-                .getElementById(
-                    "birthCalculate"
-                )
-                .addEventListener(
-                    "click",
-                    function() {
-
-                        const result =
-                            document.getElementById(
-                                "birthResult"
-                            );
-
-
-                        const birthday =
-                            getSelectedDate(
-                                "birthDate"
-                            );
-
-
-                        if (!birthday) {
-
-                            result.innerHTML = `
-                                <div class="result-box">
-                                    ⚠️ Please enter a valid
-                                    date in MM/DD/YYYY format.
-                                </div>
-                            `;
-
-                            return;
-
-                        }
-
-
-                        const today =
-                            new Date();
-
-
-                        if (
-                            birthday > today
-                        ) {
-
-                            result.innerHTML = `
-                                <div class="result-box">
-                                    ⚠️ Birthday cannot
-                                    be in the future.
-                                </div>
-                            `;
-
-                            return;
-
-                        }
-
-
-                        const age =
-                            getAge(
-                                birthday
-                            );
-
-
-                        const totalDays =
-                            Math.floor(
-                                (
-                                    today -
-                                    birthday
-                                )
-                                /
-                                (
-                                    1000 *
-                                    60 *
-                                    60 *
-                                    24
-                                )
-                            );
-
-
-                        result.innerHTML = `
-
-                            <div class="result-box">
-
-                                <h3>
-                                    🎉 Your Age
-                                </h3>
-
-                                <p>
-                                    <strong>
-                                        ${age.years}
-                                        Years
-                                        ${age.months}
-                                        Months
-                                        ${age.days}
-                                        Days
-                                    </strong>
-                                </p>
-
-                                <p>
-                                    🎂 Born:
-                                    ${formatDate(birthday)}
-                                </p>
-
-                                <p>
-                                    📅 Total Days:
-                                    ${totalDays.toLocaleString()}
-                                </p>
-
-                                <p>
-                                    🕒 Total Hours:
-                                    ${(totalDays * 24)
-                                        .toLocaleString()}
-                                </p>
-
-                            </div>
-
-                        `;
-
-                    }
+            let next =
+                safeReplaceYear(
+                    birthDate,
+                    today.getFullYear()
                 );
+
+
+            if (
+                next < today
+            ) {
+
+                next =
+                    safeReplaceYear(
+                        birthDate,
+                        today.getFullYear() + 1
+                    );
+
+            }
+
+
+            return next;
 
         }
 
 
         /* =====================================================
-           DATE DIFFERENCE
+           WESTERN ZODIAC
         ===================================================== */
 
-        function differenceCalculator() {
+        function westernZodiac(
+            month,
+            day
+        ) {
 
-            showModal(
-                "📆 Date Difference",
+            const signs = [
 
-                `
+                [
+                    "Capricorn",
+                    1,
+                    1,
+                    1,
+                    19
+                ],
 
-                <div class="form">
+                [
+                    "Aquarius",
+                    1,
+                    20,
+                    2,
+                    18
+                ],
 
-                    ${createDateControl(
-                        "date1",
-                        "date1Picker",
-                        "First Date"
-                    )}
+                [
+                    "Pisces",
+                    2,
+                    19,
+                    3,
+                    20
+                ],
 
-                    ${createDateControl(
-                        "date2",
-                        "date2Picker",
-                        "Second Date"
-                    )}
+                [
+                    "Aries",
+                    3,
+                    21,
+                    4,
+                    19
+                ],
 
-                    <button
-                        class="calc-button"
-                        id="differenceCalculate"
-                    >
-                        Calculate Difference
-                    </button>
+                [
+                    "Taurus",
+                    4,
+                    20,
+                    5,
+                    20
+                ],
 
-                    <div
-                        class="result"
-                        id="differenceResult"
-                    ></div>
+                [
+                    "Gemini",
+                    5,
+                    21,
+                    6,
+                    20
+                ],
 
-                </div>
+                [
+                    "Cancer",
+                    6,
+                    21,
+                    7,
+                    22
+                ],
 
-                `
-            );
+                [
+                    "Leo",
+                    7,
+                    23,
+                    8,
+                    22
+                ],
 
+                [
+                    "Virgo",
+                    8,
+                    23,
+                    9,
+                    22
+                ],
 
-            activateDateControl(
-                "date1",
-                "date1Picker"
-            );
+                [
+                    "Libra",
+                    9,
+                    23,
+                    10,
+                    22
+                ],
 
+                [
+                    "Scorpio",
+                    10,
+                    23,
+                    11,
+                    21
+                ],
 
-            activateDateControl(
-                "date2",
-                "date2Picker"
-            );
+                [
+                    "Sagittarius",
+                    11,
+                    22,
+                    12,
+                    21
+                ],
 
+                [
+                    "Capricorn",
+                    12,
+                    22,
+                    12,
+                    31
+                ]
 
-            document
-                .getElementById(
-                    "differenceCalculate"
-                )
-                .addEventListener(
-                    "click",
-                    function() {
-
-                        const result =
-                            document.getElementById(
-                                "differenceResult"
-                            );
-
-
-                        const date1 =
-                            getSelectedDate(
-                                "date1"
-                            );
-
-
-                        const date2 =
-                            getSelectedDate(
-                                "date2"
-                            );
-
-
-                        if (
-                            !date1 ||
-                            !date2
-                        ) {
-
-                            result.innerHTML = `
-                                <div class="result-box">
-                                    ⚠️ Please enter both dates
-                                    in MM/DD/YYYY format.
-                                </div>
-                            `;
-
-                            return;
-
-                        }
-
-
-                        const difference =
-                            Math.abs(
-                                date2 -
-                                date1
-                            );
-
-
-                        const totalDays =
-                            Math.floor(
-                                difference
-                                /
-                                (
-                                    1000 *
-                                    60 *
-                                    60 *
-                                    24
-                                )
-                            );
-
-
-                        const weeks =
-                            Math.floor(
-                                totalDays / 7
-                            );
+            ];
 
 
-                        const remainingDays =
-                            totalDays % 7;
+            for (
+                const sign
+                of signs
+            ) {
+
+                const [
+                    name,
+                    sm,
+                    sd,
+                    em,
+                    ed
+                ] = sign;
 
 
-                        const totalHours =
-                            totalDays * 24;
+                if (
+                    (
+                        month === sm &&
+                        day >= sd
+                    )
+                    ||
+                    (
+                        month === em &&
+                        day <= ed
+                    )
+                ) {
+
+                    return name;
+
+                }
+
+            }
 
 
-                        const totalMinutes =
-                            totalHours * 60;
-
-
-                        const totalSeconds =
-                            totalMinutes * 60;
-
-
-                        result.innerHTML = `
-
-                            <div class="result-box">
-
-                                <h3>
-                                    📊 Difference
-                                </h3>
-
-                                <p>
-                                    📅
-                                    ${formatDate(date1)}
-                                </p>
-
-                                <p>
-                                    📅
-                                    ${formatDate(date2)}
-                                </p>
-
-                                <hr>
-
-                                <p>
-                                    <strong>
-                                        ${totalDays.toLocaleString()}
-                                        Days
-                                    </strong>
-                                </p>
-
-                                <p>
-                                    📆
-                                    ${weeks}
-                                    Weeks
-                                    ${remainingDays}
-                                    Days
-                                </p>
-
-                                <p>
-                                    🕒
-                                    ${totalHours.toLocaleString()}
-                                    Hours
-                                </p>
-
-                                <p>
-                                    ⏱️
-                                    ${totalMinutes.toLocaleString()}
-                                    Minutes
-                                </p>
-
-                                <p>
-                                    ⚡
-                                    ${totalSeconds.toLocaleString()}
-                                    Seconds
-                                </p>
-
-                            </div>
-
-                        `;
-
-                    }
-                );
+            return "Unknown";
 
         }
 
 
         /* =====================================================
-           COUNTDOWN
+           CHINESE ZODIAC
         ===================================================== */
 
-        let countdownInterval =
-            null;
+        function chineseZodiac(
+            year
+        ) {
+
+            const animals = [
+
+                "Rat",
+                "Ox",
+                "Tiger",
+                "Rabbit",
+                "Dragon",
+                "Snake",
+                "Horse",
+                "Goat",
+                "Monkey",
+                "Rooster",
+                "Dog",
+                "Pig"
+
+            ];
 
 
-        function countdownCalculator() {
+            return animals[
+                (
+                    year - 4
+                ) % 12
+            ];
 
-            showModal(
-                "⏳ Countdown",
+        }
 
-                `
 
-                <div class="form">
+        /* =====================================================
+           LIFE PATH
+        ===================================================== */
 
-                    <label>
-                        Target Date & Time
-                    </label>
+        function reduceNumber(
+            number
+        ) {
 
-                    <input
-                        type="datetime-local"
-                        id="countdownDate"
-                        class="input"
-                    >
+            while (
+                number > 9 &&
+                ![
+                    11,
+                    22,
+                    33
+                ].includes(number)
+            ) {
 
-                    <button
-                        class="calc-button"
-                        id="countdownStart"
-                    >
-                        Start Countdown
-                    </button>
+                number =
+                    String(number)
+                        .split("")
+                        .reduce(
+                            (
+                                sum,
+                                digit
+                            ) =>
+                                sum +
+                                Number(digit),
+                            0
+                        );
 
-                    <div
-                        class="result"
-                        id="countdownResult"
-                    ></div>
+            }
 
-                </div>
 
-                `
+            return number;
+
+        }
+
+
+        function lifePath(
+            birthDate
+        ) {
+
+            const value =
+                (
+                    String(
+                        birthDate.getDate()
+                    )
+                    +
+                    String(
+                        birthDate.getMonth()
+                        + 1
+                    )
+                    +
+                    String(
+                        birthDate.getFullYear()
+                    )
+                )
+                .split("")
+                .reduce(
+                    (
+                        sum,
+                        digit
+                    ) =>
+                        sum +
+                        Number(digit),
+                    0
+                );
+
+
+            return reduceNumber(
+                value
             );
 
-
-            document
-                .getElementById(
-                    "countdownStart"
-                )
-                .addEventListener(
-                    "click",
-                    function() {
-
-                        const value =
-                            document.getElementById(
-                                "countdownDate"
-                            ).value;
-
-
-                        const result =
-                            document.getElementById(
-                                "countdownResult"
-                            );
-
-
-                        if (!value) {
-
-                            result.innerHTML = `
-                                <div class="result-box">
-                                    ⚠️ Please select
-                                    a target date.
-                                </div>
-                            `;
-
-                            return;
-
-                        }
-
-
-                        const target =
-                            new Date(
-                                value
-                            );
-
-
-                        if (
-                            countdownInterval
-                        ) {
-
-                            clearInterval(
-                                countdownInterval
-                            );
-
-                        }
-
-
-                        function updateCountdown() {
-
-                            const now =
-                                new Date();
-
-
-                            const difference =
-                                target - now;
-
-
-                            if (
-                                difference <= 0
-                            ) {
-
-                                clearInterval(
-                                    countdownInterval
-                                );
-
-
-                                result.innerHTML = `
-
-                                    <div class="result-box">
-
-                                        <h3>
-                                            🎉 Finished!
-                                        </h3>
-
-                                        <p>
-                                            Countdown completed.
-                                        </p>
-
-                                    </div>
-
-                                `;
-
-
-                                return;
-
-                            }
-
-
-                            const days =
-                                Math.floor(
-                                    difference /
-                                    (
-                                        1000 *
-                                        60 *
-                                        60 *
-                                        24
-                                    )
-                                );
-
-
-                            const hours =
-                                Math.floor(
-                                    difference /
-                                    (
-                                        1000 *
-                                        60 *
-                                        60
-                                    )
-                                )
-                                % 24;
-
-
-                            const minutes =
-                                Math.floor(
-                                    difference /
-                                    (
-                                        1000 *
-                                        60
-                                    )
-                                )
-                                % 60;
-
-
-                            const seconds =
-                                Math.floor(
-                                    difference /
-                                    1000
-                                )
-                                % 60;
-
-
-                            result.innerHTML = `
-
-                                <div class="result-box">
-
-                                    <h3>
-                                        ⏰ Remaining
-                                    </h3>
-
-                                    <div
-                                        class="countdown-grid"
-                                    >
-
-                                        <div
-                                            class="countdown-item"
-                                        >
-
-                                            <strong>
-                                                ${days}
-                                            </strong>
-
-                                            <span>
-                                                Days
-                                            </span>
-
-                                        </div>
-
-
-                                        <div
-                                            class="countdown-item"
-                                        >
-
-                                            <strong>
-                                                ${hours}
-                                            </strong>
-
-                                            <span>
-                                                Hours
-                                            </span>
-
-                                        </div>
-
-
-                                        <div
-                                            class="countdown-item"
-                                        >
-
-                                            <strong>
-                                                ${minutes}
-                                            </strong>
-
-                                            <span>
-                                                Minutes
-                                            </span>
-
-                                        </div>
-
-
-                                        <div
-                                            class="countdown-item"
-                                        >
-
-                                            <strong>
-                                                ${seconds}
-                                            </strong>
-
-                                            <span>
-                                                Seconds
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            `;
-
-                        }
-
-
-                        updateCountdown();
-
-
-                        countdownInterval =
-                            setInterval(
-                                updateCountdown,
-                                1000
-                            );
-
-                    }
+        }
+
+
+        /* =====================================================
+           MOON PHASE
+        ===================================================== */
+
+        function moonPhase(
+            selectedDate
+        ) {
+
+            const reference =
+                new Date(
+                    2000,
+                    0,
+                    6,
+                    18,
+                    14
                 );
+
+
+            const target =
+                new Date(
+                    selectedDate.getFullYear(),
+                    selectedDate.getMonth(),
+                    selectedDate.getDate()
+                );
+
+
+            const elapsed =
+                (
+                    target -
+                    reference
+                ) / 86400000;
+
+
+            const synodic =
+                29.530588853;
+
+
+            const phaseAge =
+                (
+                    elapsed %
+                    synodic +
+                    synodic
+                ) % synodic;
+
+
+            const fraction =
+                phaseAge /
+                synodic;
+
+
+            let name;
+
+
+            if (
+                fraction < .03
+            ) {
+
+                name =
+                    "New Moon";
+
+            }
+            else if (
+                fraction < .22
+            ) {
+
+                name =
+                    "Waxing Crescent";
+
+            }
+            else if (
+                fraction < .28
+            ) {
+
+                name =
+                    "First Quarter";
+
+            }
+            else if (
+                fraction < .47
+            ) {
+
+                name =
+                    "Waxing Gibbous";
+
+            }
+            else if (
+                fraction < .53
+            ) {
+
+                name =
+                    "Full Moon";
+
+            }
+            else if (
+                fraction < .72
+            ) {
+
+                name =
+                    "Waning Gibbous";
+
+            }
+            else if (
+                fraction < .78
+            ) {
+
+                name =
+                    "Last Quarter";
+
+            }
+            else {
+
+                name =
+                    "Waning Crescent";
+
+            }
+
+
+            return {
+                name,
+                age: phaseAge
+            };
 
         }
 
@@ -3077,168 +3319,75 @@
            LIFE STATISTICS
         ===================================================== */
 
-        function statisticsCalculator() {
+        function lifeStatistics(
+            birthDate,
+            today
+        ) {
 
-            showModal(
-                "📊 Life Statistics",
-
-                `
-
-                <div class="form">
-
-                    ${createDateControl(
-                        "statsBirthday",
-                        "statsBirthdayPicker",
-                        "Your Birthday"
-                    )}
-
-                    <button
-                        class="calc-button"
-                        id="statsCalculate"
-                    >
-                        Generate Statistics
-                    </button>
-
-                    <div
-                        class="result"
-                        id="statsResult"
-                    ></div>
-
-                </div>
-
-                `
-            );
-
-
-            activateDateControl(
-                "statsBirthday",
-                "statsBirthdayPicker"
-            );
-
-
-            document
-                .getElementById(
-                    "statsCalculate"
-                )
-                .addEventListener(
-                    "click",
-                    function() {
-
-                        const result =
-                            document.getElementById(
-                                "statsResult"
-                            );
-
-
-                        const birthday =
-                            getSelectedDate(
-                                "statsBirthday"
-                            );
-
-
-                        if (!birthday) {
-
-                            result.innerHTML = `
-                                <div class="result-box">
-                                    ⚠️ Please enter a valid
-                                    date in MM/DD/YYYY format.
-                                </div>
-                            `;
-
-                            return;
-
-                        }
-
-
-                        const now =
-                            new Date();
-
-
-                        if (
-                            birthday > now
-                        ) {
-
-                            result.innerHTML = `
-                                <div class="result-box">
-                                    ⚠️ Birthday cannot
-                                    be in the future.
-                                </div>
-                            `;
-
-                            return;
-
-                        }
-
-
-                        const days =
-                            Math.floor(
-                                (
-                                    now -
-                                    birthday
-                                )
-                                /
-                                (
-                                    1000 *
-                                    60 *
-                                    60 *
-                                    24
-                                )
-                            );
-
-
-                        const hours =
-                            days * 24;
-
-
-                        const minutes =
-                            hours * 60;
-
-
-                        const seconds =
-                            minutes * 60;
-
-
-                        result.innerHTML = `
-
-                            <div class="result-box">
-
-                                <h3>
-                                    📊 Life Statistics
-                                </h3>
-
-                                <p>
-                                    🎂 Birthday:
-                                    ${formatDate(birthday)}
-                                </p>
-
-                                <hr>
-
-                                <p>
-                                    📅 Days:
-                                    ${days.toLocaleString()}
-                                </p>
-
-                                <p>
-                                    🕒 Hours:
-                                    ${hours.toLocaleString()}
-                                </p>
-
-                                <p>
-                                    ⏱️ Minutes:
-                                    ${minutes.toLocaleString()}
-                                </p>
-
-                                <p>
-                                    ⚡ Seconds:
-                                    ${seconds.toLocaleString()}
-                                </p>
-
-                            </div>
-
-                        `;
-
-                    }
+            const totalDays =
+                Math.floor(
+                    (
+                        today -
+                        birthDate
+                    )
+                    /
+                    86400000
                 );
+
+
+            const hours =
+                totalDays * 24;
+
+
+            const minutes =
+                hours * 60;
+
+
+            const seconds =
+                minutes * 60;
+
+
+            const heartbeats =
+                Math.floor(
+                    minutes * 70
+                );
+
+
+            const sleepHours =
+                Math.floor(
+                    totalDays * 8
+                );
+
+
+            const earthRevolutions =
+                totalDays;
+
+
+            const leapDays =
+                countLeapDays(
+                    birthDate,
+                    today
+                );
+
+
+            return {
+                days:
+                    totalDays,
+
+                hours,
+
+                minutes,
+
+                seconds,
+
+                heartbeats,
+
+                sleepHours,
+
+                earthRevolutions,
+
+                leapDays
+            };
 
         }
 
@@ -3247,272 +3396,2642 @@
            AGE MILESTONES
         ===================================================== */
 
-        function milestonesCalculator() {
+        function ageMilestones(
+            birthDate,
+            today
+        ) {
 
-            showModal(
-                "🎯 Age Milestones",
-
-                `
-
-                <div class="form">
-
-                    ${createDateControl(
-                        "milestoneBirthday",
-                        "milestoneBirthdayPicker",
-                        "Your Birthday"
-                    )}
-
-                    <button
-                        class="calc-button"
-                        id="milestoneCalculate"
-                    >
-                        Check Milestones
-                    </button>
-
-                    <div
-                        class="result"
-                        id="milestoneResult"
-                    ></div>
-
-                </div>
-
-                `
-            );
+            const ages = [
+                18,
+                21,
+                25,
+                30,
+                40,
+                50,
+                60,
+                75,
+                100
+            ];
 
 
-            activateDateControl(
-                "milestoneBirthday",
-                "milestoneBirthdayPicker"
-            );
+            return ages.map(
+                age => {
 
-
-            document
-                .getElementById(
-                    "milestoneCalculate"
-                )
-                .addEventListener(
-                    "click",
-                    function() {
-
-                        const result =
-                            document.getElementById(
-                                "milestoneResult"
-                            );
-
-
-                        const birthday =
-                            getSelectedDate(
-                                "milestoneBirthday"
-                            );
-
-
-                        if (!birthday) {
-
-                            result.innerHTML = `
-                                <div class="result-box">
-                                    ⚠️ Please enter a valid
-                                    date in MM/DD/YYYY format.
-                                </div>
-                            `;
-
-                            return;
-
-                        }
-
-
-                        const now =
-                            new Date();
-
-
-                        if (
-                            birthday > now
-                        ) {
-
-                            result.innerHTML = `
-                                <div class="result-box">
-                                    ⚠️ Birthday cannot
-                                    be in the future.
-                                </div>
-                            `;
-
-                            return;
-
-                        }
-
-
-                        const ages = [
-                            10,
-                            13,
-                            16,
-                            18,
-                            21,
-                            25,
-                            30,
-                            40,
-                            50,
-                            60,
-                            70,
-                            80,
-                            90,
-                            100
-                        ];
-
-
-                        let html = `
-
-                            <div class="result-box">
-
-                                <h3>
-                                    🎯 Milestones
-                                </h3>
-
-                        `;
-
-
-                        ages.forEach(
-                            function(age) {
-
-                                const date =
-                                    new Date(
-                                        birthday
-                                    );
-
-
-                                date.setFullYear(
-                                    birthday
-                                        .getFullYear()
-                                    + age
-                                );
-
-
-                                if (
-                                    date <= now
-                                ) {
-
-                                    html += `
-
-                                        <p>
-                                            ✅ Age
-                                            ${age} —
-                                            ${formatDate(
-                                                date
-                                            )}
-                                        </p>
-
-                                    `;
-
-                                } else {
-
-                                    html += `
-
-                                        <p>
-                                            🔜 Age
-                                            ${age} —
-                                            ${formatDate(
-                                                date
-                                            )}
-                                        </p>
-
-                                    `;
-
-                                }
-
-                            }
+                    const date =
+                        safeReplaceYear(
+                            birthDate,
+                            birthDate.getFullYear()
+                            + age
                         );
 
 
-                        html += `
-                            </div>
-                        `;
+                    let status;
 
 
-                        result.innerHTML =
-                            html;
+                    if (
+                        date <
+                        today
+                    ) {
+
+                        status =
+                            "Passed";
 
                     }
-                );
+                    else if (
+                        date.getTime()
+                        ===
+                        today.getTime()
+                    ) {
+
+                        status =
+                            "Today 🎉";
+
+                    }
+                    else {
+
+                        const days =
+                            Math.floor(
+                                (
+                                    date -
+                                    today
+                                )
+                                /
+                                86400000
+                            );
+
+
+                        status =
+                            formatNumber(
+                                days
+                            )
+                            +
+                            " days left";
+
+                    }
+
+
+                    return {
+                        age,
+                        date,
+                        status
+                    };
+
+                }
+            );
 
         }
 
 
         /* =====================================================
-           CARD EVENTS
+           DAY MILESTONES
+        ===================================================== */
+
+        function dayMilestones(
+            birthDate,
+            today
+        ) {
+
+            const milestones = [
+                1000,
+                5000,
+                10000,
+                15000,
+                20000,
+                25000,
+                30000
+            ];
+
+
+            return milestones.map(
+                days => {
+
+                    const date =
+                        new Date(
+                            birthDate
+                        );
+
+
+                    date.setDate(
+                        date.getDate()
+                        + days
+                    );
+
+
+                    let status;
+
+
+                    if (
+                        date < today
+                    ) {
+
+                        status =
+                            "Passed";
+
+                    }
+                    else if (
+                        date.getTime()
+                        ===
+                        today.getTime()
+                    ) {
+
+                        status =
+                            "Today 🎉";
+
+                    }
+                    else {
+
+                        const remaining =
+                            Math.floor(
+                                (
+                                    date -
+                                    today
+                                )
+                                /
+                                86400000
+                            );
+
+
+                        status =
+                            formatNumber(
+                                remaining
+                            )
+                            +
+                            " days left";
+
+                    }
+
+
+                    return {
+                        days,
+                        date,
+                        status
+                    };
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           CALCULATE EVERYTHING
+        ===================================================== */
+
+        function calculateAll(
+            birthDate
+        ) {
+
+            const today =
+                getDhakaToday();
+
+
+            const age =
+                calculateAge(
+                    birthDate,
+                    today
+                );
+
+
+            const next =
+                nextBirthday(
+                    birthDate,
+                    today
+                );
+
+
+            const countdownDays =
+                Math.floor(
+                    (
+                        next -
+                        today
+                    )
+                    /
+                    86400000
+                );
+
+
+            const calendarDiff =
+                calendarDifference(
+                    today,
+                    next
+                );
+
+
+            const zodiac =
+                westernZodiac(
+                    birthDate.getMonth()
+                    + 1,
+                    birthDate.getDate()
+                );
+
+
+            const chinese =
+                chineseZodiac(
+                    birthDate.getFullYear()
+                );
+
+
+            const lifePathNumber =
+                lifePath(
+                    birthDate
+                );
+
+
+            const moon =
+                moonPhase(
+                    birthDate
+                );
+
+
+            const stats =
+                lifeStatistics(
+                    birthDate,
+                    today
+                );
+
+
+            const ageM =
+                ageMilestones(
+                    birthDate,
+                    today
+                );
+
+
+            const dayM =
+                dayMilestones(
+                    birthDate,
+                    today
+                );
+
+
+            return {
+
+                today,
+
+                age,
+
+                next,
+
+                countdownDays,
+
+                calendarDiff,
+
+                turningAge:
+                    next.getFullYear()
+                    -
+                    birthDate.getFullYear(),
+
+                bornWeekday:
+                    weekday(
+                        birthDate
+                    ),
+
+                nextWeekday:
+                    weekday(
+                        next
+                    ),
+
+                zodiac,
+
+                chinese,
+
+                lifePathNumber,
+
+                moon,
+
+                stats,
+
+                ageM,
+
+                dayM
+
+            };
+
+        }
+
+
+        /* =====================================================
+           DHAKA TODAY
+        ===================================================== */
+
+        function getDhakaToday() {
+
+            const parts =
+                new Intl.DateTimeFormat(
+                    "en-US",
+                    {
+                        timeZone:
+                            "Asia/Dhaka",
+
+                        year:
+                            "numeric",
+
+                        month:
+                            "2-digit",
+
+                        day:
+                            "2-digit"
+                    }
+                ).formatToParts(
+                    new Date()
+                );
+
+
+            const year =
+                Number(
+                    parts.find(
+                        p =>
+                            p.type ===
+                            "year"
+                    ).value
+                );
+
+
+            const month =
+                Number(
+                    parts.find(
+                        p =>
+                            p.type ===
+                            "month"
+                    ).value
+                );
+
+
+            const day =
+                Number(
+                    parts.find(
+                        p =>
+                            p.type ===
+                            "day"
+                    ).value
+                );
+
+
+            return new Date(
+                year,
+                month - 1,
+                day
+            );
+
+        }
+
+
+        /* =====================================================
+           REPORT HELPERS
+        ===================================================== */
+
+        function section(
+            title,
+            html
+        ) {
+
+            return `
+
+                <div class="report-section">
+
+                    <div
+                        class="report-section-title"
+                    >
+                        ${title}
+                    </div>
+
+                    ${html}
+
+                </div>
+
+            `;
+
+        }
+
+
+        function row(
+            label,
+            value
+        ) {
+
+            return `
+
+                <div class="report-row">
+
+                    ${label}
+                    <strong>
+                        ${value}
+                    </strong>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           FULL REPORT
+        ===================================================== */
+
+        function fullReport(
+            birthDate,
+            data
+        ) {
+
+            const s =
+                data.stats;
+
+
+            return (
+
+                section(
+                    "🎂 BIRTHDAY",
+                    row(
+                        "📅 Birth Date: ",
+                        formatDate(
+                            birthDate
+                        )
+                    )
+                    +
+                    row(
+                        "📆 Born On: ",
+                        data.bornWeekday
+                    )
+                )
+
+                +
+
+                section(
+                    "🎂 AGE",
+                    row(
+                        "Age: ",
+                        `${data.age.years} years, ${data.age.months} months, ${data.age.days} days`
+                    )
+                )
+
+                +
+
+                section(
+                    "🎉 NEXT BIRTHDAY",
+                    row(
+                        "Date: ",
+                        formatDate(
+                            data.next
+                        )
+                    )
+                    +
+                    row(
+                        "Weekday: ",
+                        data.nextWeekday
+                    )
+                    +
+                    row(
+                        "Turning Age: ",
+                        data.turningAge
+                    )
+                )
+
+                +
+
+                section(
+                    "⏳ COUNTDOWN",
+                    row(
+                        "Days remaining: ",
+                        formatNumber(
+                            data.countdownDays
+                        )
+                    )
+                    +
+                    row(
+                        "Calendar countdown: ",
+                        `${data.calendarDiff.years} years, ${data.calendarDiff.months} months, ${data.calendarDiff.days} days`
+                    )
+                )
+
+                +
+
+                section(
+                    "♈ ASTROLOGY",
+                    row(
+                        "Western Zodiac: ",
+                        data.zodiac
+                    )
+                    +
+                    row(
+                        "Chinese Zodiac: ",
+                        data.chinese
+                    )
+                    +
+                    row(
+                        "Life Path Number: ",
+                        data.lifePathNumber
+                    )
+                    +
+                    row(
+                        "Moon Phase: ",
+                        data.moon.name
+                    )
+                )
+
+                +
+
+                section(
+                    "📊 LIFE STATISTICS",
+                    row(
+                        "Days lived: ",
+                        formatNumber(
+                            s.days
+                        )
+                    )
+                    +
+                    row(
+                        "Hours: ",
+                        formatNumber(
+                            s.hours
+                        )
+                    )
+                    +
+                    row(
+                        "Minutes: ",
+                        formatNumber(
+                            s.minutes
+                        )
+                    )
+                    +
+                    row(
+                        "Seconds: ",
+                        formatNumber(
+                            s.seconds
+                        )
+                    )
+                    +
+                    row(
+                        "Estimated heartbeats: ",
+                        formatNumber(
+                            s.heartbeats
+                        )
+                    )
+                    +
+                    row(
+                        "Estimated sleep: ",
+                        formatNumber(
+                            s.sleepHours
+                        )
+                        +
+                        " hours"
+                    )
+                    +
+                    row(
+                        "Earth revolutions: ",
+                        formatNumber(
+                            s.earthRevolutions
+                        )
+                    )
+                    +
+                    row(
+                        "Leap days experienced: ",
+                        s.leapDays
+                    )
+                )
+
+                +
+
+                `<div class="note">
+
+                    Time-based statistics are approximate
+                    because birth time is not provided.<br>
+                    Heartbeat estimate uses 70 BPM.<br>
+                    Sleep estimate uses 8 hours/day.<br>
+                    Life Path Number is numerology-based.<br>
+                    Chinese Zodiac may differ near Lunar New Year.<br>
+                    Moon phase is approximate.
+
+                </div>`
+
+            );
+
+        }
+
+
+        /* =====================================================
+           NEXT BIRTHDAY
+        ===================================================== */
+
+        function nextBirthdayReport(
+            data
+        ) {
+
+            return (
+
+                section(
+                    "🎂 NEXT BIRTHDAY",
+
+                    row(
+                        "📅 Date: ",
+                        formatDate(
+                            data.next
+                        )
+                    )
+
+                    +
+
+                    row(
+                        "📆 Weekday: ",
+                        data.nextWeekday
+                    )
+
+                    +
+
+                    row(
+                        "🎉 You will turn: ",
+                        data.turningAge
+                    )
+
+                    +
+
+                    row(
+                        "⏳ Days remaining: ",
+                        formatNumber(
+                            data.countdownDays
+                        )
+                    )
+
+                    +
+
+                    row(
+                        "🗓 Countdown: ",
+                        `${data.calendarDiff.years} years, ${data.calendarDiff.months} months, ${data.calendarDiff.days} days`
+                    )
+                )
+
+            );
+
+        }
+
+
+        /* =====================================================
+           COUNTDOWN REPORT
+        ===================================================== */
+
+        function countdownReport(
+            data
+        ) {
+
+            return `
+
+                ${section(
+                    "⏳ BIRTHDAY COUNTDOWN",
+
+                    row(
+                        "🎂 Next Birthday: ",
+                        formatDate(
+                            data.next
+                        )
+                    )
+
+                    +
+
+                    row(
+                        "📅 Days remaining: ",
+                        formatNumber(
+                            data.countdownDays
+                        )
+                    )
+
+                    +
+
+                    row(
+                        "🗓 Calendar countdown: ",
+                        `${data.calendarDiff.years} years, ${data.calendarDiff.months} months, ${data.calendarDiff.days} days`
+                    )
+
+                    +
+
+                    row(
+                        "🎉 You will turn: ",
+                        data.turningAge
+                    )
+                )}
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           ZODIAC REPORT
+        ===================================================== */
+
+        function zodiacReport(
+            data
+        ) {
+
+            return section(
+                "♈ ZODIAC & ASTROLOGY",
+
+                row(
+                    "♈ Western Zodiac: ",
+                    data.zodiac
+                )
+
+                +
+
+                row(
+                    "🐉 Chinese Zodiac: ",
+                    data.chinese
+                )
+
+                +
+
+                row(
+                    "🔢 Life Path Number: ",
+                    data.lifePathNumber
+                )
+
+                +
+
+                row(
+                    "🌙 Moon Phase on Birth Date: ",
+                    data.moon.name
+                )
+
+                +
+
+                row(
+                    "📆 Born on: ",
+                    data.bornWeekday
+                )
+
+                +
+
+                `<div class="note">
+
+                    Astrology and numerology information
+                    is provided for entertainment.
+
+                </div>`
+            );
+
+        }
+
+
+        /* =====================================================
+           LIFE STATS REPORT
+        ===================================================== */
+
+        function lifeStatsReport(
+            data
+        ) {
+
+            const s =
+                data.stats;
+
+
+            return section(
+                "📊 LIFE STATISTICS",
+
+                row(
+                    "📅 Days lived: ",
+                    formatNumber(
+                        s.days
+                    )
+                )
+
+                +
+
+                row(
+                    "⏰ Hours: ",
+                    formatNumber(
+                        s.hours
+                    )
+                )
+
+                +
+
+                row(
+                    "⏱ Minutes: ",
+                    formatNumber(
+                        s.minutes
+                    )
+                )
+
+                +
+
+                row(
+                    "⏱ Seconds: ",
+                    formatNumber(
+                        s.seconds
+                    )
+                )
+
+                +
+
+                row(
+                    "❤️ Estimated heartbeats: ",
+                    formatNumber(
+                        s.heartbeats
+                    )
+                )
+
+                +
+
+                `<div class="note">
+                    Based on an approximate 70 BPM.
+                </div>`
+
+                +
+
+                row(
+                    "😴 Estimated sleep: ",
+                    formatNumber(
+                        s.sleepHours
+                    )
+                    +
+                    " hours"
+                )
+
+                +
+
+                `<div class="note">
+                    Based on an approximate 8 hours/day.
+                </div>`
+
+                +
+
+                row(
+                    "🌍 Earth revolutions: ",
+                    formatNumber(
+                        s.earthRevolutions
+                    )
+                )
+
+                +
+
+                row(
+                    "📅 Leap days experienced: ",
+                    s.leapDays
+                )
+
+            );
+
+        }
+
+
+        /* =====================================================
+           MILESTONE REPORT
+        ===================================================== */
+
+        function milestoneReport(
+            data
+        ) {
+
+            let html =
+                section(
+                    "🎯 AGE MILESTONES",
+                    ""
+                );
+
+
+            data.ageM.forEach(
+                item => {
+
+                    html += `
+
+                        <div class="report-section">
+
+                            <div
+                                class="report-row"
+                            >
+                                🎂 Age:
+                                <strong>
+                                    ${item.age}
+                                </strong>
+                            </div>
+
+                            <div
+                                class="report-row"
+                            >
+                                📅 Date:
+                                <strong>
+                                    ${formatDate(
+                                        item.date
+                                    )}
+                                </strong>
+                            </div>
+
+                            <div
+                                class="report-row"
+                            >
+                                ➡️ Status:
+                                <strong
+                                    class="${
+                                        item.status ===
+                                        "Passed"
+                                        ? "status-past"
+                                        : "status-future"
+                                    }"
+                                >
+                                    ${item.status}
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+
+            html += section(
+                "📅 DAY MILESTONES",
+                ""
+            );
+
+
+            data.dayM.forEach(
+                item => {
+
+                    html += `
+
+                        <div class="report-section">
+
+                            <div
+                                class="report-row"
+                            >
+                                📍
+                                <strong>
+                                    ${formatNumber(
+                                        item.days
+                                    )} days
+                                </strong>
+                            </div>
+
+                            <div
+                                class="report-row"
+                            >
+                                📅
+                                <strong>
+                                    ${formatDate(
+                                        item.date
+                                    )}
+                                </strong>
+                            </div>
+
+                            <div
+                                class="report-row"
+                            >
+                                ➡️
+                                <strong>
+                                    ${item.status}
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+
+            return html;
+
+        }
+
+
+        /* =====================================================
+           BIRTHDAY CARD
+        ===================================================== */
+
+        function createBirthdayCard(
+            birthDate,
+            data
+        ) {
+
+            const canvas =
+                document.getElementById(
+                    "hiddenCanvas"
+                );
+
+
+            const ctx =
+                canvas.getContext(
+                    "2d"
+                );
+
+
+            const width =
+                canvas.width;
+
+            const height =
+                canvas.height;
+
+
+            ctx.fillStyle =
+                "rgb(20,25,45)";
+
+            ctx.fillRect(
+                0,
+                0,
+                width,
+                height
+            );
+
+
+            /* Decorations */
+
+            const circles = [
+                [
+                    80,
+                    80,
+                    150
+                ],
+                [
+                    1090,
+                    90,
+                    120
+                ],
+                [
+                    100,
+                    600,
+                    90
+                ],
+                [
+                    1080,
+                    580,
+                    140
+                ]
+            ];
+
+
+            ctx.strokeStyle =
+                "rgb(255,210,100)";
+
+            ctx.lineWidth = 4;
+
+
+            circles.forEach(
+                circle => {
+
+                    ctx.beginPath();
+
+                    ctx.arc(
+                        circle[0],
+                        circle[1],
+                        circle[2],
+                        0,
+                        Math.PI * 2
+                    );
+
+                    ctx.stroke();
+
+                }
+            );
+
+
+            /* Title */
+
+            ctx.textAlign =
+                "center";
+
+            ctx.font =
+                "bold 64px Arial";
+
+            ctx.fillStyle =
+                "rgb(255,220,120)";
+
+
+            ctx.fillText(
+                "HAPPY BIRTHDAY!",
+                width / 2,
+                125
+            );
+
+
+            /* Date */
+
+            ctx.font =
+                "bold 46px Arial";
+
+            ctx.fillStyle =
+                "rgb(240,240,250)";
+
+
+            ctx.fillText(
+                formatDate(
+                    birthDate
+                ),
+                width / 2,
+                235
+            );
+
+
+            /* Age */
+
+            ctx.font =
+                "32px Arial";
+
+            ctx.fillStyle =
+                "rgb(210,220,240)";
+
+
+            ctx.fillText(
+                `Age: ${data.age.years} years, ${data.age.months} months, ${data.age.days} days`,
+                width / 2,
+                330
+            );
+
+
+            /* Zodiac */
+
+            ctx.font =
+                "32px Arial";
+
+            ctx.fillStyle =
+                "rgb(220,220,240)";
+
+
+            ctx.fillText(
+                `Zodiac: ${data.zodiac}   |   Chinese: ${data.chinese}`,
+                width / 2,
+                400
+            );
+
+
+            /* Footer */
+
+            ctx.font =
+                "24px Arial";
+
+            ctx.fillStyle =
+                "rgb(180,190,210)";
+
+
+            ctx.fillText(
+                "Birthday Calculator Bot",
+                width / 2,
+                650
+            );
+
+
+            return canvas.toDataURL(
+                "image/png"
+            );
+
+        }
+
+
+        /* =====================================================
+           BIRTHDAY WORKSPACE
+        ===================================================== */
+
+        const birthdayWorkspace =
+            document.getElementById(
+                "birthdayWorkspace"
+            );
+
+
+        const dateWorkspace =
+            document.getElementById(
+                "dateWorkspace"
+            );
+
+
+        const birthdayReport =
+            document.getElementById(
+                "birthdayReport"
+            );
+
+
+        const birthdayActions =
+            document.getElementById(
+                "birthdayActions"
+            );
+
+
+        let birthdayDate =
+            null;
+
+        let birthdayData =
+            null;
+
+
+        function openBirthdayWorkspace() {
+
+            dateWorkspace.style.display =
+                "none";
+
+
+            birthdayWorkspace.style.display =
+                "block";
+
+
+            birthdayWorkspace.scrollIntoView({
+                behavior:
+                    "smooth"
+            });
+
+        }
+
+
+        document
+            .getElementById(
+                "openBirthday"
+            )
+            .addEventListener(
+                "click",
+                openBirthdayWorkspace
+            );
+
+
+        document
+            .getElementById(
+                "birthdayBack"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    birthdayWorkspace.style.display =
+                        "none";
+
+
+                    document
+                        .getElementById(
+                            "calculators"
+                        )
+                        .scrollIntoView({
+                            behavior:
+                                "smooth"
+                        });
+
+                }
+            );
+
+
+        /* Date input */
+
+        const birthdayInput =
+            document.getElementById(
+                "birthdayInput"
+            );
+
+
+        const birthdayPicker =
+            document.getElementById(
+                "birthdayPicker"
+            );
+
+
+        birthdayInput.addEventListener(
+            "input",
+            function() {
+
+                birthdayInput.value =
+                    formatTypedDate(
+                        birthdayInput.value
+                    );
+
+            }
+        );
+
+
+        birthdayPicker.addEventListener(
+            "change",
+            function() {
+
+                birthdayInput.value =
+                    pickerToText(
+                        birthdayPicker.value
+                    );
+
+            }
+        );
+
+
+        /* Calculate */
+
+        document
+            .getElementById(
+                "calculateBirthday"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    const parsed =
+                        parseDate(
+                            birthdayInput.value
+                        );
+
+
+                    if (!parsed) {
+
+                        birthdayReport.style.display =
+                            "block";
+
+
+                        birthdayReport.innerHTML = `
+
+                            <div class="report">
+
+                                ❌ Invalid date.
+
+                                <br><br>
+
+                                Please use:
+
+                                <br>
+
+                                MM/DD/YYYY
+
+                                <br>
+
+                                Example:
+                                09/23/2005
+
+                            </div>
+
+                        `;
+
+                        return;
+
+                    }
+
+
+                    const today =
+                        getDhakaToday();
+
+
+                    if (
+                        parsed > today
+                    ) {
+
+                        birthdayReport.style.display =
+                            "block";
+
+
+                        birthdayReport.innerHTML = `
+
+                            <div class="report">
+
+                                ❌ Birth date cannot
+                                be in the future.
+
+                            </div>
+
+                        `;
+
+                        return;
+
+                    }
+
+
+                    if (
+                        parsed.getFullYear()
+                        < 1900
+                    ) {
+
+                        birthdayReport.style.display =
+                            "block";
+
+
+                        birthdayReport.innerHTML = `
+
+                            <div class="report">
+
+                                ❌ Please enter a birth
+                                year from 1900 onward.
+
+                            </div>
+
+                        `;
+
+                        return;
+
+                    }
+
+
+                    birthdayDate =
+                        parsed;
+
+
+                    birthdayData =
+                        calculateAll(
+                            parsed
+                        );
+
+
+                    birthdayActions.style.display =
+                        "grid";
+
+
+                    birthdayReport.style.display =
+                        "block";
+
+
+                    renderBirthday(
+                        "full"
+                    );
+
+                }
+            );
+
+
+        /* =====================================================
+           BIRTHDAY ACTIONS
         ===================================================== */
 
         document
             .querySelectorAll(
-                ".card"
+                "[data-action]"
             )
             .forEach(
-                function(card) {
+                button => {
 
-                    card.addEventListener(
+                    button.addEventListener(
                         "click",
                         function() {
 
-                            const tool =
-                                card.dataset.tool;
+                            const action =
+                                this.dataset.action;
 
 
                             if (
-                                tool ===
-                                "birthday"
+                                action ===
+                                "again"
                             ) {
 
-                                birthdayCalculator();
+                                birthdayInput.value =
+                                    "";
+
+                                birthdayPicker.value =
+                                    "";
+
+                                birthdayData =
+                                    null;
+
+                                birthdayDate =
+                                    null;
+
+                                birthdayActions.style.display =
+                                    "none";
+
+                                birthdayReport.style.display =
+                                    "none";
+
+                                return;
 
                             }
 
-                            else if (
-                                tool ===
-                                "difference"
-                            ) {
 
-                                differenceCalculator();
-
-                            }
-
-                            else if (
-                                tool ===
-                                "countdown"
-                            ) {
-
-                                countdownCalculator();
-
-                            }
-
-                            else if (
-                                tool ===
-                                "statistics"
-                            ) {
-
-                                statisticsCalculator();
-
-                            }
-
-                            else if (
-                                tool ===
-                                "milestones"
-                            ) {
-
-                                milestonesCalculator();
-
-                            }
-
-                            else if (
-                                tool ===
-                                "telegram"
-                            ) {
-
-                                openTelegram();
-
-                            }
+                            renderBirthday(
+                                action
+                            );
 
                         }
                     );
 
                 }
             );
+
+
+        function renderBirthday(
+            type
+        ) {
+
+            document
+                .querySelectorAll(
+                    "[data-action]"
+                )
+                .forEach(
+                    button => {
+
+                        button.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+            const active =
+                document.querySelector(
+                    `[data-action="${type}"]`
+                );
+
+
+            if (active) {
+
+                active.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            if (type === "full") {
+
+                birthdayReport.innerHTML =
+                    fullReport(
+                        birthdayDate,
+                        birthdayData
+                    );
+
+                return;
+
+            }
+
+
+            if (type === "next") {
+
+                birthdayReport.innerHTML =
+                    nextBirthdayReport(
+                        birthdayData
+                    );
+
+                return;
+
+            }
+
+
+            if (type === "countdown") {
+
+                birthdayReport.innerHTML =
+                    countdownReport(
+                        birthdayData
+                    );
+
+                return;
+
+            }
+
+
+            if (type === "zodiac") {
+
+                birthdayReport.innerHTML =
+                    zodiacReport(
+                        birthdayData
+                    );
+
+                return;
+
+            }
+
+
+            if (type === "stats") {
+
+                birthdayReport.innerHTML =
+                    lifeStatsReport(
+                        birthdayData
+                    );
+
+                return;
+
+            }
+
+
+            if (type === "milestones") {
+
+                birthdayReport.innerHTML =
+                    milestoneReport(
+                        birthdayData
+                    );
+
+                return;
+
+            }
+
+
+            if (type === "card") {
+
+                const image =
+                    createBirthdayCard(
+                        birthdayDate,
+                        birthdayData
+                    );
+
+
+                birthdayReport.innerHTML = `
+
+                    <div
+                        class="report birthday-card-wrap"
+                    >
+
+                        <h3>
+                            🖼️ Your Birthday Card
+                        </h3>
+
+                        <canvas
+                            id="birthdayCanvas"
+                            width="1200"
+                            height="700"
+                        ></canvas>
+
+                        <br>
+
+                        <a
+                            class="download-button"
+                            id="downloadBirthdayCard"
+                            download="birthday_card.png"
+                        >
+                            ⬇️ Download Birthday Card
+                        </a>
+
+                    </div>
+
+                `;
+
+
+                const visibleCanvas =
+                    document.getElementById(
+                        "birthdayCanvas"
+                    );
+
+
+                const context =
+                    visibleCanvas.getContext(
+                        "2d"
+                    );
+
+
+                const imageObject =
+                    new Image();
+
+
+                imageObject.onload =
+                    function() {
+
+                        context.drawImage(
+                            imageObject,
+                            0,
+                            0
+                        );
+
+                    };
+
+
+                imageObject.src =
+                    image;
+
+
+                document
+                    .getElementById(
+                        "downloadBirthdayCard"
+                    )
+                    .href =
+                    image;
+
+                return;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           DATE DIFFERENCE
+        ===================================================== */
+
+        document
+            .getElementById(
+                "openDateDifference"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    birthdayWorkspace.style.display =
+                        "none";
+
+
+                    dateWorkspace.style.display =
+                        "block";
+
+
+                    dateWorkspace.scrollIntoView({
+                        behavior:
+                            "smooth"
+                    });
+
+                }
+            );
+
+
+        document
+            .getElementById(
+                "dateBack"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    dateWorkspace.style.display =
+                        "none";
+
+
+                    document
+                        .getElementById(
+                            "calculators"
+                        )
+                        .scrollIntoView({
+                            behavior:
+                                "smooth"
+                        });
+
+                }
+            );
+
+
+        const firstInput =
+            document.getElementById(
+                "firstDate"
+            );
+
+
+        const secondInput =
+            document.getElementById(
+                "secondDate"
+            );
+
+
+        const firstPicker =
+            document.getElementById(
+                "firstPicker"
+            );
+
+
+        const secondPicker =
+            document.getElementById(
+                "secondPicker"
+            );
+
+
+        firstInput.addEventListener(
+            "input",
+            function() {
+
+                firstInput.value =
+                    formatTypedDate(
+                        firstInput.value
+                    );
+
+            }
+        );
+
+
+        secondInput.addEventListener(
+            "input",
+            function() {
+
+                secondInput.value =
+                    formatTypedDate(
+                        secondInput.value
+                    );
+
+            }
+        );
+
+
+        firstPicker.addEventListener(
+            "change",
+            function() {
+
+                firstInput.value =
+                    pickerToText(
+                        firstPicker.value
+                    );
+
+            }
+        );
+
+
+        secondPicker.addEventListener(
+            "change",
+            function() {
+
+                secondInput.value =
+                    pickerToText(
+                        secondPicker.value
+                    );
+
+            }
+        );
+
+
+        let dateCountdownTimer =
+            null;
+
+
+        document
+            .getElementById(
+                "calculateDifference"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    const first =
+                        parseDate(
+                            firstInput.value
+                        );
+
+
+                    const second =
+                        parseDate(
+                            secondInput.value
+                        );
+
+
+                    const report =
+                        document.getElementById(
+                            "dateReport"
+                        );
+
+
+                    if (
+                        !first ||
+                        !second
+                    ) {
+
+                        report.style.display =
+                            "block";
+
+
+                        report.innerHTML = `
+
+                            <div class="report">
+
+                                ❌ Please enter two
+                                valid dates.
+
+                            </div>
+
+                        `;
+
+                        return;
+
+                    }
+
+
+                    renderDateReport(
+                        first,
+                        second
+                    );
+
+
+                    if (
+                        dateCountdownTimer
+                    ) {
+
+                        clearInterval(
+                            dateCountdownTimer
+                        );
+
+                    }
+
+
+                    dateCountdownTimer =
+                        setInterval(
+                            function() {
+
+                                renderDateReport(
+                                    first,
+                                    second
+                                );
+
+                            },
+                            1000
+                        );
+
+                }
+            );
+
+
+        document
+            .getElementById(
+                "calculateDateAgain"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    firstInput.value =
+                        "";
+
+                    secondInput.value =
+                        "";
+
+                    firstPicker.value =
+                        "";
+
+                    secondPicker.value =
+                        "";
+
+                    document
+                        .getElementById(
+                            "dateReport"
+                        )
+                        .style.display =
+                        "none";
+
+                }
+            );
+
+
+        function renderDateReport(
+            first,
+            second
+        ) {
+
+            const today =
+                getDhakaToday();
+
+
+            const signed =
+                Math.floor(
+                    (
+                        second -
+                        first
+                    )
+                    /
+                    86400000
+                );
+
+
+            const absolute =
+                Math.abs(
+                    signed
+                );
+
+
+            const cal =
+                calendarDifference(
+                    first,
+                    second
+                );
+
+
+            const weeks =
+                Math.floor(
+                    absolute / 7
+                );
+
+
+            const remaining =
+                absolute % 7;
+
+
+            const totalHours =
+                absolute * 24;
+
+
+            const totalMinutes =
+                totalHours * 60;
+
+
+            const totalSeconds =
+                totalMinutes * 60;
+
+
+            const inclusive =
+                absolute + 1;
+
+
+            const leapDays =
+                countLeapDays(
+                    first,
+                    second
+                );
+
+
+            const targetIsFuture =
+                second > today;
+
+
+            const targetIsToday =
+                second.getTime()
+                ===
+                today.getTime();
+
+
+            const targetIsPast =
+                second < today;
+
+
+            let html = "";
+
+
+            /* First */
+
+            html += section(
+                "1️⃣ FIRST DATE",
+
+                row(
+                    "📅 Date: ",
+                    formatDate(first)
+                )
+
+                +
+
+                row(
+                    "📆 Weekday: ",
+                    weekday(first)
+                )
+
+                +
+
+                row(
+                    "🔢 Day of year: ",
+                    ordinal(
+                        dayOfYear(first)
+                    )
+                )
+
+                +
+
+                row(
+                    "🌴 Weekend: ",
+                    first.getDay() === 0 ||
+                    first.getDay() === 6
+                        ? "Yes 🌴"
+                        : "No"
+                )
+
+                +
+
+                row(
+                    "🗓 Leap Year: ",
+                    isLeapYear(
+                        first.getFullYear()
+                    )
+                        ? "Yes 🐸"
+                        : "No"
+                )
+
+                +
+
+                row(
+                    "📅 Month: ",
+                    first.toLocaleDateString(
+                        "en-US",
+                        {
+                            month:
+                                "long"
+                        }
+                    )
+                )
+
+                +
+
+                row(
+                    "📊 Days in Month: ",
+                    daysInMonth(first)
+                )
+            );
+
+
+            /* Second */
+
+            html += section(
+                "2️⃣ SECOND DATE",
+
+                row(
+                    "📅 Date: ",
+                    formatDate(second)
+                )
+
+                +
+
+                row(
+                    "📆 Weekday: ",
+                    weekday(second)
+                )
+
+                +
+
+                row(
+                    "🔢 Day of year: ",
+                    ordinal(
+                        dayOfYear(second)
+                    )
+                )
+
+                +
+
+                row(
+                    "🌴 Weekend: ",
+                    second.getDay() === 0 ||
+                    second.getDay() === 6
+                        ? "Yes 🌴"
+                        : "No"
+                )
+
+                +
+
+                row(
+                    "🗓 Leap Year: ",
+                    isLeapYear(
+                        second.getFullYear()
+                    )
+                        ? "Yes 🐸"
+                        : "No"
+                )
+
+                +
+
+                row(
+                    "📅 Month: ",
+                    second.toLocaleDateString(
+                        "en-US",
+                        {
+                            month:
+                                "long"
+                        }
+                    )
+                )
+
+                +
+
+                row(
+                    "📊 Days in Month: ",
+                    daysInMonth(second)
+                )
+            );
+
+
+            /* Difference */
+
+            html += section(
+                "📏 DATE DIFFERENCE",
+
+                row(
+                    "📅 Total Days: ",
+                    formatNumber(
+                        absolute
+                    )
+                )
+
+                +
+
+                row(
+                    "🗓 Weeks: ",
+                    `${formatNumber(
+                        weeks
+                    )} weeks ${remaining} days`
+                )
+
+                +
+
+                row(
+                    "📊 Calendar Difference: ",
+                    `${cal.years} years, ${cal.months} months, ${cal.days} days`
+                )
+
+                +
+
+                row(
+                    "⏰ Total Hours: ",
+                    formatNumber(
+                        totalHours
+                    )
+                )
+
+                +
+
+                row(
+                    "⏱ Total Minutes: ",
+                    formatNumber(
+                        totalMinutes
+                    )
+                )
+
+                +
+
+                row(
+                    "⚡ Total Seconds: ",
+                    formatNumber(
+                        totalSeconds
+                    )
+                )
+
+                +
+
+                row(
+                    "📌 Inclusive Calendar Days: ",
+                    formatNumber(
+                        inclusive
+                    )
+                )
+            );
+
+
+            /* Order */
+
+            if (
+                signed > 0
+            ) {
+
+                html += section(
+                    "➡️ DATE ORDER",
+
+                    row(
+                        "Status: ",
+                        "First date comes before second date."
+                    )
+
+                    +
+
+                    row(
+                        "⏩ Difference: ",
+                        `${formatNumber(absolute)} days after`
+                    )
+                );
+
+            }
+            else if (
+                signed < 0
+            ) {
+
+                html += section(
+                    "⬅️ DATE ORDER",
+
+                    row(
+                        "Status: ",
+                        "Second date comes before first date."
+                    )
+
+                    +
+
+                    row(
+                        "⏪ Difference: ",
+                        `${formatNumber(absolute)} days before`
+                    )
+                );
+
+            }
+            else {
+
+                html += section(
+                    "🟰 SAME DATE",
+
+                    row(
+                        "Status: ",
+                        "Both dates are exactly the same."
+                    )
+                );
+
+            }
+
+
+            /* Today */
+
+            html += section(
+                "📍 TODAY",
+
+                row(
+                    "📅 Today: ",
+                    formatDate(today)
+                )
+
+                +
+
+                row(
+                    "📆 Today is: ",
+                    weekday(today)
+                )
+
+                +
+
+                row(
+                    "🎯 Target Date: ",
+                    formatDate(second)
+                )
+
+                +
+
+                row(
+                    "📆 Target Day: ",
+                    weekday(second)
+                )
+            );
+
+
+            /* Target */
+
+            if (
+                targetIsFuture
+            ) {
+
+                const daysUntil =
+                    Math.floor(
+                        (
+                            second -
+                            today
+                        )
+                        /
+                        86400000
+                    );
+
+
+                const live =
+                    getDhakaMidnightCountdown(
+                        second
+                    );
+
+
+                let countdownHtml = "";
+
+
+                if (live) {
+
+                    countdownHtml = `
+
+                        <div class="live-box">
+
+                            <div
+                                class="live-item"
+                            >
+                                <strong>
+                                    ${live.days}
+                                </strong>
+                                <span>
+                                    Days
+                                </span>
+                            </div>
+
+                            <div
+                                class="live-item"
+                            >
+                                <strong>
+                                    ${live.hours}
+                                </strong>
+                                <span>
+                                    Hours
+                                </span>
+                            </div>
+
+                            <div
+                                class="live-item"
+                            >
+                                <strong>
+                                    ${live.minutes}
+                                </strong>
+                                <span>
+                                    Minutes
+                                </span>
+                            </div>
+
+                            <div
+                                class="live-item"
+                            >
+                                <strong>
+                                    ${live.seconds}
+                                </strong>
+                                <span>
+                                    Seconds
+                                </span>
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                html += section(
+                    "⏳ COUNTDOWN",
+
+                    row(
+                        "🚀 Days remaining: ",
+                        formatNumber(
+                            daysUntil
+                        )
+                    )
+
+                    +
+
+                    `
+                    <div
+                        class="report-row"
+                    >
+                        ⏱ Live Countdown to
+                        <strong>
+                            00:00 Asia/Dhaka
+                        </strong>
+                    </div>
+
+                    ${countdownHtml}
+                    `
+                );
+
+            }
+            else if (
+                targetIsToday
+            ) {
+
+                html += section(
+                    "🎯 TARGET STATUS",
+
+                    `
+                    <div
+                        class="report-row status-good"
+                    >
+                        🔥 The target date
+                        is TODAY!
+                    </div>
+                    `
+                );
+
+            }
+            else {
+
+                const passed =
+                    Math.floor(
+                        (
+                            today -
+                            second
+                        )
+                        /
+                        86400000
+                    );
+
+
+                html += section(
+                    "⏪ TARGET STATUS",
+
+                    row(
+                        "Status: ",
+                        `Target date passed ${formatNumber(passed)} days ago.`
+                    )
+                );
+
+            }
+
+
+            /* Extra */
+
+            html += section(
+                "📊 EXTRA INFORMATION",
+
+                row(
+                    "🐸 Leap Days Between Dates: ",
+                    leapDays
+                )
+
+                +
+
+                row(
+                    "📅 First date day of year: ",
+                    dayOfYear(first)
+                )
+
+                +
+
+                row(
+                    "📅 Second date day of year: ",
+                    dayOfYear(second)
+                )
+
+                +
+
+                row(
+                    `📆 Days Left in ${first.getFullYear()}: `,
+                    daysRemainingInYear(first)
+                )
+
+                +
+
+                row(
+                    `📆 Days Left in ${second.getFullYear()}: `,
+                    daysRemainingInYear(second)
+                )
+
+                +
+
+                row(
+                    "🌎 First Year: ",
+                    first.getFullYear()
+                )
+
+                +
+
+                row(
+                    "🌎 Second Year: ",
+                    second.getFullYear()
+                )
+
+                +
+
+                `
+                <div class="note">
+
+                    Hours, minutes and seconds above
+                    are based on full calendar days.<br>
+
+                    For the live countdown, the target
+                    time is assumed to be 00:00 local time.
+
+                </div>
+                `
+            );
+
+
+            const report =
+                document.getElementById(
+                    "dateReport"
+                );
+
+
+            report.style.display =
+                "block";
+
+
+            report.innerHTML =
+                html;
+
+        }
+
+
+        /* =====================================================
+           DHAKA MIDNIGHT COUNTDOWN
+        ===================================================== */
+
+        function getDhakaMidnightCountdown(
+            targetDate
+        ) {
+
+            const targetUtc =
+                Date.UTC(
+                    targetDate.getFullYear(),
+                    targetDate.getMonth(),
+                    targetDate.getDate(),
+                    0,
+                    0,
+                    0
+                )
+                -
+                (
+                    6 * 60 * 60 * 1000
+                );
+
+
+            const diff =
+                targetUtc -
+                Date.now();
+
+
+            if (
+                diff <= 0
+            ) {
+
+                return null;
+
+            }
+
+
+            let seconds =
+                Math.floor(
+                    diff / 1000
+                );
+
+
+            const days =
+                Math.floor(
+                    seconds / 86400
+                );
+
+
+            seconds %=
+                86400;
+
+
+            const hours =
+                Math.floor(
+                    seconds / 3600
+                );
+
+
+            seconds %=
+                3600;
+
+
+            const minutes =
+                Math.floor(
+                    seconds / 60
+                );
+
+
+            seconds %=
+                60;
+
+
+            return {
+                days,
+                hours,
+                minutes,
+                seconds
+            };
+
+        }
 
 
         /* =====================================================
@@ -3542,18 +6061,18 @@
                         (
                             event.clientX /
                             window.innerWidth
-                            - 0.5
-                        )
-                        * 8;
+                            -
+                            .5
+                        ) * 8;
 
 
                     const y =
                         (
                             event.clientY /
                             window.innerHeight
-                            - 0.5
-                        )
-                        * 8;
+                            -
+                            .5
+                        ) * 8;
 
 
                     orb.style.transform =
@@ -3568,24 +6087,12 @@
         }
 
 
-        /* =====================================================
-           CONSOLE
-        ===================================================== */
-
         console.log(
             "Calculator Universe loaded."
         );
 
         console.log(
-            "Date input: MM/DD/YYYY"
-        );
-
-        console.log(
-            "Developer: @Do_x_Die"
-        );
-
-        console.log(
-            "Telegram Bot: @cracker_team_05_bot"
+            "Bot feature parity mode enabled."
         );
 
     </script>
