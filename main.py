@@ -33,7 +33,7 @@ from date_calculator import (
 
 
 # =========================================================
-# CONFIGURATION
+# CONFIG
 # =========================================================
 
 TOKEN = os.getenv("BOT_TOKEN")
@@ -50,7 +50,6 @@ DEVELOPER_ID = os.getenv("DEVELOPER_ID", "")
 BASE_DIR = Path(__file__).resolve().parent
 WEB_DIR = BASE_DIR / "web"
 
-
 if not TOKEN:
     raise ValueError(
         "BOT_TOKEN environment variable is missing!"
@@ -58,7 +57,7 @@ if not TOKEN:
 
 
 # =========================================================
-# MAIN KEYBOARD
+# MENU
 # =========================================================
 
 START_BUTTON = "🏠 Start"
@@ -78,81 +77,51 @@ MAIN_MARKUP = ReplyKeyboardMarkup(
 
 
 # =========================================================
-# START COMMAND
+# START
 # =========================================================
 
-async def start_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    context.user_data.pop(
-        "date_calc_state",
-        None
-    )
+async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-    context.user_data.pop(
-        "date_calc_first_date",
-        None
-    )
-
-    context.user_data.pop(
-        "date_calc_second_date",
-        None
-    )
+    context.user_data.pop("date_calc_state", None)
+    context.user_data.pop("date_calc_first_date", None)
+    context.user_data.pop("date_calc_second_date", None)
 
     await update.message.reply_text(
         "🚀 Welcome to Calculator Universe!\n\n"
         "🎂 Birthday Calculator\n"
         "📆 Date Difference Calculator\n\n"
-        "Choose a calculator from the menu below.",
+        "Choose an option below.",
         reply_markup=MAIN_MARKUP
     )
 
 
 # =========================================================
-# HELP COMMAND
+# HELP
 # =========================================================
 
-async def help_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
     await update.message.reply_text(
         "📚 Help\n\n"
-        "/start - Open main menu\n"
-        "/help - Show help\n"
-        "/cancel - Cancel current calculation\n\n"
-        "Use the buttons below to start a calculator.",
+        "/start - Main menu\n"
+        "/help - Help\n"
+        "/cancel - Cancel calculation",
         reply_markup=MAIN_MARKUP
     )
 
 
 # =========================================================
-# CANCEL COMMAND
+# CANCEL
 # =========================================================
 
-async def cancel_command(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    context.user_data.pop(
-        "date_calc_state",
-        None
-    )
+async def cancel_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-    context.user_data.pop(
-        "date_calc_first_date",
-        None
-    )
-
-    context.user_data.pop(
-        "date_calc_second_date",
-        None
-    )
+    context.user_data.pop("date_calc_state", None)
+    context.user_data.pop("date_calc_first_date", None)
+    context.user_data.pop("date_calc_second_date", None)
 
     await update.message.reply_text(
-        "❌ Current calculation cancelled.\n\n"
-        "You are back in the main menu.",
+        "❌ Calculation cancelled.",
         reply_markup=MAIN_MARKUP
     )
 
@@ -165,11 +134,8 @@ async def developer_handler(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
 ):
-    developer_id = (
-        DEVELOPER_ID
-        if DEVELOPER_ID
-        else "Not provided"
-    )
+
+    developer_id = DEVELOPER_ID or "Not provided"
 
     await update.message.reply_text(
         "👨‍💻 DEVELOPER\n\n"
@@ -190,50 +156,44 @@ async def text_router(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
 ):
+
     if not update.message:
         return
 
     text = update.message.text
 
-    # Main menu
     if text == START_BUTTON:
         await start_command(update, context)
         return
 
-    # Birthday Calculator
     if text == BIRTHDAY_BUTTON:
         await birthday_start(update, context)
         return
 
-    # Date Difference Calculator
     if text == DATE_CALCULATOR_BUTTON:
         await date_calculator_start(update, context)
         return
 
-    # Developer
     if text == DEVELOPER_BUTTON:
         await developer_handler(update, context)
         return
 
-    # Date calculator active state
     if is_date_calculator_active(context):
         await date_calculator_handler(update, context)
         return
 
-    # Birthday calculator fallback
     await birthday_message_handler(update, context)
 
 
 # =========================================================
-# TELEGRAM MENU BUTTON
+# TELEGRAM WEB APP MENU
 # =========================================================
 
-async def setup_bot_menu(
-    application: Application
-):
+async def setup_bot_menu(application: Application):
+
     await application.bot.set_chat_menu_button(
         menu_button=MenuButtonWebApp(
-            text="🌐 Open / Wake Bot",
+            text="🌐 Open Website",
             web_app=WebAppInfo(
                 url=RENDER_URL
             )
@@ -242,28 +202,24 @@ async def setup_bot_menu(
 
 
 # =========================================================
-# WEBSITE SERVER
+# WEB SERVER
 # =========================================================
 
-class HealthHandler(BaseHTTPRequestHandler):
+class WebHandler(BaseHTTPRequestHandler):
 
     def log_message(self, format, *args):
-        # Keep Render logs clean
         return
 
-    def send_file(
-        self,
-        file_path: Path,
-        content_type: str
-    ):
-        if not file_path.exists() or not file_path.is_file():
-            self.send_error(
-                404,
-                "File not found"
-            )
+    def serve_file(self, filename, content_type):
+
+        file_path = WEB_DIR / filename
+
+        if not file_path.exists():
+            self.send_error(404, "File not found")
             return
 
         try:
+
             data = file_path.read_bytes()
 
             self.send_response(200)
@@ -280,7 +236,7 @@ class HealthHandler(BaseHTTPRequestHandler):
 
             self.send_header(
                 "Cache-Control",
-                "no-cache"
+                "no-cache, no-store, must-revalidate"
             )
 
             self.end_headers()
@@ -290,60 +246,43 @@ class HealthHandler(BaseHTTPRequestHandler):
         except Exception:
             self.send_error(
                 500,
-                "Internal Server Error"
+                "Internal server error"
             )
 
     def do_GET(self):
 
-        parsed_url = urlparse(self.path)
-        path = parsed_url.path
-
-        # -------------------------------------------------
-        # HOME PAGE
-        # -------------------------------------------------
+        path = urlparse(self.path).path
 
         if path in ["/", "/index.html"]:
 
-            self.send_file(
-                WEB_DIR / "index.html",
+            self.serve_file(
+                "index.html",
                 "text/html; charset=utf-8"
             )
 
             return
 
-        # -------------------------------------------------
-        # CSS
-        # -------------------------------------------------
-
         if path == "/style.css":
 
-            self.send_file(
-                WEB_DIR / "style.css",
+            self.serve_file(
+                "style.css",
                 "text/css; charset=utf-8"
             )
 
             return
 
-        # -------------------------------------------------
-        # JAVASCRIPT
-        # -------------------------------------------------
-
         if path == "/script.js":
 
-            self.send_file(
-                WEB_DIR / "script.js",
+            self.serve_file(
+                "script.js",
                 "application/javascript; charset=utf-8"
             )
 
             return
 
-        # -------------------------------------------------
-        # HEALTH CHECK
-        # -------------------------------------------------
-
         if path == "/health":
 
-            response = b"OK"
+            data = b"OK"
 
             self.send_response(200)
 
@@ -354,30 +293,26 @@ class HealthHandler(BaseHTTPRequestHandler):
 
             self.send_header(
                 "Content-Length",
-                str(len(response))
+                str(len(data))
             )
 
             self.end_headers()
 
-            self.wfile.write(response)
+            self.wfile.write(data)
 
             return
 
-        # -------------------------------------------------
-        # 404
-        # -------------------------------------------------
-
         self.send_error(
             404,
-            "Page not found"
+            "Not Found"
         )
 
 
 # =========================================================
-# RUN WEBSITE SERVER
+# WEB SERVER THREAD
 # =========================================================
 
-def run_health_server():
+def run_web_server():
 
     port = int(
         os.getenv(
@@ -388,11 +323,11 @@ def run_health_server():
 
     server = HTTPServer(
         ("0.0.0.0", port),
-        HealthHandler
+        WebHandler
     )
 
     print(
-        f"🌐 Website server running on port {port}"
+        f"🌐 Website running on port {port}"
     )
 
     server.serve_forever()
@@ -404,17 +339,13 @@ def run_health_server():
 
 def main():
 
-    print("🚀 Starting Calculator Universe...")
-    print(
-        f"🌐 Website: {RENDER_URL}"
-    )
-    print(
-        f"🤖 Telegram: @cracker_team_05_bot"
-    )
-
-    # ---------------------------------------------
-    # Telegram Application
-    # ---------------------------------------------
+    print("================================")
+    print("🚀 CALCULATOR UNIVERSE")
+    print("================================")
+    print(f"🌐 Website: {RENDER_URL}")
+    print("🤖 Bot: @cracker_team_05_bot")
+    print("👨‍💻 Developer: @Do_x_Die")
+    print("================================")
 
     application = (
         Application.builder()
@@ -422,10 +353,6 @@ def main():
         .post_init(setup_bot_menu)
         .build()
     )
-
-    # ---------------------------------------------
-    # Commands
-    # ---------------------------------------------
 
     application.add_handler(
         CommandHandler(
@@ -448,10 +375,6 @@ def main():
         )
     )
 
-    # ---------------------------------------------
-    # Text Messages
-    # ---------------------------------------------
-
     application.add_handler(
         MessageHandler(
             filters.TEXT & ~filters.COMMAND,
@@ -459,31 +382,19 @@ def main():
         )
     )
 
-    # ---------------------------------------------
-    # Website / Health Server
-    # ---------------------------------------------
-
-    server_thread = threading.Thread(
-        target=run_health_server,
+    web_thread = threading.Thread(
+        target=run_web_server,
         daemon=True
     )
 
-    server_thread.start()
+    web_thread.start()
 
-    # ---------------------------------------------
-    # Start Telegram Bot
-    # ---------------------------------------------
-
-    print("🤖 Telegram bot is starting...")
+    print("🤖 Starting Telegram polling...")
 
     application.run_polling(
         allowed_updates=Update.ALL_TYPES
     )
 
-
-# =========================================================
-# ENTRY POINT
-# =========================================================
 
 if __name__ == "__main__":
     main()
