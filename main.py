@@ -44,7 +44,7 @@ RENDER_URL = os.getenv(
 )
 
 DEVELOPER_NAME = "MASTERMIND"
-DEVELOPER_USERNAME = "@Do*x*Die"
+DEVELOPER_USERNAME = "@Do_x_Die"
 DEVELOPER_ID = os.getenv("DEVELOPER_ID", "")
 
 BASE_DIR = Path(__file__).resolve().parent
