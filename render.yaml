@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: birthday-calculator-bot
+    runtime: python
+    plan: free
+
+    buildCommand: pip install -r requirements.txt
+
+    startCommand: python main.py
+
+    envVars:
+      - key: TOKEN
+        sync: false
+
+      - key: DEVELOPER_ID
+        sync: false
+
+      - key: DEVELOPER_USERNAME
+        value: "@Do*x*Die"
+
+      - key: TIMEZONE
+        value: "Asia/Dhaka"
