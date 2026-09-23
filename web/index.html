@@ -2,26 +2,823 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
         name="description"
-        content="Calculator Universe by MASTERMIND — Birthday, Date Difference, Countdown and Life Statistics."
+        content="Calculator Universe by MASTERMIND"
     >
 
-    <meta name="theme-color" content="#020307">
+    <meta
+        name="theme-color"
+        content="#020307"
+    >
 
     <title>Calculator Universe — MASTERMIND</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #020307;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: -10;
+            background: #020307;
+        }
+
+        .glow {
+            position: absolute;
+            width: 550px;
+            height: 550px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: .15;
+        }
+
+        .glow-red {
+            background: #ff174f;
+            top: -250px;
+            left: -200px;
+            animation: floatGlow 8s ease-in-out infinite;
+        }
+
+        .glow-blue {
+            background: #168cff;
+            right: -200px;
+            bottom: -300px;
+            animation: floatGlow 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatGlow {
+            0%,100% {
+                transform: translate(0,0);
+            }
+
+            50% {
+                transform: translate(70px,45px);
+            }
+        }
+
+        .grid {
+            position: absolute;
+            inset: 0;
+            opacity: .12;
+            background-image:
+                linear-gradient(
+                    rgba(22,140,255,.25) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,23,79,.20) 1px,
+                    transparent 1px
+                );
+            background-size: 55px 55px;
+            transform:
+                perspective(500px)
+                rotateX(60deg)
+                translateY(30%);
+        }
+
+        #particles {
+            position: absolute;
+            inset: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: .6;
+            animation: particleMove 8s linear infinite;
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translateY(30px);
+            }
+
+            50% {
+                transform: translateY(-60px);
+            }
+
+            100% {
+                transform: translateY(30px);
+            }
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            background: rgba(2,3,7,.78);
+            backdrop-filter: blur(16px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff174f,
+                    #fff,
+                    #168cff
+                );
+
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: .25s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-button {
+            border: 1px solid rgba(22,140,255,.4);
+            background: rgba(22,140,255,.08);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        .nav-button:hover {
+            background: rgba(22,140,255,.18);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 110px 20px 70px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            color: #999;
+            font-size: 12px;
+            letter-spacing: 3px;
+
+            margin-bottom: 28px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ff174f;
+
+            box-shadow:
+                0 0 8px #ff174f,
+                0 0 20px #ff174f;
+
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            50% {
+                opacity: .35;
+                transform: scale(.65);
+            }
+        }
+
+        .orb {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 28px;
+        }
+
+        .orb-core {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+
+            width: 100px;
+            height: 100px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #fff,
+                    #168cff 25%,
+                    #07182d 60%,
+                    #020307 100%
+                );
+
+            box-shadow:
+                0 0 30px #168cff,
+                0 0 80px rgba(22,140,255,.45);
+        }
+
+        .orb-ring {
+            position: absolute;
+            inset: 10px;
+
+            border: 2px solid transparent;
+            border-top-color: #ff174f;
+            border-right-color: #168cff;
+            border-radius: 50%;
+
+            animation: spin 4s linear infinite;
+        }
+
+        .orb-ring.two {
+            inset: -3px;
+
+            border-top-color: #168cff;
+            border-right-color: #ff174f;
+
+            animation-duration: 6s;
+            animation-direction: reverse;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .welcome {
+            font-size: 13px;
+            letter-spacing: 5px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px,8vw,92px);
+            line-height: .95;
+            font-weight: 900;
+            letter-spacing: -4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #fff,
+                    #ff174f,
+                    #168cff,
+                    #fff
+                );
+
+            background-size: 300%;
+
+            -webkit-background-clip: text;
+            color: transparent;
+
+            animation: gradientMove 7s linear infinite;
+        }
+
+        .hero h1 span {
+            display: block;
+        }
+
+        @keyframes gradientMove {
+            to {
+                background-position: 300%;
+            }
+        }
+
+        .hero-text {
+            max-width: 650px;
+            margin: 28px auto;
+
+            color: #888;
+            line-height: 1.7;
+        }
+
+        .hero-button {
+            display: inline-block;
+
+            padding: 15px 25px;
+
+            color: #fff;
+            text-decoration: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff174f,
+                    #168cff
+                );
+
+            box-shadow:
+                0 0 25px rgba(255,23,79,.16),
+                0 0 25px rgba(22,140,255,.16);
+        }
+
+        .hero-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        .section {
+            padding: 100px 6%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title small {
+            color: #ff174f;
+            letter-spacing: 4px;
+        }
+
+        .section-title h2 {
+            margin-top: 10px;
+            font-size: clamp(30px,5vw,48px);
+        }
+
+        .section-title p {
+            margin-top: 12px;
+            color: #777;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .cards {
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 20px;
+        }
+
+        .card {
+            position: relative;
+
+            min-height: 260px;
+
+            padding: 28px;
+
+            text-align: left;
+
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 18px;
+
+            background: rgba(255,255,255,.035);
+
+            color: #fff;
+
+            cursor: pointer;
+
+            transition:
+                transform .3s,
+                border-color .3s,
+                box-shadow .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+
+            border-color:
+                rgba(22,140,255,.4);
+
+            box-shadow:
+                0 15px 45px rgba(0,0,0,.35),
+                0 0 30px rgba(22,140,255,.10);
+        }
+
+        .card-icon {
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+
+        .card-number {
+            position: absolute;
+            top: 22px;
+            right: 25px;
+            color: #555;
+            font-size: 12px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 21px;
+        }
+
+        .card p {
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .card span {
+            color: #168cff;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about-box {
+            max-width: 850px;
+            margin: auto;
+
+            padding: 45px;
+
+            text-align: center;
+
+            background: rgba(255,255,255,.035);
+
+            border:
+                1px solid rgba(255,255,255,.08);
+
+            border-radius: 22px;
+        }
+
+        .about-box small {
+            color: #ff174f;
+            letter-spacing: 4px;
+        }
+
+        .about-box h2 {
+            margin: 12px 0 18px;
+            font-size: clamp(30px,5vw,48px);
+        }
+
+        .about-box h2 span {
+            color: #168cff;
+        }
+
+        .about-box p {
+            color: #888;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .developer-link {
+            color: #168cff;
+            text-decoration: none;
+        }
+
+        .developer-link:hover {
+            text-decoration: underline;
+        }
+
+        .telegram-button {
+            margin-top: 10px;
+
+            border: 0;
+            border-radius: 10px;
+
+            padding: 13px 18px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff174f,
+                    #168cff
+                );
+
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 35px 20px;
+            text-align: center;
+
+            border-top:
+                1px solid rgba(255,255,255,.06);
+
+            color: #555;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        footer p {
+            margin-top: 8px;
+            color: #333;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 18px;
+
+            background: rgba(0,0,0,.82);
+
+            backdrop-filter: blur(10px);
+
+            z-index: 999;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            position: relative;
+
+            width: 100%;
+            max-width: 520px;
+
+            max-height: 90vh;
+            overflow-y: auto;
+
+            padding: 30px;
+
+            background: #080a10;
+
+            border:
+                1px solid rgba(22,140,255,.25);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 0 60px rgba(0,0,0,.7);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+
+            width: 36px;
+            height: 36px;
+
+            border: 0;
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.08);
+
+            color: white;
+
+            font-size: 24px;
+
+            cursor: pointer;
+        }
+
+        .modal-box h2 {
+            margin-bottom: 22px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .form label {
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        .input {
+            width: 100%;
+
+            padding: 13px;
+
+            background: #03050a;
+
+            color: #fff;
+
+            border:
+                1px solid rgba(255,255,255,.10);
+
+            border-radius: 10px;
+
+            outline: none;
+        }
+
+        .input:focus {
+            border-color: #168cff;
+        }
+
+        .calc-button {
+            border: 0;
+
+            padding: 13px;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff174f,
+                    #168cff
+                );
+
+            color: #fff;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .result {
+            margin-top: 15px;
+        }
+
+        .result-box {
+            padding: 18px;
+
+            background: rgba(255,255,255,.04);
+
+            border:
+                1px solid rgba(255,255,255,.08);
+
+            border-radius: 14px;
+
+            line-height: 1.8;
+        }
+
+        .result-box h3 {
+            color: #168cff;
+            margin-bottom: 10px;
+        }
+
+        .result-box hr {
+            border: 0;
+            border-top:
+                1px solid rgba(255,255,255,.08);
+            margin: 12px 0;
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .countdown-item {
+            padding: 14px;
+            text-align: center;
+            background: rgba(255,255,255,.05);
+            border-radius: 10px;
+        }
+
+        .countdown-item strong {
+            display: block;
+            font-size: 28px;
+        }
+
+        .countdown-item span {
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .cards {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 620px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .nav-button {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+                letter-spacing: -3px;
+            }
+
+            .orb {
+                transform: scale(.84);
+                margin-bottom: 3px;
+            }
+
+            .section {
+                padding: 80px 5%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .about-box {
+                padding: 28px 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Background Effects -->
     <div class="background">
         <div class="glow glow-red"></div>
         <div class="glow glow-blue"></div>
@@ -30,331 +827,354 @@
     </div>
 
 
-    <!-- Top Navigation -->
+    <!-- NAVBAR -->
+
     <header class="navbar">
 
-        <div class="brand">
-            <div class="brand-orb"></div>
-
-            <div class="brand-text">
-                <span class="brand-name">MASTERMIND</span>
-                <span class="brand-subtitle">CALCULATOR UNIVERSE</span>
-            </div>
+        <div class="logo">
+            MASTERMIND
         </div>
 
-        <button
-            class="menu-button"
-            id="menuButton"
-            aria-label="Open menu"
-        >
-            ☰
-        </button>
-
-        <nav class="nav-links" id="navLinks">
+        <nav class="nav-links">
             <a href="#home">Home</a>
             <a href="#calculators">Calculators</a>
             <a href="#about">About</a>
         </nav>
 
+        <button
+            class="nav-button"
+            id="telegramNav"
+        >
+            🤖 Telegram
+        </button>
+
     </header>
 
 
-    <!-- Main Content -->
-    <main>
-
-        <!-- Hero Section -->
-        <section class="hero" id="home">
-
-            <div class="status">
-                <span class="status-dot"></span>
-                SYSTEM ONLINE
-            </div>
-
-            <div class="hero-orb">
-                <div class="orb-core"></div>
-                <div class="orb-ring ring-one"></div>
-                <div class="orb-ring ring-two"></div>
-                <div class="orb-ring ring-three"></div>
-            </div>
-
-            <p class="hero-label">WELCOME TO</p>
-
-            <h1>
-                CALCULATOR
-                <span>UNIVERSE</span>
-            </h1>
-
-            <p class="hero-description">
-                Powerful calculators for your age, birthdays,
-                dates, countdowns and life statistics.
-            </p>
-
-            <div class="hero-buttons">
-                <a href="#calculators" class="primary-button">
-                    EXPLORE CALCULATORS
-                </a>
-
-                <a href="#about" class="secondary-button">
-                    ABOUT PROJECT
-                </a>
-            </div>
-
-            <div class="energy-line"></div>
-
-        </section>
-
-
-        <!-- Calculator Section -->
-        <section class="calculators" id="calculators">
-
-            <div class="section-heading">
-                <span>TOOLS</span>
-                <h2>Choose Your Calculator</h2>
-                <p>
-                    Select a tool and start calculating.
-                </p>
-            </div>
-
-
-            <div class="calculator-grid">
-
-                <!-- Birthday -->
-                <article
-                    class="calculator-card"
-                    data-tool="birthday"
-                >
-                    <div class="card-icon">🎂</div>
-
-                    <div class="card-content">
-                        <span class="card-number">01</span>
-
-                        <h3>Birthday Calculator</h3>
-
-                        <p>
-                            Calculate your exact age,
-                            next birthday and countdown.
-                        </p>
-
-                        <button class="card-button">
-                            OPEN
-                            <span>→</span>
-                        </button>
-                    </div>
-                </article>
-
-
-                <!-- Date Difference -->
-                <article
-                    class="calculator-card"
-                    data-tool="date-difference"
-                >
-                    <div class="card-icon">📆</div>
-
-                    <div class="card-content">
-                        <span class="card-number">02</span>
-
-                        <h3>Date Difference</h3>
-
-                        <p>
-                            Find the exact difference between
-                            two dates.
-                        </p>
-
-                        <button class="card-button">
-                            OPEN
-                            <span>→</span>
-                        </button>
-                    </div>
-                </article>
-
-
-                <!-- Countdown -->
-                <article
-                    class="calculator-card"
-                    data-tool="countdown"
-                >
-                    <div class="card-icon">⏳</div>
-
-                    <div class="card-content">
-                        <span class="card-number">03</span>
-
-                        <h3>Countdown</h3>
-
-                        <p>
-                            Create a live countdown to
-                            your important date.
-                        </p>
-
-                        <button class="card-button">
-                            OPEN
-                            <span>→</span>
-                        </button>
-                    </div>
-                </article>
-
-
-                <!-- Life Statistics -->
-                <article
-                    class="calculator-card"
-                    data-tool="life-statistics"
-                >
-                    <div class="card-icon">📊</div>
-
-                    <div class="card-content">
-                        <span class="card-number">04</span>
-
-                        <h3>Life Statistics</h3>
-
-                        <p>
-                            Explore detailed statistics
-                            based on your age.
-                        </p>
-
-                        <button class="card-button">
-                            OPEN
-                            <span>→</span>
-                        </button>
-                    </div>
-                </article>
-
-
-                <!-- Age Milestones -->
-                <article
-                    class="calculator-card"
-                    data-tool="milestones"
-                >
-                    <div class="card-icon">🎯</div>
-
-                    <div class="card-content">
-                        <span class="card-number">05</span>
-
-                        <h3>Age Milestones</h3>
-
-                        <p>
-                            Discover important future
-                            age milestones.
-                        </p>
-
-                        <button class="card-button">
-                            OPEN
-                            <span>→</span>
-                        </button>
-                    </div>
-                </article>
-
-
-                <!-- Telegram -->
-                <article
-                    class="calculator-card telegram-card"
-                    data-tool="telegram"
-                >
-                    <div class="card-icon">🤖</div>
-
-                    <div class="card-content">
-                        <span class="card-number">06</span>
-
-                        <h3>Telegram Bot</h3>
-
-                        <p>
-                            Use Calculator Universe directly
-                            through Telegram.
-                        </p>
-
-                        <button class="card-button">
-                            OPEN
-                            <span>→</span>
-                        </button>
-                    </div>
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- About Section -->
-        <section class="about" id="about">
-
-            <div class="about-panel">
-
-                <div class="about-icon">
-                    ⚡
-                </div>
-
-                <div class="about-content">
-
-                    <span class="section-label">
-                        ABOUT
-                    </span>
-
-                    <h2>
-                        Built by
-                        <span>MASTERMIND</span>
-                    </h2>
-
-                    <p>
-                        Calculator Universe is a collection
-                        of useful date and age calculation tools,
-                        designed with a modern futuristic interface.
-                    </p>
-
-                    <div class="developer-info">
-
-                        <div>
-                            <span>DEVELOPER</span>
-                            <strong>MASTERMIND</strong>
-                        </div>
-
-                        <div>
-                            <span>TELEGRAM</span>
-                            <strong>@Do_x_Die</strong>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- Footer -->
-    <footer class="footer">
-
-        <div class="footer-line"></div>
-
-        <p>
-            CALCULATOR UNIVERSE
+    <!-- HERO -->
+
+    <section
+        class="hero"
+        id="home"
+    >
+
+        <div class="status">
+            <span class="status-dot"></span>
+            SYSTEM ONLINE
+        </div>
+
+        <div class="orb">
+
+            <div class="orb-ring"></div>
+            <div class="orb-ring two"></div>
+            <div class="orb-core"></div>
+
+        </div>
+
+        <div class="welcome">
+            WELCOME TO
+        </div>
+
+        <h1>
+            CALCULATOR
+            <span>UNIVERSE</span>
+        </h1>
+
+        <p class="hero-text">
+            Powerful calculators for your age,
+            birthdays, dates, countdowns and
+            life statistics.
         </p>
 
-        <span>
+        <a
+            class="hero-button"
+            href="#calculators"
+        >
+            EXPLORE CALCULATORS
+        </a>
+
+    </section>
+
+
+    <!-- CALCULATORS -->
+
+    <section
+        class="section"
+        id="calculators"
+    >
+
+        <div class="section-title">
+
+            <small>TOOLS</small>
+
+            <h2>
+                Choose Your Calculator
+            </h2>
+
+            <p>
+                Select a tool and start calculating.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <button
+                class="card"
+                data-tool="birthday"
+            >
+
+                <div class="card-icon">
+                    🎂
+                </div>
+
+                <div class="card-number">
+                    01
+                </div>
+
+                <h3>
+                    Birthday Calculator
+                </h3>
+
+                <p>
+                    Calculate your exact age
+                    in years, months and days.
+                </p>
+
+                <span>
+                    OPEN →
+                </span>
+
+            </button>
+
+
+            <button
+                class="card"
+                data-tool="difference"
+            >
+
+                <div class="card-icon">
+                    📆
+                </div>
+
+                <div class="card-number">
+                    02
+                </div>
+
+                <h3>
+                    Date Difference
+                </h3>
+
+                <p>
+                    Find the exact difference
+                    between two dates.
+                </p>
+
+                <span>
+                    OPEN →
+                </span>
+
+            </button>
+
+
+            <button
+                class="card"
+                data-tool="countdown"
+            >
+
+                <div class="card-icon">
+                    ⏳
+                </div>
+
+                <div class="card-number">
+                    03
+                </div>
+
+                <h3>
+                    Countdown
+                </h3>
+
+                <p>
+                    Create a live countdown
+                    to any date and time.
+                </p>
+
+                <span>
+                    OPEN →
+                </span>
+
+            </button>
+
+
+            <button
+                class="card"
+                data-tool="statistics"
+            >
+
+                <div class="card-icon">
+                    📊
+                </div>
+
+                <div class="card-number">
+                    04
+                </div>
+
+                <h3>
+                    Life Statistics
+                </h3>
+
+                <p>
+                    See your days, hours,
+                    minutes and seconds.
+                </p>
+
+                <span>
+                    OPEN →
+                </span>
+
+            </button>
+
+
+            <button
+                class="card"
+                data-tool="milestones"
+            >
+
+                <div class="card-icon">
+                    🎯
+                </div>
+
+                <div class="card-number">
+                    05
+                </div>
+
+                <h3>
+                    Age Milestones
+                </h3>
+
+                <p>
+                    Check important future
+                    age milestones.
+                </p>
+
+                <span>
+                    OPEN →
+                </span>
+
+            </button>
+
+
+            <button
+                class="card"
+                data-tool="telegram"
+            >
+
+                <div class="card-icon">
+                    🤖
+                </div>
+
+                <div class="card-number">
+                    06
+                </div>
+
+                <h3>
+                    Telegram Bot
+                </h3>
+
+                <p>
+                    Open Calculator Universe
+                    directly in Telegram.
+                </p>
+
+                <span>
+                    OPEN →
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section
+        class="section"
+        id="about"
+    >
+
+        <div class="about-box">
+
+            <small>ABOUT</small>
+
+            <h2>
+                Built by
+                <span>MASTERMIND</span>
+            </h2>
+
+            <p>
+                Calculator Universe is a collection
+                of modern date and age calculation tools.
+            </p>
+
+            <p>
+                👨‍💻 Developer:
+                <a
+                    class="developer-link"
+                    href="https://t.me/Do_x_Die"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    @Do_x_Die
+                </a>
+            </p>
+
+            <button
+                class="telegram-button"
+                id="telegramAbout"
+            >
+                🤖 OPEN TELEGRAM BOT
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        CALCULATOR UNIVERSE
+
+        <p>
             POWERED BY MASTERMIND
-        </span>
+        </p>
 
     </footer>
 
 
-    <!-- Calculator Modal -->
+    <!-- MODAL -->
+
     <div
         class="modal"
-        id="calculatorModal"
-        aria-hidden="true"
+        id="modal"
     >
-
-        <div class="modal-overlay" id="modalOverlay"></div>
 
         <div class="modal-box">
 
             <button
                 class="modal-close"
-                id="modalClose"
-                aria-label="Close"
+                id="closeModal"
             >
                 ×
             </button>
+
+            <h2 id="modalTitle">
+                Calculator
+            </h2>
 
             <div id="modalContent"></div>
 
@@ -363,11 +1183,1244 @@
     </div>
 
 
-    <!-- Scan Line -->
-    <div class="scan-line"></div>
+    <script>
+
+        "use strict";
 
 
-    <script src="script.js"></script>
+        /* =========================================
+           TELEGRAM
+        ========================================= */
+
+        const telegramBotUrl =
+            "https://t.me/cracker_team_05_bot";
+
+
+        function openTelegram() {
+
+            window.open(
+                telegramBotUrl,
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        }
+
+
+        document
+            .getElementById("telegramNav")
+            .addEventListener(
+                "click",
+                openTelegram
+            );
+
+
+        document
+            .getElementById("telegramAbout")
+            .addEventListener(
+                "click",
+                openTelegram
+            );
+
+
+        /* =========================================
+           PARTICLES
+        ========================================= */
+
+        const particles =
+            document.getElementById("particles");
+
+        for (
+            let i = 0;
+            i < (
+                window.innerWidth < 650
+                    ? 30
+                    : 60
+            );
+            i++
+        ) {
+
+            const particle =
+                document.createElement("span");
+
+            particle.className =
+                "particle";
+
+            particle.style.left =
+                Math.random() * 100 + "%";
+
+            particle.style.top =
+                Math.random() * 100 + "%";
+
+            particle.style.animationDelay =
+                Math.random() * 8 + "s";
+
+            particle.style.animationDuration =
+                5 + Math.random() * 8 + "s";
+
+            particles.appendChild(
+                particle
+            );
+
+        }
+
+
+        /* =========================================
+           MODAL
+        ========================================= */
+
+        const modal =
+            document.getElementById("modal");
+
+        const modalTitle =
+            document.getElementById("modalTitle");
+
+        const modalContent =
+            document.getElementById(
+                "modalContent"
+            );
+
+        const closeModalButton =
+            document.getElementById(
+                "closeModal"
+            );
+
+
+        function showModal(
+            title,
+            content
+        ) {
+
+            modalTitle.textContent =
+                title;
+
+            modalContent.innerHTML =
+                content;
+
+            modal.classList.add(
+                "show"
+            );
+
+        }
+
+
+        function closeModal() {
+
+            modal.classList.remove(
+                "show"
+            );
+
+        }
+
+
+        closeModalButton.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        modal.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target === modal
+                ) {
+                    closeModal();
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+                    closeModal();
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           HELPERS
+        ========================================= */
+
+        function parseDate(value) {
+
+            return new Date(
+                value + "T00:00:00"
+            );
+
+        }
+
+
+        function formatDate(date) {
+
+            return date.toLocaleDateString(
+                "en-US",
+                {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }
+            );
+
+        }
+
+
+        function getAge(birthDate) {
+
+            const today =
+                new Date();
+
+            let years =
+                today.getFullYear()
+                - birthDate.getFullYear();
+
+            let months =
+                today.getMonth()
+                - birthDate.getMonth();
+
+            let days =
+                today.getDate()
+                - birthDate.getDate();
+
+
+            if (days < 0) {
+
+                months--;
+
+                const lastMonth =
+                    new Date(
+                        today.getFullYear(),
+                        today.getMonth(),
+                        0
+                    );
+
+                days +=
+                    lastMonth.getDate();
+
+            }
+
+
+            if (months < 0) {
+
+                years--;
+                months += 12;
+
+            }
+
+
+            return {
+                years,
+                months,
+                days
+            };
+
+        }
+
+
+        /* =========================================
+           BIRTHDAY
+        ========================================= */
+
+        function birthdayCalculator() {
+
+            showModal(
+                "🎂 Birthday Calculator",
+
+                `
+                <div class="form">
+
+                    <label>
+                        Enter your birthday
+                    </label>
+
+                    <input
+                        type="date"
+                        id="birthDate"
+                        class="input"
+                    >
+
+                    <button
+                        class="calc-button"
+                        id="birthCalculate"
+                    >
+                        Calculate Age
+                    </button>
+
+                    <div
+                        class="result"
+                        id="birthResult"
+                    ></div>
+
+                </div>
+                `
+            );
+
+
+            document
+                .getElementById(
+                    "birthCalculate"
+                )
+                .addEventListener(
+                    "click",
+                    function() {
+
+                        const value =
+                            document.getElementById(
+                                "birthDate"
+                            ).value;
+
+                        const result =
+                            document.getElementById(
+                                "birthResult"
+                            );
+
+
+                        if (!value) {
+
+                            result.innerHTML =
+                                "⚠️ Please select your birthday.";
+
+                            return;
+
+                        }
+
+
+                        const birthday =
+                            parseDate(value);
+
+                        const now =
+                            new Date();
+
+
+                        if (
+                            birthday > now
+                        ) {
+
+                            result.innerHTML =
+                                "⚠️ Birthday cannot be in the future.";
+
+                            return;
+
+                        }
+
+
+                        const age =
+                            getAge(
+                                birthday
+                            );
+
+
+                        const totalDays =
+                            Math.floor(
+                                (
+                                    now -
+                                    birthday
+                                ) /
+                                (
+                                    1000 *
+                                    60 *
+                                    60 *
+                                    24
+                                )
+                            );
+
+
+                        result.innerHTML = `
+
+                            <div class="result-box">
+
+                                <h3>
+                                    🎉 Your Age
+                                </h3>
+
+                                <p>
+                                    <strong>
+                                        ${age.years}
+                                        Years
+                                        ${age.months}
+                                        Months
+                                        ${age.days}
+                                        Days
+                                    </strong>
+                                </p>
+
+                                <p>
+                                    🎂 Born:
+                                    ${formatDate(birthday)}
+                                </p>
+
+                                <p>
+                                    📅 Total Days:
+                                    ${totalDays.toLocaleString()}
+                                </p>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+        }
+
+
+        /* =========================================
+           DATE DIFFERENCE
+        ========================================= */
+
+        function differenceCalculator() {
+
+            showModal(
+                "📆 Date Difference",
+
+                `
+                <div class="form">
+
+                    <label>
+                        First Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="date1"
+                        class="input"
+                    >
+
+                    <label>
+                        Second Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="date2"
+                        class="input"
+                    >
+
+                    <button
+                        class="calc-button"
+                        id="differenceCalculate"
+                    >
+                        Calculate Difference
+                    </button>
+
+                    <div
+                        class="result"
+                        id="differenceResult"
+                    ></div>
+
+                </div>
+                `
+            );
+
+
+            document
+                .getElementById(
+                    "differenceCalculate"
+                )
+                .addEventListener(
+                    "click",
+                    function() {
+
+                        const first =
+                            document.getElementById(
+                                "date1"
+                            ).value;
+
+                        const second =
+                            document.getElementById(
+                                "date2"
+                            ).value;
+
+                        const result =
+                            document.getElementById(
+                                "differenceResult"
+                            );
+
+
+                        if (
+                            !first ||
+                            !second
+                        ) {
+
+                            result.innerHTML =
+                                "⚠️ Please select both dates.";
+
+                            return;
+
+                        }
+
+
+                        const d1 =
+                            parseDate(first);
+
+                        const d2 =
+                            parseDate(second);
+
+
+                        const difference =
+                            Math.abs(
+                                d2 - d1
+                            );
+
+
+                        const days =
+                            Math.floor(
+                                difference /
+                                (
+                                    1000 *
+                                    60 *
+                                    60 *
+                                    24
+                                )
+                            );
+
+
+                        const weeks =
+                            Math.floor(
+                                days / 7
+                            );
+
+                        const remainingDays =
+                            days % 7;
+
+
+                        result.innerHTML = `
+
+                            <div class="result-box">
+
+                                <h3>
+                                    📊 Difference
+                                </h3>
+
+                                <p>
+                                    ${formatDate(d1)}
+                                </p>
+
+                                <p>
+                                    ${formatDate(d2)}
+                                </p>
+
+                                <hr>
+
+                                <p>
+                                    <strong>
+                                        ${days.toLocaleString()}
+                                        Days
+                                    </strong>
+                                </p>
+
+                                <p>
+                                    📆
+                                    ${weeks}
+                                    Weeks
+                                    ${remainingDays}
+                                    Days
+                                </p>
+
+                                <p>
+                                    🕒
+                                    ${(days * 24)
+                                        .toLocaleString()}
+                                    Hours
+                                </p>
+
+                                <p>
+                                    ⏱️
+                                    ${(days * 24 * 60)
+                                        .toLocaleString()}
+                                    Minutes
+                                </p>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+        }
+
+
+        /* =========================================
+           COUNTDOWN
+        ========================================= */
+
+        let countdownInterval = null;
+
+
+        function countdownCalculator() {
+
+            showModal(
+                "⏳ Countdown",
+
+                `
+                <div class="form">
+
+                    <label>
+                        Target Date & Time
+                    </label>
+
+                    <input
+                        type="datetime-local"
+                        id="countdownDate"
+                        class="input"
+                    >
+
+                    <button
+                        class="calc-button"
+                        id="countdownStart"
+                    >
+                        Start Countdown
+                    </button>
+
+                    <div
+                        class="result"
+                        id="countdownResult"
+                    ></div>
+
+                </div>
+                `
+            );
+
+
+            document
+                .getElementById(
+                    "countdownStart"
+                )
+                .addEventListener(
+                    "click",
+                    function() {
+
+                        const value =
+                            document.getElementById(
+                                "countdownDate"
+                            ).value;
+
+                        const result =
+                            document.getElementById(
+                                "countdownResult"
+                            );
+
+
+                        if (!value) {
+
+                            result.innerHTML =
+                                "⚠️ Please select a target date.";
+
+                            return;
+
+                        }
+
+
+                        const target =
+                            new Date(value);
+
+
+                        if (
+                            countdownInterval
+                        ) {
+
+                            clearInterval(
+                                countdownInterval
+                            );
+
+                        }
+
+
+                        function update() {
+
+                            const now =
+                                new Date();
+
+                            const diff =
+                                target - now;
+
+
+                            if (
+                                diff <= 0
+                            ) {
+
+                                clearInterval(
+                                    countdownInterval
+                                );
+
+                                result.innerHTML = `
+
+                                    <div class="result-box">
+
+                                        <h3>
+                                            🎉 Finished!
+                                        </h3>
+
+                                        <p>
+                                            Countdown completed.
+                                        </p>
+
+                                    </div>
+
+                                `;
+
+                                return;
+
+                            }
+
+
+                            const days =
+                                Math.floor(
+                                    diff /
+                                    (
+                                        1000 *
+                                        60 *
+                                        60 *
+                                        24
+                                    )
+                                );
+
+
+                            const hours =
+                                Math.floor(
+                                    diff /
+                                    (
+                                        1000 *
+                                        60 *
+                                        60
+                                    )
+                                ) % 24;
+
+
+                            const minutes =
+                                Math.floor(
+                                    diff /
+                                    (
+                                        1000 *
+                                        60
+                                    )
+                                ) % 60;
+
+
+                            const seconds =
+                                Math.floor(
+                                    diff /
+                                    1000
+                                ) % 60;
+
+
+                            result.innerHTML = `
+
+                                <div class="result-box">
+
+                                    <h3>
+                                        ⏰ Remaining
+                                    </h3>
+
+                                    <div class="countdown-grid">
+
+                                        <div class="countdown-item">
+                                            <strong>
+                                                ${days}
+                                            </strong>
+                                            <span>
+                                                Days
+                                            </span>
+                                        </div>
+
+                                        <div class="countdown-item">
+                                            <strong>
+                                                ${hours}
+                                            </strong>
+                                            <span>
+                                                Hours
+                                            </span>
+                                        </div>
+
+                                        <div class="countdown-item">
+                                            <strong>
+                                                ${minutes}
+                                            </strong>
+                                            <span>
+                                                Minutes
+                                            </span>
+                                        </div>
+
+                                        <div class="countdown-item">
+                                            <strong>
+                                                ${seconds}
+                                            </strong>
+                                            <span>
+                                                Seconds
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+                        }
+
+
+                        update();
+
+                        countdownInterval =
+                            setInterval(
+                                update,
+                                1000
+                            );
+
+                    }
+                );
+
+        }
+
+
+        /* =========================================
+           LIFE STATISTICS
+        ========================================= */
+
+        function statisticsCalculator() {
+
+            showModal(
+                "📊 Life Statistics",
+
+                `
+                <div class="form">
+
+                    <label>
+                        Your Birthday
+                    </label>
+
+                    <input
+                        type="date"
+                        id="statsBirthday"
+                        class="input"
+                    >
+
+                    <button
+                        class="calc-button"
+                        id="statsCalculate"
+                    >
+                        Generate Statistics
+                    </button>
+
+                    <div
+                        class="result"
+                        id="statsResult"
+                    ></div>
+
+                </div>
+                `
+            );
+
+
+            document
+                .getElementById(
+                    "statsCalculate"
+                )
+                .addEventListener(
+                    "click",
+                    function() {
+
+                        const value =
+                            document.getElementById(
+                                "statsBirthday"
+                            ).value;
+
+                        const result =
+                            document.getElementById(
+                                "statsResult"
+                            );
+
+
+                        if (!value) {
+
+                            result.innerHTML =
+                                "⚠️ Please select your birthday.";
+
+                            return;
+
+                        }
+
+
+                        const birthday =
+                            parseDate(value);
+
+                        const now =
+                            new Date();
+
+
+                        if (
+                            birthday > now
+                        ) {
+
+                            result.innerHTML =
+                                "⚠️ Invalid birthday.";
+
+                            return;
+
+                        }
+
+
+                        const days =
+                            Math.floor(
+                                (
+                                    now -
+                                    birthday
+                                ) /
+                                (
+                                    1000 *
+                                    60 *
+                                    60 *
+                                    24
+                                )
+                            );
+
+
+                        const hours =
+                            days * 24;
+
+                        const minutes =
+                            hours * 60;
+
+                        const seconds =
+                            minutes * 60;
+
+
+                        result.innerHTML = `
+
+                            <div class="result-box">
+
+                                <h3>
+                                    📊 Life Statistics
+                                </h3>
+
+                                <p>
+                                    🎂 Birthday:
+                                    ${formatDate(birthday)}
+                                </p>
+
+                                <hr>
+
+                                <p>
+                                    📅 Days:
+                                    ${days.toLocaleString()}
+                                </p>
+
+                                <p>
+                                    🕒 Hours:
+                                    ${hours.toLocaleString()}
+                                </p>
+
+                                <p>
+                                    ⏱️ Minutes:
+                                    ${minutes.toLocaleString()}
+                                </p>
+
+                                <p>
+                                    ⚡ Seconds:
+                                    ${seconds.toLocaleString()}
+                                </p>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+        }
+
+
+        /* =========================================
+           MILESTONES
+        ========================================= */
+
+        function milestonesCalculator() {
+
+            showModal(
+                "🎯 Age Milestones",
+
+                `
+                <div class="form">
+
+                    <label>
+                        Your Birthday
+                    </label>
+
+                    <input
+                        type="date"
+                        id="milestoneBirthday"
+                        class="input"
+                    >
+
+                    <button
+                        class="calc-button"
+                        id="milestoneCalculate"
+                    >
+                        Check Milestones
+                    </button>
+
+                    <div
+                        class="result"
+                        id="milestoneResult"
+                    ></div>
+
+                </div>
+                `
+            );
+
+
+            document
+                .getElementById(
+                    "milestoneCalculate"
+                )
+                .addEventListener(
+                    "click",
+                    function() {
+
+                        const value =
+                            document.getElementById(
+                                "milestoneBirthday"
+                            ).value;
+
+                        const result =
+                            document.getElementById(
+                                "milestoneResult"
+                            );
+
+
+                        if (!value) {
+
+                            result.innerHTML =
+                                "⚠️ Please select your birthday.";
+
+                            return;
+
+                        }
+
+
+                        const birthday =
+                            parseDate(value);
+
+                        const now =
+                            new Date();
+
+
+                        if (
+                            birthday > now
+                        ) {
+
+                            result.innerHTML =
+                                "⚠️ Invalid birthday.";
+
+                            return;
+
+                        }
+
+
+                        const ages = [
+                            10,
+                            13,
+                            16,
+                            18,
+                            21,
+                            25,
+                            30,
+                            40,
+                            50,
+                            60,
+                            70,
+                            80,
+                            90,
+                            100
+                        ];
+
+
+                        let html = `
+                            <div class="result-box">
+                                <h3>
+                                    🎯 Milestones
+                                </h3>
+                        `;
+
+
+                        ages.forEach(
+                            function(age) {
+
+                                const date =
+                                    new Date(
+                                        birthday
+                                    );
+
+                                date.setFullYear(
+                                    birthday.getFullYear()
+                                    + age
+                                );
+
+
+                                if (
+                                    date <= now
+                                ) {
+
+                                    html += `
+                                        <p>
+                                            ✅ Age
+                                            ${age} —
+                                            ${formatDate(date)}
+                                        </p>
+                                    `;
+
+                                } else {
+
+                                    html += `
+                                        <p>
+                                            🔜 Age
+                                            ${age} —
+                                            ${formatDate(date)}
+                                        </p>
+                                    `;
+
+                                }
+
+                            }
+                        );
+
+
+                        html += `
+                            </div>
+                        `;
+
+
+                        result.innerHTML =
+                            html;
+
+                    }
+                );
+
+        }
+
+
+        /* =========================================
+           CARD EVENTS
+        ========================================= */
+
+        document
+            .querySelectorAll(".card")
+            .forEach(
+                function(card) {
+
+                    card.addEventListener(
+                        "click",
+                        function() {
+
+                            const tool =
+                                card.dataset.tool;
+
+
+                            if (
+                                tool === "birthday"
+                            ) {
+                                birthdayCalculator();
+                            }
+
+                            else if (
+                                tool === "difference"
+                            ) {
+                                differenceCalculator();
+                            }
+
+                            else if (
+                                tool === "countdown"
+                            ) {
+                                countdownCalculator();
+                            }
+
+                            else if (
+                                tool === "statistics"
+                            ) {
+                                statisticsCalculator();
+                            }
+
+                            else if (
+                                tool === "milestones"
+                            ) {
+                                milestonesCalculator();
+                            }
+
+                            else if (
+                                tool === "telegram"
+                            ) {
+                                openTelegram();
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =========================================
+           MOUSE EFFECT
+        ========================================= */
+
+        if (
+            window.innerWidth > 900
+        ) {
+
+            document.addEventListener(
+                "mousemove",
+                function(event) {
+
+                    const orb =
+                        document.querySelector(
+                            ".orb"
+                        );
+
+                    if (!orb) {
+                        return;
+                    }
+
+
+                    const x =
+                        (
+                            event.clientX /
+                            window.innerWidth -
+                            .5
+                        ) * 8;
+
+
+                    const y =
+                        (
+                            event.clientY /
+                            window.innerHeight -
+                            .5
+                        ) * 8;
+
+
+                    orb.style.transform =
+                        `translate(${x}px,${y}px)`;
+
+                }
+            );
+
+        }
+
+
+        console.log(
+            "Calculator Universe loaded successfully."
+        );
+
+    </script>
 
 </body>
 </html>
