@@ -133,11 +133,6 @@ async def developer_handler(
 
 🚀 Calculator Universe
 
-Built with:
-• Python
-• Telegram Bot API
-• Render
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ❤️ Thanks for using the bot.
