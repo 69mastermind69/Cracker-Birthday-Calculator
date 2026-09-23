@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Calculator Universe by MASTERMIND — Birthday, Date Difference, Countdown and Life Statistics."
+    >
+
+    <meta name="theme-color" content="#020307">
+
+    <title>Calculator Universe — MASTERMIND</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Effects -->
+    <div class="background">
+        <div class="glow glow-red"></div>
+        <div class="glow glow-blue"></div>
+        <div class="grid"></div>
+        <div id="particles"></div>
+    </div>
+
+
+    <!-- Top Navigation -->
+    <header class="navbar">
+
+        <div class="brand">
+            <div class="brand-orb"></div>
+
+            <div class="brand-text">
+                <span class="brand-name">MASTERMIND</span>
+                <span class="brand-subtitle">CALCULATOR UNIVERSE</span>
+            </div>
+        </div>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#calculators">Calculators</a>
+            <a href="#about">About</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+
+            <div class="status">
+                <span class="status-dot"></span>
+                SYSTEM ONLINE
+            </div>
+
+            <div class="hero-orb">
+                <div class="orb-core"></div>
+                <div class="orb-ring ring-one"></div>
+                <div class="orb-ring ring-two"></div>
+                <div class="orb-ring ring-three"></div>
+            </div>
+
+            <p class="hero-label">WELCOME TO</p>
+
+            <h1>
+                CALCULATOR
+                <span>UNIVERSE</span>
+            </h1>
+
+            <p class="hero-description">
+                Powerful calculators for your age, birthdays,
+                dates, countdowns and life statistics.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#calculators" class="primary-button">
+                    EXPLORE CALCULATORS
+                </a>
+
+                <a href="#about" class="secondary-button">
+                    ABOUT PROJECT
+                </a>
+            </div>
+
+            <div class="energy-line"></div>
+
+        </section>
+
+
+        <!-- Calculator Section -->
+        <section class="calculators" id="calculators">
+
+            <div class="section-heading">
+                <span>TOOLS</span>
+                <h2>Choose Your Calculator</h2>
+                <p>
+                    Select a tool and start calculating.
+                </p>
+            </div>
+
+
+            <div class="calculator-grid">
+
+                <!-- Birthday -->
+                <article
+                    class="calculator-card"
+                    data-tool="birthday"
+                >
+                    <div class="card-icon">🎂</div>
+
+                    <div class="card-content">
+                        <span class="card-number">01</span>
+
+                        <h3>Birthday Calculator</h3>
+
+                        <p>
+                            Calculate your exact age,
+                            next birthday and countdown.
+                        </p>
+
+                        <button class="card-button">
+                            OPEN
+                            <span>→</span>
+                        </button>
+                    </div>
+                </article>
+
+
+                <!-- Date Difference -->
+                <article
+                    class="calculator-card"
+                    data-tool="date-difference"
+                >
+                    <div class="card-icon">📆</div>
+
+                    <div class="card-content">
+                        <span class="card-number">02</span>
+
+                        <h3>Date Difference</h3>
+
+                        <p>
+                            Find the exact difference between
+                            two dates.
+                        </p>
+
+                        <button class="card-button">
+                            OPEN
+                            <span>→</span>
+                        </button>
+                    </div>
+                </article>
+
+
+                <!-- Countdown -->
+                <article
+                    class="calculator-card"
+                    data-tool="countdown"
+                >
+                    <div class="card-icon">⏳</div>
+
+                    <div class="card-content">
+                        <span class="card-number">03</span>
+
+                        <h3>Countdown</h3>
+
+                        <p>
+                            Create a live countdown to
+                            your important date.
+                        </p>
+
+                        <button class="card-button">
+                            OPEN
+                            <span>→</span>
+                        </button>
+                    </div>
+                </article>
+
+
+                <!-- Life Statistics -->
+                <article
+                    class="calculator-card"
+                    data-tool="life-statistics"
+                >
+                    <div class="card-icon">📊</div>
+
+                    <div class="card-content">
+                        <span class="card-number">04</span>
+
+                        <h3>Life Statistics</h3>
+
+                        <p>
+                            Explore detailed statistics
+                            based on your age.
+                        </p>
+
+                        <button class="card-button">
+                            OPEN
+                            <span>→</span>
+                        </button>
+                    </div>
+                </article>
+
+
+                <!-- Age Milestones -->
+                <article
+                    class="calculator-card"
+                    data-tool="milestones"
+                >
+                    <div class="card-icon">🎯</div>
+
+                    <div class="card-content">
+                        <span class="card-number">05</span>
+
+                        <h3>Age Milestones</h3>
+
+                        <p>
+                            Discover important future
+                            age milestones.
+                        </p>
+
+                        <button class="card-button">
+                            OPEN
+                            <span>→</span>
+                        </button>
+                    </div>
+                </article>
+
+
+                <!-- Telegram -->
+                <article
+                    class="calculator-card telegram-card"
+                    data-tool="telegram"
+                >
+                    <div class="card-icon">🤖</div>
+
+                    <div class="card-content">
+                        <span class="card-number">06</span>
+
+                        <h3>Telegram Bot</h3>
+
+                        <p>
+                            Use Calculator Universe directly
+                            through Telegram.
+                        </p>
+
+                        <button class="card-button">
+                            OPEN
+                            <span>→</span>
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- About Section -->
+        <section class="about" id="about">
+
+            <div class="about-panel">
+
+                <div class="about-icon">
+                    ⚡
+                </div>
+
+                <div class="about-content">
+
+                    <span class="section-label">
+                        ABOUT
+                    </span>
+
+                    <h2>
+                        Built by
+                        <span>MASTERMIND</span>
+                    </h2>
+
+                    <p>
+                        Calculator Universe is a collection
+                        of useful date and age calculation tools,
+                        designed with a modern futuristic interface.
+                    </p>
+
+                    <div class="developer-info">
+
+                        <div>
+                            <span>DEVELOPER</span>
+                            <strong>MASTERMIND</strong>
+                        </div>
+
+                        <div>
+                            <span>TELEGRAM</span>
+                            <strong>@Do*x*Die</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="footer-line"></div>
+
+        <p>
+            CALCULATOR UNIVERSE
+        </p>
+
+        <span>
+            POWERED BY MASTERMIND
+        </span>
+
+    </footer>
+
+
+    <!-- Calculator Modal -->
+    <div
+        class="modal"
+        id="calculatorModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal-overlay" id="modalOverlay"></div>
+
+        <div class="modal-box">
+
+            <button
+                class="modal-close"
+                id="modalClose"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+            <div id="modalContent"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Scan Line -->
+    <div class="scan-line"></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
