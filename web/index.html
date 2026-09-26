@@ -7,7 +7,7 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
     <meta
@@ -20,6 +20,21 @@
         content="Calculator Universe"
     >
 
+    <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+    >
+
     <title>Calculator Universe</title>
 
 
@@ -29,7 +44,9 @@
            RESET
         ===================================================== */
 
-        * {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -37,10 +54,12 @@
 
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
             min-height: 100vh;
+            min-height: 100svh;
 
             font-family:
                 Inter,
@@ -52,11 +71,12 @@
                 sans-serif;
 
             color: #ffffff;
-
-            background:
-                #04050a;
+            background: #04050a;
 
             overflow-x: hidden;
+
+            -webkit-tap-highlight-color:
+                transparent;
         }
 
         button,
@@ -69,9 +89,23 @@
             outline: 0;
         }
 
+        button,
+        a {
+            -webkit-tap-highlight-color:
+                transparent;
+        }
+
+        img,
+        svg {
+            max-width: 100%;
+        }
+
         ::selection {
-            background: rgba(117, 154, 255, .25);
-            color: #ffffff;
+            background:
+                rgba(117, 154, 255, .25);
+
+            color:
+                #ffffff;
         }
 
 
@@ -116,7 +150,8 @@
 
             opacity: .65;
 
-            filter: blur(45px);
+            filter:
+                blur(45px);
 
             background:
                 conic-gradient(
@@ -135,11 +170,13 @@
         }
 
         @keyframes auroraSpin {
+
             to {
                 transform:
                     rotate(360deg)
                     scale(1.06);
             }
+
         }
 
         .glow {
@@ -429,6 +466,12 @@
 
             z-index:
                 1000;
+
+            padding-top:
+                max(
+                    10px,
+                    env(safe-area-inset-top)
+                );
         }
 
         .nav-side {
@@ -538,6 +581,9 @@
             height:
                 7px;
 
+            flex:
+                0 0 auto;
+
             border-radius:
                 50%;
 
@@ -562,9 +608,7 @@
                     .25;
 
                 transform:
-                    scale(
-                        .65
-                    );
+                    scale(.65);
             }
 
         }
@@ -599,6 +643,9 @@
                 280%;
 
             -webkit-background-clip:
+                text;
+
+            background-clip:
                 text;
 
             color:
@@ -638,6 +685,9 @@
             min-height:
                 100vh;
 
+            min-height:
+                100svh;
+
             display:
                 flex;
 
@@ -665,6 +715,9 @@
                 inline-flex;
 
             align-items:
+                center;
+
+            justify-content:
                 center;
 
             gap:
@@ -704,6 +757,9 @@
 
             margin-bottom:
                 28px;
+
+            max-width:
+                100%;
         }
 
 
@@ -723,6 +779,9 @@
 
             margin-bottom:
                 32px;
+
+            flex:
+                0 0 auto;
         }
 
         .core-halo {
@@ -761,9 +820,7 @@
 
             50% {
                 transform:
-                    scale(
-                        1.08
-                    );
+                    scale(1.08);
 
                 opacity:
                     .7;
@@ -866,24 +923,24 @@
 
             to {
                 transform:
-                    rotate(
-                        360deg
-                    );
+                    rotate(360deg);
             }
+
         }
 
         @keyframes ringSpinB {
 
             to {
                 transform:
-                    rotate(
-                        -360deg
-                    );
+                    rotate(-360deg);
             }
+
         }
 
 
-        /* Orbit arcs */
+        /* =====================================================
+           ORBIT ARCS
+        ===================================================== */
 
         .arc {
             position:
@@ -906,9 +963,7 @@
                     -50%,
                     -50%
                 )
-                rotate(
-                    -22deg
-                );
+                rotate(-22deg);
 
             border-radius:
                 50%;
@@ -955,9 +1010,7 @@
                     -50%,
                     -50%
                 )
-                rotate(
-                    35deg
-                );
+                rotate(35deg);
 
             animation-duration:
                 9s;
@@ -972,10 +1025,13 @@
                 rotate:
                     360deg;
             }
+
         }
 
 
-        /* floating dots */
+        /* =====================================================
+           FLOATING DOTS
+        ===================================================== */
 
         .orbit-node {
             position:
@@ -1070,6 +1126,7 @@
                         13px
                     );
             }
+
         }
 
         @keyframes nodeTwo {
@@ -1081,6 +1138,7 @@
                         -14px
                     );
             }
+
         }
 
         @keyframes nodeThree {
@@ -1090,14 +1148,15 @@
                     .3;
 
                 transform:
-                    scale(
-                        .55
-                    );
+                    scale(.55);
             }
+
         }
 
 
-        /* Calendar Glass */
+        /* =====================================================
+           CALENDAR GLASS
+        ===================================================== */
 
         .calendar {
             position:
@@ -1114,9 +1173,7 @@
                     -50%,
                     -50%
                 )
-                rotate(
-                    -5deg
-                );
+                rotate(-5deg);
 
             width:
                 153px;
@@ -1217,9 +1274,7 @@
                 );
 
             transform:
-                rotate(
-                    23deg
-                );
+                rotate(23deg);
 
             animation:
                 calendarShine
@@ -1327,6 +1382,9 @@
             -webkit-background-clip:
                 text;
 
+            background-clip:
+                text;
+
             color:
                 transparent;
         }
@@ -1384,6 +1442,9 @@
                 260%;
 
             -webkit-background-clip:
+                text;
+
+            background-clip:
                 text;
 
             color:
@@ -1470,13 +1531,14 @@
 
             transition:
                 .25s;
+
+            touch-action:
+                manipulation;
         }
 
         .hero-cta:hover {
             transform:
-                translateY(
-                    -3px
-                );
+                translateY(-3px);
         }
 
 
@@ -1487,6 +1549,9 @@
         .section {
             padding:
                 110px 6%;
+
+            scroll-margin-top:
+                100px;
         }
 
         .section-heading {
@@ -1555,7 +1620,7 @@
             grid-template-columns:
                 repeat(
                     2,
-                    1fr
+                    minmax(0, 1fr)
                 );
 
             gap:
@@ -1626,13 +1691,14 @@
                 transform .35s,
                 border-color .35s,
                 box-shadow .35s;
+
+            touch-action:
+                manipulation;
         }
 
         .card:hover {
             transform:
-                translateY(
-                    -9px
-                );
+                translateY(-9px);
 
             border-color:
                 rgba(
@@ -1657,6 +1723,11 @@
                     255,
                     .08
                 );
+        }
+
+        .card:active {
+            transform:
+                scale(.99);
         }
 
         .card::before {
@@ -1689,6 +1760,9 @@
 
             opacity:
                 .13;
+
+            pointer-events:
+                none;
         }
 
         .card::after {
@@ -1724,15 +1798,16 @@
                 );
 
             transform:
-                rotate(
-                    -8deg
-                );
+                rotate(-8deg);
 
             animation:
                 cardScan
                 6s
                 ease-in-out
                 infinite;
+
+            pointer-events:
+                none;
         }
 
         @keyframes cardScan {
@@ -1881,6 +1956,9 @@
 
             margin:
                 auto;
+
+            width:
+                100%;
         }
 
         .workspace-box {
@@ -1924,6 +2002,9 @@
                     0,
                     .25
                 );
+
+            overflow:
+                hidden;
         }
 
         .workspace-top {
@@ -1995,6 +2076,12 @@
 
             transition:
                 .25s;
+
+            white-space:
+                nowrap;
+
+            touch-action:
+                manipulation;
         }
 
         .back-button:hover {
@@ -2006,6 +2093,11 @@
                     .08
                 );
         }
+
+
+        /* =====================================================
+           INPUTS
+        ===================================================== */
 
         .input-box {
             padding:
@@ -2049,16 +2141,25 @@
 
             margin-top:
                 9px;
+
+            min-width:
+                0;
         }
 
         .date-input {
             flex:
-                1;
+                1 1 auto;
+
+            min-width:
+                0;
         }
 
         .input {
             width:
                 100%;
+
+            min-height:
+                50px;
 
             padding:
                 14px 15px;
@@ -2091,6 +2192,9 @@
 
             transition:
                 .2s;
+
+            -webkit-appearance:
+                none;
         }
 
         .input::placeholder {
@@ -2123,6 +2227,12 @@
 
             width:
                 52px;
+
+            min-width:
+                52px;
+
+            min-height:
+                50px;
 
             display:
                 flex;
@@ -2161,6 +2271,9 @@
 
             overflow:
                 hidden;
+
+            touch-action:
+                manipulation;
         }
 
         .calendar-button input {
@@ -2198,6 +2311,9 @@
             width:
                 100%;
 
+            min-height:
+                50px;
+
             margin-top:
                 16px;
 
@@ -2231,6 +2347,23 @@
                     255,
                     .11
                 );
+
+            transition:
+                transform .2s,
+                filter .2s;
+
+            touch-action:
+                manipulation;
+        }
+
+        .main-button:hover {
+            filter:
+                brightness(1.08);
+        }
+
+        .main-button:active {
+            transform:
+                scale(.99);
         }
 
 
@@ -2245,7 +2378,7 @@
             grid-template-columns:
                 repeat(
                     2,
-                    1fr
+                    minmax(0, 1fr)
                 );
 
             gap:
@@ -2258,6 +2391,9 @@
         .action {
             padding:
                 13px;
+
+            min-height:
+                46px;
 
             color:
                 #d9deea;
@@ -2290,6 +2426,9 @@
 
             transition:
                 .2s;
+
+            touch-action:
+                manipulation;
         }
 
         .action:hover,
@@ -2354,6 +2493,9 @@
                     0,
                     .13
                 );
+
+            overflow:
+                hidden;
         }
 
         .report-section {
@@ -2398,6 +2540,9 @@
 
             line-height:
                 1.65;
+
+            overflow-wrap:
+                anywhere;
         }
 
         .report-row strong {
@@ -2426,7 +2571,7 @@
             grid-template-columns:
                 repeat(
                     4,
-                    1fr
+                    minmax(0, 1fr)
                 );
 
             gap:
@@ -2471,6 +2616,9 @@
                     255,
                     .06
                 );
+
+            min-width:
+                0;
         }
 
         .live-item strong {
@@ -2479,6 +2627,12 @@
 
             font-size:
                 27px;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
         }
 
         .live-item span {
@@ -2611,6 +2765,9 @@
             -webkit-background-clip:
                 text;
 
+            background-clip:
+                text;
+
             color:
                 transparent;
         }
@@ -2728,6 +2885,9 @@
             -webkit-background-clip:
                 text;
 
+            background-clip:
+                text;
+
             color:
                 transparent;
         }
@@ -2753,7 +2913,11 @@
 
         footer {
             padding:
-                34px 20px 48px;
+                34px 20px
+                calc(
+                    48px +
+                    env(safe-area-inset-bottom)
+                );
 
             text-align:
                 center;
@@ -2766,6 +2930,48 @@
 
             letter-spacing:
                 3px;
+
+            line-height:
+                2;
+        }
+
+        .developer {
+            display:
+                block;
+
+            margin-top:
+                9px;
+
+            color:
+                #7885a5;
+
+            font-size:
+                10px;
+
+            letter-spacing:
+                2px;
+
+            text-transform:
+                uppercase;
+        }
+
+        .developer strong {
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff5a94,
+                    #ffffff,
+                    #75a8ff
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            color:
+                transparent;
         }
 
 
@@ -2773,9 +2979,7 @@
            RESPONSIVE
         ===================================================== */
 
-        @media (
-            max-width: 900px
-        ) {
+        @media (max-width: 900px) {
 
             .nav-side {
                 display:
@@ -2795,9 +2999,17 @@
         }
 
 
-        @media (
-            max-width: 620px
-        ) {
+        @media (max-width: 620px) {
+
+            .background .aurora {
+                opacity:
+                    .42;
+            }
+
+            .background .glow {
+                filter:
+                    blur(75px);
+            }
 
             .navbar {
                 width:
@@ -2813,6 +3025,9 @@
 
                 top:
                     9px;
+
+                padding:
+                    10px 14px;
             }
 
             .brand {
@@ -2828,11 +3043,23 @@
                     120px 15px 70px;
             }
 
+            .hero-badge {
+                font-size:
+                    8px;
+
+                letter-spacing:
+                    1.7px;
+
+                padding:
+                    8px 10px;
+
+                margin-bottom:
+                    20px;
+            }
+
             .hero-core {
                 transform:
-                    scale(
-                        .86
-                    );
+                    scale(.86);
 
                 margin-bottom:
                     4px;
@@ -2844,11 +3071,28 @@
 
                 letter-spacing:
                     -3px;
+
+                max-width:
+                    100%;
             }
 
             .hero-description {
                 font-size:
                     14px;
+
+                line-height:
+                    1.7;
+
+                max-width:
+                    520px;
+            }
+
+            .hero-cta {
+                padding:
+                    13px 18px;
+
+                margin-top:
+                    22px;
             }
 
             .section {
@@ -2856,9 +3100,22 @@
                     82px 5%;
             }
 
+            .section-heading {
+                margin-bottom:
+                    35px;
+            }
+
+            .section-heading p {
+                font-size:
+                    14px;
+            }
+
             .workspace-box {
                 padding:
                     20px 15px;
+
+                border-radius:
+                    21px;
             }
 
             .workspace-top {
@@ -2867,6 +3124,27 @@
 
                 align-items:
                     flex-start;
+
+                gap:
+                    13px;
+            }
+
+            .workspace-top h2 {
+                font-size:
+                    29px;
+            }
+
+            .back-button {
+                min-height:
+                    44px;
+            }
+
+            .input-box {
+                padding:
+                    16px 13px;
+
+                border-radius:
+                    16px;
             }
 
             .action-grid {
@@ -2878,21 +3156,32 @@
                 grid-template-columns:
                     repeat(
                         2,
-                        1fr
+                        minmax(0, 1fr)
                     );
+            }
+
+            .report {
+                padding:
+                    16px 13px;
             }
 
             .birthday-card {
                 min-height:
                     320px;
+
+                padding:
+                    22px 16px;
+            }
+
+            .about-box {
+                padding:
+                    38px 20px;
             }
 
         }
 
 
-        @media (
-            max-width: 390px
-        ) {
+        @media (max-width: 390px) {
 
             .brand {
                 font-size:
@@ -2902,11 +3191,23 @@
                     4px;
             }
 
+            .hero {
+                padding-left:
+                    12px;
+
+                padding-right:
+                    12px;
+            }
+
             .hero-core {
                 transform:
-                    scale(
-                        .76
-                    );
+                    scale(.76);
+
+                margin-top:
+                    -10px;
+
+                margin-bottom:
+                    -18px;
             }
 
             .hero-title {
@@ -2914,9 +3215,124 @@
                     41px;
             }
 
+            .hero-description {
+                font-size:
+                    13px;
+            }
+
+            .section {
+                padding-left:
+                    4%;
+
+                padding-right:
+                    4%;
+            }
+
             .card {
                 padding:
                     24px;
+
+                min-height:
+                    270px;
+            }
+
+            .card h3 {
+                font-size:
+                    21px;
+            }
+
+            .date-control {
+                gap:
+                    7px;
+            }
+
+            .calendar-button {
+                width:
+                    48px;
+
+                min-width:
+                    48px;
+            }
+
+            .input {
+                padding-left:
+                    12px;
+
+                padding-right:
+                    12px;
+
+                font-size:
+                    15px;
+            }
+
+            .live-item strong {
+                font-size:
+                    23px;
+            }
+
+        }
+
+
+        /* =====================================================
+           PERFORMANCE / TOUCH OPTIMIZATION
+        ===================================================== */
+
+        @media (hover: none), (pointer: coarse) {
+
+            .card:hover,
+            .hero-cta:hover,
+            .back-button:hover,
+            .action:hover {
+                transform:
+                    none;
+            }
+
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior:
+                    auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
+            }
+
+        }
+
+
+        /* =====================================================
+           VERY SMALL / LOW POWER DEVICES
+        ===================================================== */
+
+        @media (max-width: 620px) and
+               (prefers-reduced-motion: no-preference) {
+
+            .stars {
+                animation-duration:
+                    45s;
+            }
+
+            .aurora {
+                animation-duration:
+                    30s;
+            }
+
+            .card::after {
+                animation-duration:
+                    9s;
             }
 
         }
@@ -3137,17 +3553,14 @@
             <button
                 class="card"
                 id="openBirthday"
+                type="button"
             >
 
-                <div
-                    class="card-icon"
-                >
+                <div class="card-icon">
                     🎂
                 </div>
 
-                <div
-                    class="card-number"
-                >
+                <div class="card-number">
                     01
                 </div>
 
@@ -3174,17 +3587,14 @@
             <button
                 class="card"
                 id="openDifference"
+                type="button"
             >
 
-                <div
-                    class="card-icon"
-                >
+                <div class="card-icon">
                     📆
                 </div>
 
-                <div
-                    class="card-number"
-                >
+                <div class="card-number">
                     02
                 </div>
 
@@ -3243,6 +3653,7 @@
                     <button
                         class="back-button"
                         id="birthdayBack"
+                        type="button"
                     >
                         ← Back
                     </button>
@@ -3272,6 +3683,7 @@
 
                         <label
                             class="calendar-button"
+                            aria-label="Choose birth date"
                         >
 
                             📅
@@ -3294,6 +3706,7 @@
                     <button
                         class="main-button"
                         id="calculateBirthday"
+                        type="button"
                     >
                         CALCULATE
                     </button>
@@ -3308,6 +3721,7 @@
                         <button
                             class="action active"
                             data-action="full"
+                            type="button"
                         >
                             📋 Full Report
                         </button>
@@ -3315,6 +3729,7 @@
                         <button
                             class="action"
                             data-action="next"
+                            type="button"
                         >
                             🎂 Next Birthday
                         </button>
@@ -3322,6 +3737,7 @@
                         <button
                             class="action"
                             data-action="countdown"
+                            type="button"
                         >
                             ⏳ Countdown
                         </button>
@@ -3329,6 +3745,7 @@
                         <button
                             class="action"
                             data-action="zodiac"
+                            type="button"
                         >
                             ♈ Zodiac & Astrology
                         </button>
@@ -3336,6 +3753,7 @@
                         <button
                             class="action"
                             data-action="stats"
+                            type="button"
                         >
                             📊 Life Statistics
                         </button>
@@ -3343,6 +3761,7 @@
                         <button
                             class="action"
                             data-action="milestones"
+                            type="button"
                         >
                             🎯 Age Milestones
                         </button>
@@ -3350,6 +3769,7 @@
                         <button
                             class="action"
                             data-action="card"
+                            type="button"
                         >
                             🖼️ Birthday Card
                         </button>
@@ -3357,6 +3777,7 @@
                         <button
                             class="action"
                             data-action="again"
+                            type="button"
                         >
                             🔄 Calculate Again
                         </button>
@@ -3411,6 +3832,7 @@
                     <button
                         class="back-button"
                         id="differenceBack"
+                        type="button"
                     >
                         ← Back
                     </button>
@@ -3441,6 +3863,7 @@
 
                         <label
                             class="calendar-button"
+                            aria-label="Choose first date"
                         >
 
                             📅
@@ -3483,6 +3906,7 @@
 
                         <label
                             class="calendar-button"
+                            aria-label="Choose second date"
                         >
 
                             📅
@@ -3505,6 +3929,7 @@
                     <button
                         class="main-button"
                         id="calculateDifference"
+                        type="button"
                     >
                         CALCULATE DIFFERENCE
                     </button>
@@ -3513,6 +3938,7 @@
                     <button
                         class="action"
                         id="differenceAgain"
+                        type="button"
                         style="
                             width:100%;
                             margin-top:10px;
@@ -3587,6 +4013,11 @@
 
         CALCULATOR UNIVERSE
 
+        <span class="developer">
+            Developed by
+            <strong>MASTERMIND</strong>
+        </span>
+
     </footer>
 
 
@@ -3601,6 +4032,7 @@
 
         /* =====================================================
            PARTICLES
+           Mobile = fewer particles for better performance
         ===================================================== */
 
         const particleContainer =
@@ -3608,54 +4040,76 @@
                 "particles"
             );
 
+        const isSmallScreen =
+            window.innerWidth <= 650;
+
+        const isTouchDevice =
+            window.matchMedia(
+                "(pointer: coarse)"
+            ).matches;
 
         const particleCount =
-            window.innerWidth <= 650
-                ? 28
-                : 55;
+            isSmallScreen
+                ? 16
+                : 45;
 
 
-        for (
-            let i = 0;
-            i < particleCount;
-            i++
+        if (
+            particleContainer
         ) {
 
-            const particle =
-                document.createElement(
-                    "span"
+            const fragment =
+                document.createDocumentFragment();
+
+
+            for (
+                let i = 0;
+                i < particleCount;
+                i++
+            ) {
+
+                const particle =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                particle.className =
+                    "particle";
+
+
+                particle.style.left =
+                    Math.random() * 100
+                    + "%";
+
+
+                particle.style.top =
+                    Math.random() * 100
+                    + "%";
+
+
+                particle.style.animationDelay =
+                    Math.random() * 6
+                    + "s";
+
+
+                particle.style.animationDuration =
+                    (
+                        5 +
+                        Math.random() * 7
+                    )
+                    + "s";
+
+
+                fragment.appendChild(
+                    particle
                 );
 
-
-            particle.className =
-                "particle";
-
-
-            particle.style.left =
-                Math.random() * 100
-                + "%";
-
-
-            particle.style.top =
-                Math.random() * 100
-                + "%";
-
-
-            particle.style.animationDelay =
-                Math.random() * 6
-                + "s";
-
-
-            particle.style.animationDuration =
-                (
-                    5 +
-                    Math.random() * 7
-                )
-                + "s";
+            }
 
 
             particleContainer.appendChild(
-                particle
+                fragment
             );
 
         }
@@ -3670,10 +4124,11 @@
         ) {
 
             let digits =
-                value.replace(
-                    /\D/g,
-                    ""
-                );
+                String(value)
+                    .replace(
+                        /\D/g,
+                        ""
+                    );
 
 
             if (
@@ -3748,20 +4203,22 @@
             if (
                 !value
             ) {
+
                 return "";
+
             }
 
 
             const parts =
-                value.split(
-                    "-"
-                );
+                value.split("-");
 
 
             if (
                 parts.length !== 3
             ) {
+
                 return "";
+
             }
 
 
@@ -3785,11 +4242,9 @@
         ) {
 
             const parts =
-                value
+                String(value)
                     .trim()
-                    .split(
-                        "/"
-                    );
+                    .split("/");
 
 
             if (
@@ -3840,6 +4295,8 @@
                 day < 1
                 ||
                 day > 31
+                ||
+                year < 1
             ) {
 
                 return null;
@@ -3858,13 +4315,9 @@
             if (
                 date.getFullYear() !== year
                 ||
-                date.getMonth()
-                    !==
-                    month - 1
+                date.getMonth() !== month - 1
                 ||
-                date.getDate()
-                    !==
-                    day
+                date.getDate() !== day
             ) {
 
                 return null;
@@ -4206,17 +4659,68 @@
                 );
 
 
+            /*
+             * Leap-day birthdays need safe handling.
+             * In non-leap years JavaScript can otherwise
+             * roll February 29 into March.
+             */
+
             if (
-                next < today
+                birth.getMonth() === 1
+                &&
+                birth.getDate() === 29
+                &&
+                !isLeapYear(
+                    today.getFullYear()
+                )
             ) {
 
                 next =
                     new Date(
-                        today.getFullYear()
-                        + 1,
-                        birth.getMonth(),
-                        birth.getDate()
+                        today.getFullYear(),
+                        2,
+                        1
                     );
+
+            }
+
+
+            if (
+                next < today
+            ) {
+
+                const nextYear =
+                    today.getFullYear() + 1;
+
+
+                if (
+                    birth.getMonth() === 1
+                    &&
+                    birth.getDate() === 29
+                    &&
+                    !isLeapYear(
+                        nextYear
+                    )
+                ) {
+
+                    next =
+                        new Date(
+                            nextYear,
+                            2,
+                            1
+                        );
+
+                }
+                else {
+
+                    next =
+                        new Date(
+                            nextYear,
+                            birth.getMonth(),
+                            birth.getDate()
+                        );
+
+                }
 
             }
 
@@ -4451,11 +4955,22 @@
             ];
 
 
-            return animals[
+            const index =
                 (
-                    year - 4
-                ) % 12
-            ];
+                    (
+                        year -
+                        4
+                    )
+                    %
+                    12
+                    +
+                    12
+                )
+                %
+                12;
+
+
+            return animals[index];
 
         }
 
@@ -4566,7 +5081,8 @@
             const age =
                 (
                     (
-                        days % cycle
+                        days %
+                        cycle
                     )
                     +
                     cycle
@@ -4690,15 +5206,32 @@
             workspace
         ) {
 
+            if (
+                !workspace
+            ) {
+
+                return;
+
+            }
+
+
             workspace.classList.remove(
                 "hidden"
             );
 
 
-            workspace.scrollIntoView({
-                behavior:
-                    "smooth"
-            });
+            requestAnimationFrame(
+                function() {
+
+                    workspace.scrollIntoView({
+                        behavior:
+                            "smooth",
+                        block:
+                            "start"
+                    });
+
+                }
+            );
 
         }
 
@@ -4852,6 +5385,7 @@
                                     "Format",
                                     "Please use MM/DD/YYYY"
                                 )}
+
                                 ${row(
                                     "Example",
                                     "09/23/2005"
@@ -5022,8 +5556,21 @@
                                         birthdayTimer
                                     );
 
+                                    birthdayTimer =
+                                        null;
+
                                 }
 
+
+                                return;
+
+                            }
+
+
+                            if (
+                                !birthDate ||
+                                !birthData
+                            ) {
 
                                 return;
 
@@ -5214,11 +5761,15 @@
 
                         +
 
-                        `<div class="note">
+                        `
+                        <div class="note">
+
                             Astrology and numerology
                             information is provided
                             for entertainment.
-                        </div>`
+
+                        </div>
+                        `
                     )
 
                     +
@@ -5351,6 +5902,7 @@
                                 <strong id="bdDays">
                                     0
                                 </strong>
+
                                 <span>
                                     DAYS
                                 </span>
@@ -5360,6 +5912,7 @@
                                 <strong id="bdHours">
                                     0
                                 </strong>
+
                                 <span>
                                     HOURS
                                 </span>
@@ -5369,6 +5922,7 @@
                                 <strong id="bdMinutes">
                                     0
                                 </strong>
+
                                 <span>
                                     MINUTES
                                 </span>
@@ -5378,6 +5932,7 @@
                                 <strong id="bdSeconds">
                                     0
                                 </strong>
+
                                 <span>
                                     SECONDS
                                 </span>
@@ -5391,6 +5946,15 @@
 
 
                 function updateCountdown() {
+
+                    if (
+                        !birthDate
+                    ) {
+
+                        return;
+
+                    }
+
 
                     const now =
                         new Date();
@@ -5419,15 +5983,15 @@
 
                     const days =
                         Math.floor(
-                            totalSeconds / 86400
+                            totalSeconds /
+                            86400
                         );
 
 
                     const hours =
                         Math.floor(
                             (
-                                totalSeconds
-                                %
+                                totalSeconds %
                                 86400
                             )
                             /
@@ -5438,8 +6002,7 @@
                     const minutes =
                         Math.floor(
                             (
-                                totalSeconds
-                                %
+                                totalSeconds %
                                 3600
                             )
                             /
@@ -5448,33 +6011,50 @@
 
 
                     const seconds =
-                        totalSeconds
-                        %
+                        totalSeconds %
                         60;
 
 
-                    document.getElementById(
-                        "bdDays"
-                    ).textContent =
-                        days;
+                    const bdDays =
+                        document.getElementById(
+                            "bdDays"
+                        );
+
+                    const bdHours =
+                        document.getElementById(
+                            "bdHours"
+                        );
+
+                    const bdMinutes =
+                        document.getElementById(
+                            "bdMinutes"
+                        );
+
+                    const bdSeconds =
+                        document.getElementById(
+                            "bdSeconds"
+                        );
 
 
-                    document.getElementById(
-                        "bdHours"
-                    ).textContent =
-                        hours;
+                    if (bdDays) {
+                        bdDays.textContent =
+                            days;
+                    }
 
+                    if (bdHours) {
+                        bdHours.textContent =
+                            hours;
+                    }
 
-                    document.getElementById(
-                        "bdMinutes"
-                    ).textContent =
-                        minutes;
+                    if (bdMinutes) {
+                        bdMinutes.textContent =
+                            minutes;
+                    }
 
-
-                    document.getElementById(
-                        "bdSeconds"
-                    ).textContent =
-                        seconds;
+                    if (bdSeconds) {
+                        bdSeconds.textContent =
+                            seconds;
+                    }
 
                 }
 
@@ -5610,10 +6190,14 @@
 
                         +
 
-                        `<div class="note">
+                        `
+                        <div class="note">
+
                             Approximate statistics
                             based on calendar days.
-                        </div>`
+
+                        </div>
+                        `
                     );
 
 
@@ -5672,10 +6256,13 @@
                             >
 
                                 🎯 Age
+
                                 <strong>
                                     ${age}
                                 </strong>
+
                                 —
+
                                 ${formatDate(
                                     date
                                 )}
@@ -5683,6 +6270,7 @@
                                 <br>
 
                                 Status:
+
                                 <strong>
                                     ${
                                         passed
@@ -5744,6 +6332,7 @@
                             <br><br>
 
                             Turning
+
                             ${
                                 birthData.next.getFullYear()
                                 -
@@ -5969,18 +6558,30 @@
                     }
 
 
-                    differenceTimer =
-                        setInterval(
-                            function() {
+                    /*
+                     * Only run the live timer when the second
+                     * date is in the future. This avoids an
+                     * unnecessary background interval.
+                     */
 
-                                renderDifference(
-                                    first,
-                                    second
-                                );
+                    if (
+                        second > new Date()
+                    ) {
 
-                            },
-                            1000
-                        );
+                        differenceTimer =
+                            setInterval(
+                                function() {
+
+                                    renderDifference(
+                                        first,
+                                        second
+                                    );
+
+                                },
+                                1000
+                            );
+
+                    }
 
 
                     document
@@ -6026,7 +6627,18 @@
                             differenceTimer
                         );
 
+                        differenceTimer =
+                            null;
+
                     }
+
+
+                    document
+                        .getElementById(
+                            "differenceAgain"
+                        )
+                        .style.display =
+                        "none";
 
                 }
             );
@@ -6057,7 +6669,8 @@
 
             const weeks =
                 Math.floor(
-                    totalDays / 7
+                    totalDays /
+                    7
                 );
 
 
@@ -6067,19 +6680,23 @@
 
 
             const hours =
-                totalDays * 24;
+                totalDays *
+                24;
 
 
             const minutes =
-                hours * 60;
+                hours *
+                60;
 
 
             const seconds =
-                minutes * 60;
+                minutes *
+                60;
 
 
             const inclusive =
-                totalDays + 1;
+                totalDays +
+                1;
 
 
             const calendar =
@@ -6290,19 +6907,20 @@
             ) {
 
                 const live =
-                    second - now;
+                    second -
+                    now;
 
 
                 const totalLiveSeconds =
                     Math.floor(
-                        live / 1000
+                        live /
+                        1000
                     );
 
 
                 const liveDays =
                     Math.floor(
-                        totalLiveSeconds
-                        /
+                        totalLiveSeconds /
                         86400
                     );
 
@@ -6310,8 +6928,7 @@
                 const liveHours =
                     Math.floor(
                         (
-                            totalLiveSeconds
-                            %
+                            totalLiveSeconds %
                             86400
                         )
                         /
@@ -6322,8 +6939,7 @@
                 const liveMinutes =
                     Math.floor(
                         (
-                            totalLiveSeconds
-                            %
+                            totalLiveSeconds %
                             3600
                         )
                         /
@@ -6360,39 +6976,54 @@
                         >
 
                             <div class="live-item">
+
                                 <strong>
                                     ${liveDays}
                                 </strong>
+
                                 <span>
                                     DAYS
                                 </span>
+
                             </div>
 
+
                             <div class="live-item">
+
                                 <strong>
                                     ${liveHours}
                                 </strong>
+
                                 <span>
                                     HOURS
                                 </span>
+
                             </div>
 
+
                             <div class="live-item">
+
                                 <strong>
                                     ${liveMinutes}
                                 </strong>
+
                                 <span>
                                     MINUTES
                                 </span>
+
                             </div>
 
+
                             <div class="live-item">
+
                                 <strong>
                                     ${liveSeconds}
                                 </strong>
+
                                 <span>
                                     SECONDS
                                 </span>
+
                             </div>
 
                         </div>
@@ -6554,7 +7185,8 @@
 
                 let month =
                     end.getMonth()
-                    - 1;
+                    -
+                    1;
 
 
                 let year =
@@ -6606,66 +7238,124 @@
 
         /* =====================================================
            POINTER GLOW
+           Disabled on touch devices to save battery/CPU.
         ===================================================== */
 
-        const pointerGlow =
-            document.createElement(
-                "div"
+        if (
+            !isTouchDevice
+        ) {
+
+            const pointerGlow =
+                document.createElement(
+                    "div"
+                );
+
+
+            pointerGlow.style.position =
+                "fixed";
+
+
+            pointerGlow.style.width =
+                "180px";
+
+
+            pointerGlow.style.height =
+                "180px";
+
+
+            pointerGlow.style.borderRadius =
+                "50%";
+
+
+            pointerGlow.style.pointerEvents =
+                "none";
+
+
+            pointerGlow.style.zIndex =
+                "-1";
+
+
+            pointerGlow.style.background =
+                "radial-gradient(circle, rgba(85,145,255,.08), transparent 68%)";
+
+
+            pointerGlow.style.transform =
+                "translate(-50%, -50%)";
+
+
+            pointerGlow.style.display =
+                "none";
+
+
+            document.body.appendChild(
+                pointerGlow
             );
 
 
-        pointerGlow.style.position =
-            "fixed";
+            let pointerFrame =
+                null;
 
 
-        pointerGlow.style.width =
-            "180px";
+            let pointerX =
+                0;
 
 
-        pointerGlow.style.height =
-            "180px";
+            let pointerY =
+                0;
 
 
-        pointerGlow.style.borderRadius =
-            "50%";
+            document.addEventListener(
+                "mousemove",
+                function(event) {
+
+                    pointerX =
+                        event.clientX;
+
+                    pointerY =
+                        event.clientY;
 
 
-        pointerGlow.style.pointerEvents =
-            "none";
+                    if (
+                        pointerFrame
+                    ) {
+
+                        return;
+
+                    }
 
 
-        pointerGlow.style.zIndex =
-            "-1";
+                    pointerFrame =
+                        requestAnimationFrame(
+                            function() {
+
+                                pointerGlow.style.display =
+                                    "block";
 
 
-        pointerGlow.style.background =
-            "radial-gradient(circle, rgba(85,145,255,.08), transparent 68%)";
+                                pointerGlow.style.left =
+                                    pointerX +
+                                    "px";
 
 
-        pointerGlow.style.transform =
-            "translate(-50%, -50%)";
+                                pointerGlow.style.top =
+                                    pointerY +
+                                    "px";
 
 
-        document.body.appendChild(
-            pointerGlow
-        );
+                                pointerFrame =
+                                    null;
 
+                            }
+                        );
 
-        document.addEventListener(
-            "mousemove",
-            function(event) {
+                },
+                {
+                    passive:
+                        true
+                }
+            );
 
-                pointerGlow.style.left =
-                    event.clientX +
-                    "px";
-
-
-                pointerGlow.style.top =
-                    event.clientY +
-                    "px";
-
-            }
-        );
+        }
 
 
         /* =====================================================
@@ -6679,6 +7369,56 @@
                 document.body.classList.add(
                     "loaded"
                 );
+
+            },
+            {
+                once:
+                    true
+            }
+        );
+
+
+        /* =====================================================
+           PAGE VISIBILITY
+           Stop live timers when tab/app is hidden.
+        ===================================================== */
+
+        document.addEventListener(
+            "visibilitychange",
+            function() {
+
+                if (
+                    document.hidden
+                ) {
+
+                    if (
+                        birthdayTimer
+                    ) {
+
+                        clearInterval(
+                            birthdayTimer
+                        );
+
+                        birthdayTimer =
+                            null;
+
+                    }
+
+
+                    if (
+                        differenceTimer
+                    ) {
+
+                        clearInterval(
+                            differenceTimer
+                        );
+
+                        differenceTimer =
+                            null;
+
+                    }
+
+                }
 
             }
         );
